@@ -14,22 +14,42 @@ abstract class HomeActionState extends HomeState {
   List<Object> get props => [];
 }
 
-class HomeInitialState extends HomeState {}
-class HomeLoadingState extends HomeState {}
+class HomeInitialState extends HomeState {
+    @override
+  List<Object> get props => [];
+}
+class HomeLoadingState extends HomeState {
+    @override
+  List<Object> get props => [];
+}
 class HomeLoadedState extends HomeState {
   final List<Product> products;
   const HomeLoadedState({
     required this.products,
   });
+    @override
+  List<Object> get props => [products];
 }
 class HomeErrorState extends HomeState {
 final String errorMessage;
   const HomeErrorState({
-    required this.errorMessage,
+    required this.errorMessage
   });
+    @override
+  List<Object> get props => [errorMessage];
 }
 // 
 class HomeNavigateToCartState extends HomeActionState {
+    @override
+  List<Object> get props => [];
 
+}
+class HomeItemAddedToCartState extends HomeActionState {
+  final Product product;
+  const HomeItemAddedToCartState({
+    required this.product,
+  });
+    @override
+  List<Object> get props => [product];
 }
 

@@ -15,8 +15,10 @@ class HomeInitialEvent extends HomeEvent {
 }
 class HomeAddToCartEvent extends HomeEvent {
   final Product product;
+  final BuildContext context;
   const HomeAddToCartEvent(
     this.product,
+    this.context,
   );
 
   @override
