@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../cart/cart_page.dart';
 
+
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -31,7 +33,7 @@ class HomePage extends StatelessWidget {
                 context.read<HomeBloc>().add(HomeNavigateToCartEvent());
               },
               style: IconButton.styleFrom(
-                  backgroundColor: Color(0xff1B1811),
+                  backgroundColor: const Color(0xff1B1811),
                   padding: const EdgeInsets.all(8),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),

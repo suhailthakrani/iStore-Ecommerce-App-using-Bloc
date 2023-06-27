@@ -23,7 +23,7 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor:  const Color.fromARGB(255, 27, 25, 18),
+      backgroundColor: const Color.fromARGB(255, 27, 25, 18),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 12, 11, 8),
         leading: IconButton(
@@ -34,10 +34,13 @@ class _CartPageState extends State<CartPage> {
           },
           icon: const Icon(Icons.arrow_back),
         ),
-        title: const Text("Cart Page",  style: TextStyle(
+        title: const Text(
+          "Cart Page",
+          style: TextStyle(
             color: Colors.white70,
             fontWeight: FontWeight.w600,
-          ),),
+          ),
+        ),
       ),
       body: BlocConsumer<CartBloc, CartState>(
         bloc: cartBloc,
@@ -207,6 +210,25 @@ class _CartPageState extends State<CartPage> {
             );
           }
         },
+      ),
+      bottomSheet: Container(
+        height: 150,
+        child: BlocBuilder<CartBloc, CartState>(
+          builder: (context, state) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text("Price:"),
+                    Text("${cartBloc.totalPrice}"),
+                  ],
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

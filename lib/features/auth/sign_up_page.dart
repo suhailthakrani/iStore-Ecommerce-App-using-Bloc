@@ -8,7 +8,6 @@ import 'package:bloc_cart_app/commons/widgets/custom_text_field.dart';
 import 'package:bloc_cart_app/models/user_model.dart';
 
 import '../../blocs/signup/signup_bloc.dart';
-import '../cart/cart_page.dart';
 
 class SignUpPage extends StatelessWidget {
   SignUpBloc signUpBloc;
@@ -154,16 +153,16 @@ class SignUpPage extends StatelessWidget {
             const SizedBox(height: 30),
             BlocListener<SignUpBloc, SignUpState>(
               listener: (context, state) {
-                if (state is !SignUpErrorState) {
-                    Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BlocProvider.value(
-                  value: BlocProvider.of<HomeBloc>(context),
-                  child:  const HomePage(),
-                ),
-              ),
-            );
+                if (state is! SignUpErrorState) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BlocProvider.value(
+                        value: BlocProvider.of<HomeBloc>(context),
+                        child: const HomePage(),
+                      ),
+                    ),
+                  );
                 }
               },
               child: ElevatedButton(
