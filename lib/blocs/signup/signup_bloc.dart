@@ -29,7 +29,10 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     }
     if (event.userModel.password.isEmpty ||
         event.userModel.password.length < 8) {
-      fieldErrors["password"] = "Password must be at least 8 characters long!";
+      fieldErrors["password"] =  "Password must be at least 8 characters long!";
+    }
+    if (event.userModel.confrimP != event.userModel.password) {
+      fieldErrors["confrimP"] =  "Passwords don't match!";
     }
     if (fieldErrors.isNotEmpty) {
       emit(SignUpErrorState(fieldErrors: fieldErrors));
@@ -53,10 +56,17 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         event.userModel.password.length < 8) {
       fieldErrors["password"] = "Password must be at least 8 characters long!";
     }
+     if (event.userModel.confrimP.isEmpty ||
+        event.userModel.confrimP.length < 8) {
+      fieldErrors["confrimP"] = "Password must be at least 8 characters long!";
+    }
+    if (event.userModel.confrimP != event.userModel.password) {
+      fieldErrors["confrimP"] =  "Passwords don't match!";
+    }
     if (fieldErrors.isNotEmpty) {
       emit(SignUpErrorState(fieldErrors: fieldErrors));
     } else {
-      emit(SignUpSuccessState());
+      emit(SignUpNavigateState());
     }
   }
 

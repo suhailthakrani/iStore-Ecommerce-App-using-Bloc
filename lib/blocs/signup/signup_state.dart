@@ -32,3 +32,8 @@ class SignUpErrorState extends SignUpState {
     @override
   List<Object> get props => [fieldErrors];
 }
+class SignUpNavigateState extends SignUpState {
+    @override
+  List<Object> get props => [];
+}
+

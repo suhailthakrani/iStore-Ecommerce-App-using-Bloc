@@ -55,7 +55,18 @@ class SignUpPage extends StatelessWidget {
               hint: "Enter your name",
               controller: nameController,
               prefix: const Icon(Icons.person_outline),
-              onChanged: (val) {},
+              onChanged: (val) {
+                  context.read<SignUpBloc>().add(
+                        SignUpTextFieldsChangedEvent(
+                          UserModel(
+                            email: emailController.text,
+                            name: val,
+                            password: passController.text,
+                            confrimP: confrimPassController.text,
+                          ),
+                        ),
+                      );
+              },
             ),
             const SizedBox(height: 5),
             BlocBuilder<SignUpBloc, SignUpState>(
@@ -80,7 +91,18 @@ class SignUpPage extends StatelessWidget {
               hint: "Enter your email",
               controller: emailController,
               prefix: const Icon(Icons.email_outlined),
-              onChanged: (val) {},
+              onChanged: (val) {
+                  context.read<SignUpBloc>().add(
+                        SignUpTextFieldsChangedEvent(
+                          UserModel(
+                            email: emailController.text,
+                            name: nameController.text,
+                            password: passController.text,
+                            confrimP: confrimPassController.text,
+                          ),
+                        ),
+                      );
+              },
             ),
             const SizedBox(height: 5),
             BlocBuilder<SignUpBloc, SignUpState>(
@@ -105,7 +127,18 @@ class SignUpPage extends StatelessWidget {
               hint: "Enter password",
               controller: passController,
               prefix: const Icon(Icons.lock_outline),
-              onChanged: (val) {},
+              onChanged: (val) {
+                  context.read<SignUpBloc>().add(
+                        SignUpTextFieldsChangedEvent(
+                          UserModel(
+                            email: emailController.text,
+                            name: nameController.text,
+                            password: val,
+                            confrimP: confrimPassController.text,
+                          ),
+                        ),
+                      );
+              },
             ),
             const SizedBox(height: 5),
             BlocBuilder<SignUpBloc, SignUpState>(
@@ -130,7 +163,19 @@ class SignUpPage extends StatelessWidget {
               hint: "Confirm password",
               controller: confrimPassController,
               prefix: const Icon(Icons.lock_outline),
-              onChanged: (val) {},
+              onChanged: (val) {
+                  context.read<SignUpBloc>().add(
+                        SignUpTextFieldsChangedEvent(
+                          UserModel(
+                            email: emailController.text,
+                            name: nameController.text,
+                            password: val, 
+                            confrimP: confrimPassController.text,
+                            
+                          ),
+                        ),
+                      );
+              },
             ),
             const SizedBox(height: 5),
             BlocBuilder<SignUpBloc, SignUpState>(
@@ -140,8 +185,8 @@ class SignUpPage extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      state.fieldErrors["password"] != null
-                          ? Text(state.fieldErrors["password"] ?? "")
+                      state.fieldErrors["confrimP"] != null
+                          ? Text(state.fieldErrors["confrimP"] ?? "")
                           : Container(),
                     ],
                   );
@@ -151,9 +196,11 @@ class SignUpPage extends StatelessWidget {
               },
             ),
             const SizedBox(height: 30),
-            BlocListener<SignUpBloc, SignUpState>(
+            BlocConsumer<SignUpBloc, SignUpState>(
+              listenWhen: (previous, current) => (current is SignUpNavigateState) ,
               listener: (context, state) {
-                if (state is! SignUpErrorState) {
+               
+                if (state is SignUpNavigateState) {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -165,24 +212,29 @@ class SignUpPage extends StatelessWidget {
                   );
                 }
               },
-              child: ElevatedButton(
+            builder: (context, state) {
+              return ElevatedButton(
                 onPressed: () {
+                   print(context.read<SignUpBloc>().state.toString());
                   context.read<SignUpBloc>().add(
                         SignUpButtonPressedEvent(
                           UserModel(
                             email: emailController.text,
                             name: nameController.text,
                             password: passController.text,
+                            confrimP: confrimPassController.text,
                           ),
                         ),
                       );
+                 
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
                 ),
                 child: const Text("Sign Up"),
-              ),
-            ),
+              );
+           
+            }, ),
             const SizedBox(height: 40),
           ],
         ),
