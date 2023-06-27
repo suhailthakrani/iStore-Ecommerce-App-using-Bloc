@@ -153,7 +153,7 @@ class HomePage extends StatelessWidget {
                                                   BorderRadius.circular(20),
                                               side: BorderSide(
                                                 color: Colors.yellow.shade900,
-                                              ))),
+                                              ),),),
                                       child: const Icon(CupertinoIcons.cart),
                                     ),
                                   ],
