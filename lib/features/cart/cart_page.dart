@@ -66,19 +66,26 @@ class _CartPageState extends State<CartPage> {
                   return Container(
                     padding: const EdgeInsets.all(16),
                     margin:
-                        const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                        const EdgeInsets.only(bottom: 16),
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
+                     
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
                       children: [
-                        Image(
-                          width: MediaQuery.of(context).size.width * 0.3,
-                          height: MediaQuery.of(context).size.width * 0.3,
-                          image: AssetImage(
-                            product.image,
-                          ), // Replace with your image path
+                        Container(
+                          decoration: BoxDecoration(
+                                color: Colors.grey.shade100,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              padding: const EdgeInsets.all(8),
+                          child: Image(
+                            width: MediaQuery.of(context).size.width * 0.3,
+                            height: MediaQuery.of(context).size.width * 0.3,
+                            image: AssetImage(
+                              product.image,
+                            ), // Replace with your image path
+                          ),
                         ),
                         const SizedBox(width: 20),
                         Expanded(
@@ -87,6 +94,7 @@ class _CartPageState extends State<CartPage> {
                             children: [
                               Text(
                                 product.name,
+                              
                                 style: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.black54,
