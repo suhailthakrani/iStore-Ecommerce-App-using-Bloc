@@ -6,10 +6,13 @@ class CustomTextField extends StatelessWidget {
   final String hint;
   final TextEditingController controller;
   final Widget prefix;
-  
+  bool obsecure;
   Function(String value) onChanged;
+  
+ 
   CustomTextField({
     Key? key,
+    this.obsecure = false,
     required this.hint,
     required this.controller,
     required this.prefix,
@@ -19,11 +22,12 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoTextField(
+      obscureText: obsecure,
       prefix: Container(
         padding: const EdgeInsets.all(10.0),
-        decoration: const BoxDecoration(
-          color: Colors.green,
-          borderRadius: BorderRadius.only(
+        decoration:  BoxDecoration(
+          color: Colors.blue.shade700,
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(12),
             bottomLeft: Radius.circular(12),
           ),
@@ -33,11 +37,13 @@ class CustomTextField extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(12),
       placeholder: hint,
-      style: TextStyle(color: Colors.white),
+      placeholderStyle: TextStyle(color: Colors.black54),
+      style: TextStyle(color: Colors.black54),
+      
       onChanged: onChanged,
       controller: controller,
       decoration: BoxDecoration(
-        color: Colors.grey.shade800,
+        color: Colors.grey.shade100,
         borderRadius: BorderRadius.circular(16),
       ),
     );

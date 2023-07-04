@@ -57,7 +57,9 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData.dark(
+          
+          theme: ThemeData(
+            primaryColor: Colors.blue.shade700,
             useMaterial3: true,
           ),
           home: authRepository.isSignedIn

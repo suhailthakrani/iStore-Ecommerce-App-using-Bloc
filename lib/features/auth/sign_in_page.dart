@@ -16,20 +16,19 @@ class SignInPage extends StatelessWidget {
     Key? key,
     required this.signInBloc,
   }) : super(key: key);
-
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     signInBloc = BlocProvider.of<SignInBloc>(context);
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passController = TextEditingController();
 
     return Scaffold(
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const SizedBox(height: 40),
-          const Row(
+          const SizedBox(height: 60),
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
@@ -37,24 +36,27 @@ class SignInPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
+                  color: Theme.of(context).primaryColor
                 ),
               ),
             ],
           ),
           const SizedBox(height: 40),
-          const CircleAvatar(
-            radius: 50,
-            backgroundColor: Colors.green,
-            child: FlutterLogo(
-              size: 50,
+          CircleAvatar(
+              radius: 70,
+              backgroundColor: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Image.asset("assets/images/ecommerc.png"),
+              ),
             ),
-          ),
           const SizedBox(height: 80),
           CustomTextField(
             hint: "Enter your email",
             controller: emailController,
             prefix: const Icon(
               Icons.email_outlined,
+              color: Colors.white,
             ),
             onChanged: (email) {
               context.read<SignInBloc>().add(
@@ -69,14 +71,13 @@ class SignInPage extends StatelessWidget {
           BlocBuilder<SignInBloc, SignInState>(
             bloc: signInBloc,
             builder: (context, state) {
-              print("-------------1----------------");
-              print(state);
+
               if (state is SignInErrorState) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     state.errors["email"] != null
-                        ? Text(state.errors["email"] ?? "")
+                        ? Text(" * ${state.errors["email"]}" ?? "", style: TextStyle(color: Colors.red),)
                         : Container(),
                   ],
                 );
@@ -88,6 +89,7 @@ class SignInPage extends StatelessWidget {
           const SizedBox(height: 10),
           CustomTextField(
             hint: "Enter password",
+            obsecure: true,
             controller: passController,
             onChanged: (pass) {
               context.read<SignInBloc>().add(
@@ -98,20 +100,19 @@ class SignInPage extends StatelessWidget {
                   );
             },
             prefix: const Icon(
-              Icons.person_outline,
+              Icons.lock_outline,
+              color: Colors.white,
             ),
           ),
           BlocBuilder<SignInBloc, SignInState>(
             bloc: signInBloc,
             builder: (context, state) {
-              print("-------------2----------------");
-              print(state);
               if (state is SignInErrorState) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     state.errors["password"] != null
-                        ? Text(state.errors["password"] ?? "")
+                        ? Text(" * ${state.errors["password"]}" ?? "", style: TextStyle(color: Colors.red),)
                         : Container(),
                   ],
                 );
@@ -128,7 +129,7 @@ class SignInPage extends StatelessWidget {
                 SnackBar snackBar = SnackBar(
                   content: Text(
                     state.error,
-                    style: TextStyle(color: Colors.red,),
+                    style: const TextStyle(color: Colors.red,),
                   ),
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -146,7 +147,7 @@ class SignInPage extends StatelessWidget {
               }
             },
             builder: (context, state) {
-              print("------------ " + state.toString());
+           
               return ElevatedButton(
                 onPressed: () {
                   context.read<SignInBloc>().add(
@@ -158,7 +159,8 @@ class SignInPage extends StatelessWidget {
                   print(state.toString());
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
+                  backgroundColor: Theme.of(context).primaryColor,
+                  foregroundColor: Colors.white
                 ),
                 child: const Text("Sign In"),
               );
@@ -176,6 +178,10 @@ class SignInPage extends StatelessWidget {
                 children: [
                   const Text(
                     "New here?",
+                     style: TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w600,
+                        ),
                   ),
                   const SizedBox(width: 8),
                   TextButton(
@@ -194,8 +200,12 @@ class SignInPage extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const Text(
+                    child: Text(
                       "Sign Up",
+                       style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.w600,
+                        ),
                     ),
                   ),
                 ],

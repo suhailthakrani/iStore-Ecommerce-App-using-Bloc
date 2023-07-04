@@ -15,6 +15,7 @@ part 'cart_state.dart';
 class CartBloc extends Bloc<CartEvent, CartState> {
   List<Product> cartItems = [];
   double totalPrice = 0.0;
+  int totalItems = 0;
   CartBloc() : super(CartInitialState()) {
     on<CartInitialEvent>(mapCartInitialEvent);
     on<CartLoadedEvent>(mapCartLoadedEvent);
@@ -59,9 +60,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             cartItems[index].copyWith(quantity: cartItems[index].quantity + 1);
         cartItems[index] = updatedItem;
         totalPrice = totalPrice + double.parse(event.product.price);
+        totalItems+=1;
       } else {
         cartItems. add(event.product);
         totalPrice = totalPrice + double.parse(event.product.price);
+        totalItems+=1;
+
       }
      emit(CartInitialState());
       // emit(CartLoadedState(cartItems: cartItems));
@@ -79,12 +83,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       if (index > -1) {
         if (cartItems[index].quantity > 1) {
           totalPrice = totalPrice - double.parse(event.product.price);
+          totalItems-=1;
           final updatedItem = cartItems[index]
               .copyWith(quantity: cartItems[index].quantity - 1);
           cartItems[index] = updatedItem;
         } else {
           totalPrice = totalPrice - double.parse(event.product.price);
           cartItems.remove(event.product);
+          totalItems-=1;
         }
       }
       

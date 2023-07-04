@@ -28,6 +28,7 @@ class SignUpPage extends StatelessWidget {
     final TextEditingController passController = TextEditingController();
     final TextEditingController confrimPassController = TextEditingController();
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
@@ -40,24 +41,27 @@ class SignUpPage extends StatelessWidget {
                   "S I G N U P  H E R E !",
                   style: TextStyle(
                     fontSize: 28,
+                    color: Colors.blue,
                     fontWeight: FontWeight.w500,
+                  
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 40),
-            const CircleAvatar(
-              radius: 50,
-              backgroundColor: Colors.green,
-              child: FlutterLogo(
-                size: 50,
-              ),
+            const SizedBox(height: 20),
+            
+               Container(
+                height: 150,
+                width: 150,
+                padding: const EdgeInsets.all(20),
+                child: Image.asset("assets/images/ecommerc.png"),
+            
             ),
             const SizedBox(height: 40),
             CustomTextField(
               hint: "Enter your name",
               controller: nameController,
-              prefix: const Icon(Icons.person_outline),
+              prefix: const Icon(Icons.person_outline, color: Colors.white,),
               onChanged: (val) {
                 context.read<SignUpBloc>().add(
                       SignUpTextFieldsChangedEvent(
@@ -80,7 +84,7 @@ class SignUpPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       state.fieldErrors["name"] != null
-                          ? Text(state.fieldErrors["name"] ?? "")
+                          ? Text(state.fieldErrors["name"] ?? "", style: TextStyle(color: Colors.red),)
                           : Container(),
                     ],
                   );
@@ -93,7 +97,7 @@ class SignUpPage extends StatelessWidget {
             CustomTextField(
               hint: "Enter your email",
               controller: emailController,
-              prefix: const Icon(Icons.email_outlined),
+              prefix: const Icon(Icons.email_outlined, color: Colors.white,),
               onChanged: (val) {
                 context.read<SignUpBloc>().add(
                       SignUpTextFieldsChangedEvent(
@@ -116,7 +120,7 @@ class SignUpPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       state.fieldErrors["email"] != null
-                          ? Text(state.fieldErrors["email"] ?? "")
+                          ? Text(state.fieldErrors["email"] ?? "", style: TextStyle(color: Colors.red), )
                           : Container(),
                     ],
                   );
@@ -129,7 +133,8 @@ class SignUpPage extends StatelessWidget {
             CustomTextField(
               hint: "Enter password",
               controller: passController,
-              prefix: const Icon(Icons.lock_outline),
+              obsecure: true,
+              prefix: const Icon(Icons.lock_outline, color: Colors.white,),
               onChanged: (val) {
                 context.read<SignUpBloc>().add(
                       SignUpTextFieldsChangedEvent(
@@ -147,14 +152,13 @@ class SignUpPage extends StatelessWidget {
             BlocBuilder<SignUpBloc, SignUpState>(
               bloc: signUpBloc,
               builder: (context, state) {
-                                        print("-------------2----------------");
-              print(state);
+
                 if (state is SignUpErrorState) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       state.fieldErrors["password"] != null
-                          ? Text(state.fieldErrors["password"] ?? "")
+                          ? Text(state.fieldErrors["password"] ?? "", style: TextStyle(color: Colors.red))
                           : Container(),
                     ],
                   );
@@ -167,7 +171,8 @@ class SignUpPage extends StatelessWidget {
             CustomTextField(
               hint: "Confirm password",
               controller: confrimPassController,
-              prefix: const Icon(Icons.lock_outline),
+              obsecure: true,
+              prefix: const Icon(Icons.lock_outline, color: Colors.white,),
               onChanged: (val) {
                 context.read<SignUpBloc>().add(
                       SignUpTextFieldsChangedEvent(
@@ -190,7 +195,7 @@ class SignUpPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       state.fieldErrors["confrimP"] != null
-                          ? Text(state.fieldErrors["confrimP"] ?? "")
+                          ? Text(state.fieldErrors["confrimP"] ?? "", style: TextStyle(color: Colors.red),)
                           : Container(),
                     ],
                   );
@@ -205,13 +210,16 @@ class SignUpPage extends StatelessWidget {
                   (current is SignUpNavigateState),
               listener: (context, state) {
                 if (state is SignUpNavigateState) {
-                  AuthenticationRepository authenticationRepository = AuthenticationRepository();
+                  AuthenticationRepository authenticationRepository =
+                      AuthenticationRepository();
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => BlocProvider.value(
                         value: BlocProvider.of<SignInBloc>(context),
-                        child: SignInPage(signInBloc: SignInBloc(authenticationRepository),),
+                        child: SignInPage(
+                          signInBloc: SignInBloc(authenticationRepository),
+                        ),
                       ),
                     ),
                   );
@@ -233,7 +241,8 @@ class SignUpPage extends StatelessWidget {
                         );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
+                    backgroundColor: Theme.of(context).primaryColor,
+                    foregroundColor: Colors.white
                   ),
                   child: const Text("Sign Up"),
                 );
@@ -248,22 +257,34 @@ class SignUpPage extends StatelessWidget {
                   children: [
                     const Text(
                       "Alrady member?",
+                       style: TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w600,
+                        ),
                     ),
                     const SizedBox(width: 8),
                     TextButton(
                       onPressed: () {
-                         Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BlocProvider.value(
-                        value: BlocProvider.of<SignInBloc>(context),
-                        child:  SignInPage(signInBloc: SignInBloc(AuthenticationRepository(),),),
-                      ),
-                    ),
-                  );
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider.value(
+                              value: BlocProvider.of<SignInBloc>(context),
+                              child: SignInPage(
+                                signInBloc: SignInBloc(
+                                  AuthenticationRepository(),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
                       },
-                      child: const Text(
+                      child: Text(
                         "Sign In",
+                        style: TextStyle(
+                          color: Colors.blue.shade700,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ],

@@ -19,7 +19,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       SignInButtonPressedeEvent event, Emitter<SignInState> emit) async {
     Map<String, String> errors = {};
 
-    try {
+    
       if (event.email.isEmpty) {
         errors["email"] = "Please enter email";
       }
@@ -40,11 +40,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           emit(const SignInInvalidCredentialState(error: "Please check your password or email!")); 
         }
       }
-    } catch (error) {
-      print("[mapSignInButtonPressedEventWithState]: $error");
-      errors["catcherror"] = "$error";
-      emit(SignInErrorState(errors: errors));
-    }
+    
   }
 
   Future<FutureOr<void>> mapSignInTextfieldsChangedEventWithState(
