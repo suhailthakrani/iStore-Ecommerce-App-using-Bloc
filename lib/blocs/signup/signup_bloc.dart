@@ -10,8 +10,8 @@ part 'signup_event.dart';
 part 'signup_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
-  final AuthenticationRepository authenticationRepository;
-  SignUpBloc(this.authenticationRepository) : super(SignUpInitialState()) {
+  final AuthenticationRepository authRepository;
+  SignUpBloc(this.authRepository) : super(SignUpInitialState()) {
     on<SignUpInitialEvent>(mapSignUpInitialEventWithState);
     on<SignUpButtonPressedEvent>(mapSignUpButtonPressedEventWithState);
     on<SignUpTextFieldsChangedEvent>(mapSignUpTextFieldsChangedEventWithState);
@@ -66,6 +66,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     if (fieldErrors.isNotEmpty) {
       emit(SignUpErrorState(fieldErrors: fieldErrors));
     } else {
+      await authRepository.register(userModel: event.userModel);
       emit(SignUpNavigateState());
     }
   }

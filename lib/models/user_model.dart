@@ -20,16 +20,19 @@ class UserModel extends Equatable {
   List<Object> get props => [email, password, confrimP, name];
   @override
   String toString() {
-    return 'UserModel { email: $email, password: $password, name: $name }';
+    return 'UserModel { email: $email, password: $password, $confrimP, name: $name }';
   }
 
-  static UserModel fromString(String string) {
-    final parts = string.split(', ');
-    final email = parts[0].split(': ')[1];
-    final password = parts[1].split(': ')[1];
-    final confrimP = parts[2].split(': ')[1];
-    final name = parts[3].split(': ')[1];
-    return UserModel(email: email, password: password, name: name, confrimP: confrimP);
+   factory UserModel.fromString(String userString) {
+    final emailMatch = RegExp(r'email:\s*([^,]+)').firstMatch(userString);
+    final passwordMatch = RegExp(r'password:\s*([^,]+)').firstMatch(userString);
+    final nameMatch = RegExp(r'name:\s*([^,}]+)').firstMatch(userString);
+
+    final email = emailMatch?.group(1)?.trim() ?? '';
+    final password = passwordMatch?.group(1)?.trim() ?? '';
+    final name = nameMatch?.group(1)?.trim() ?? '';
+
+    return UserModel(email: email, password: password, name: name, confrimP: password);
   }
   Map<String, dynamic> toJson() {
     return {

@@ -18,7 +18,7 @@ import 'repositories/authentication_repository.dart';
 Future<void> main() async {
   Bloc.observer = SimpleBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences.setMockInitialValues({});
+  // SharedPreferences.setMockInitialValues({});
   await SharedPrefs.initialize();
   final authRepository = AuthenticationRepository();
   runApp(MyApp(
@@ -48,6 +48,9 @@ class MyApp extends StatelessWidget {
             create: (context) => HomeBloc()..add(const HomeInitialEvent()),
           ),
           BlocProvider(
+            create: (context) => SignInBloc(authRepository)..add(const SignInInitialEvent()),
+          ),
+          BlocProvider(
             create: (context) => CartBloc(),
           )
         ],
@@ -59,7 +62,7 @@ class MyApp extends StatelessWidget {
           ),
           home: authRepository.isSignedIn
               ? SignInPage(
-                  signInBloc: SignInBloc(),
+                  signInBloc: SignInBloc(authRepository),
                 )
               : SignUpPage(
                   signUpBloc: SignUpBloc(authRepository),

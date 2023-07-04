@@ -1,12 +1,14 @@
 import 'package:bloc_cart_app/blocs/cart/cart_bloc.dart';
 import 'package:bloc_cart_app/blocs/home/home_bloc.dart';
+import 'package:bloc_cart_app/blocs/signin/signin_bloc.dart';
+import 'package:bloc_cart_app/features/auth/sign_in_page.dart';
+import 'package:bloc_cart_app/features/home/product/product_details_page.dart';
+import 'package:bloc_cart_app/repositories/authentication_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../cart/cart_page.dart';
-
-
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,7 +19,7 @@ class HomePage extends StatelessWidget {
     bloc.add(const HomeInitialEvent());
 
     return Scaffold(
-      backgroundColor:  const Color.fromARGB(255, 27, 25, 18),
+      backgroundColor: const Color.fromARGB(255, 27, 25, 18),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 12, 11, 8),
         title: const Text(
@@ -29,18 +31,55 @@ class HomePage extends StatelessWidget {
         ),
         actions: [
           ElevatedButton(
-              onPressed: () {
-                context.read<HomeBloc>().add(HomeNavigateToCartEvent());
-              },
-              style: IconButton.styleFrom(
-                  backgroundColor: const Color(0xff1B1811),
-                  padding: const EdgeInsets.all(8),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      side: BorderSide(
-                        color: Colors.yellow.shade900,
-                      ),),),
-              child: const Icon(CupertinoIcons.cart)),
+            onPressed: () {
+              context.read<HomeBloc>().add(HomeNavigateToCartEvent());
+            },
+            style: IconButton.styleFrom(
+              backgroundColor: const Color(0xff1B1811),
+              padding: const EdgeInsets.all(8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+                side: BorderSide(
+                  color: Colors.yellow.shade900,
+                ),
+              ),
+            ),
+            child: const Icon(CupertinoIcons.cart),
+          ),
+          BlocListener<HomeBloc, HomeState>(
+            listener:(context, state) {
+              if (state is HomeLogoutState) {
+                AuthenticationRepository authRepository = AuthenticationRepository();
+                 Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BlocProvider.value(
+                        value: BlocProvider.of<SignInBloc>(context),
+                        child: SignInPage(signInBloc: SignInBloc(authRepository),),
+                      ),
+                    ),
+                  );
+              }
+            },
+            child:  PopupMenuButton(
+                onOpened: () {
+                  // context.read<HomeBloc>().add(HomeMoreMenuButtonPressedEvent());
+                },
+                itemBuilder: (context) {
+                  return [
+                    PopupMenuItem(
+                      onTap: () {
+                        context
+                            .read<HomeBloc>()
+                            .add(HomeLogoutButtonPressedEvent());
+                      },
+                      child: const Text("Logout"),
+                    )
+                  ];
+                } 
+            ),
+            
+          ),
           const SizedBox(
             width: 20,
           ),
@@ -77,21 +116,32 @@ class HomePage extends StatelessWidget {
                     child: Row(
                       children: [
                         const SizedBox(width: 8),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade900,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image(
-                              width: MediaQuery.of(context).size.width * 0.3,
-                              height: MediaQuery.of(context).size.width * 0.3,
-                              fit: BoxFit.contain,
-                              image: AssetImage(
-                                product.image,
-                              ), // Replace with your image path
+                        InkWell(
+                          onTap: () {
+                             Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>  ProductDetails(product: product,),
+                      
+                    ),
+                  );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade900,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            padding: const EdgeInsets.all(8),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image(
+                                width: MediaQuery.of(context).size.width * 0.3,
+                                height: MediaQuery.of(context).size.width * 0.3,
+                                fit: BoxFit.contain,
+                                image: AssetImage(
+                                  product.image,
+                                ), // Replace with your image path
+                              ),
                             ),
                           ),
                         ),
@@ -148,14 +198,16 @@ class HomePage extends StatelessWidget {
                                         );
                                       },
                                       style: IconButton.styleFrom(
-                                          backgroundColor: Colors.black,
-                                          padding: const EdgeInsets.all(8),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              side: BorderSide(
-                                                color: Colors.yellow.shade900,
-                                              ),),),
+                                        backgroundColor: Colors.black,
+                                        padding: const EdgeInsets.all(8),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          side: BorderSide(
+                                            color: Colors.yellow.shade900,
+                                          ),
+                                        ),
+                                      ),
                                       child: const Icon(CupertinoIcons.cart),
                                     ),
                                   ],

@@ -44,6 +44,11 @@ class HomeNavigateToCartState extends HomeActionState {
   List<Object> get props => [];
 
 }
+class HomeLogoutState extends HomeActionState {
+    @override
+  List<Object> get props => [];
+
+}
 class HomeItemAddedToCartState extends HomeActionState {
   final Product product;
   const HomeItemAddedToCartState({

@@ -21,6 +21,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeInitialEvent>(mapHomeInitialEvent);
     on<HomeAddToCartEvent>(mapHomeAddToCartEvent);
     on<HomeNavigateToCartEvent>(mapHomeNavigateToCartEvent);
+    on<HomeLogoutButtonPressedEvent>(mapHomeLogoutButtonEventtoState);
   }
 
   FutureOr<void> mapHomeInitialEvent(
@@ -63,5 +64,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     );
     return productList;
     
+  }
+
+  FutureOr<void> mapHomeLogoutButtonEventtoState(HomeLogoutButtonPressedEvent event, Emitter<HomeState> emit) {
+    emit(HomeLogoutState());
   }
 }

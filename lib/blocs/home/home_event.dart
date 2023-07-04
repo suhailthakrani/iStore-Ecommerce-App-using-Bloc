@@ -29,3 +29,15 @@ class HomeNavigateToCartEvent extends HomeEvent {
   List<Object> get props => [];
 }
 
+class HomeMoreMenuButtonPressedEvent extends HomeEvent {
+  
+    @override
+  List<Object> get props => [];
+}
+class HomeLogoutButtonPressedEvent extends HomeEvent {
+  
+    @override
+  List<Object> get props => [];
+}
+ 
+
