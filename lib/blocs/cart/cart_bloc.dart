@@ -75,6 +75,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     }
   }
 
+  double get totalCartItems {
+    num items = 0;
+    for (var item in cartItems) {
+      items+= item.quantity;
+    }
+    return 0.0;
+  }
+
   FutureOr<void> mapCartRemoveItemEvent(
       CartRemoveItemEvent event, Emitter<CartState> emit) async {
     try {

@@ -234,7 +234,7 @@ class _CartPageState extends State<CartPage> {
                           fontSize: 18,
                         ),
                       ),
-                      Text("${cartBloc.cartItems.length}", style: const TextStyle(
+                      Text("${cartBloc.cartItems.fold(cartBloc.totalCartItems, (previousValue, element) => previousValue+element.quantity).toInt()}", style: const TextStyle(
                           color: Colors.black54,
                           fontWeight: FontWeight.w600,
                           fontSize: 18,
