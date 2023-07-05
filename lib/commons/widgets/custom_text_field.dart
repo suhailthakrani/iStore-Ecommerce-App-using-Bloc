@@ -9,10 +9,13 @@ class CustomTextField extends StatelessWidget {
   bool obsecure;
   Function(String value) onChanged;
   
+  Widget suffix;
+  
  
   CustomTextField({
     Key? key,
     this.obsecure = false,
+    this.suffix = const SizedBox(),
     required this.hint,
     required this.controller,
     required this.prefix,
@@ -35,10 +38,11 @@ class CustomTextField extends StatelessWidget {
         ),
         child: prefix,
       ),
+      suffix: suffix,
       padding: const EdgeInsets.all(12),
       placeholder: hint,
-      placeholderStyle: TextStyle(color: Colors.black54),
-      style: TextStyle(color: Colors.black54),
+      placeholderStyle: const TextStyle(color: Colors.black54),
+      style: const TextStyle(color: Colors.black54),
       
       onChanged: onChanged,
       controller: controller,

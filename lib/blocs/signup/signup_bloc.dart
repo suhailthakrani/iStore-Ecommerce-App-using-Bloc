@@ -11,6 +11,7 @@ part 'signup_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final AuthenticationRepository authRepository;
+  bool showPass = false;
   SignUpBloc(this.authRepository) : super(SignUpInitialState()) {
     on<SignUpInitialEvent>(mapSignUpInitialEventWithState);
     on<SignUpButtonPressedEvent>(mapSignUpButtonPressedEventWithState);

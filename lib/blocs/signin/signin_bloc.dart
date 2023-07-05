@@ -9,6 +9,7 @@ part 'signin_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final AuthenticationRepository authRepository;
+  bool showPass = false;
   SignInBloc(this.authRepository) : super(SignInInitialState()) {
     on<SignInInitialEvent>(mapSignInInitialEventWithState);
     on<SignInTextFieldsChangedEvent>(mapSignInTextfieldsChangedEventWithState);

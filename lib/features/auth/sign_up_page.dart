@@ -4,6 +4,7 @@ import 'package:bloc_cart_app/blocs/signin/signin_bloc.dart';
 import 'package:bloc_cart_app/features/auth/sign_in_page.dart';
 import 'package:bloc_cart_app/features/home/home_page.dart';
 import 'package:bloc_cart_app/repositories/authentication_repository.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,6 +15,7 @@ import '../../blocs/signup/signup_bloc.dart';
 
 class SignUpPage extends StatelessWidget {
   SignUpBloc signUpBloc;
+  
 
   SignUpPage({
     Key? key,
@@ -130,25 +132,43 @@ class SignUpPage extends StatelessWidget {
               },
             ),
             const SizedBox(height: 10),
-            CustomTextField(
-              hint: "Enter password",
-              controller: passController,
-              obsecure: true,
-              prefix: const Icon(Icons.lock_outline, color: Colors.white,),
-              onChanged: (val) {
-                context.read<SignUpBloc>().add(
+            BlocBuilder<SignInBloc, SignInState>(
+            builder: (context, state) {
+              return CustomTextField(
+                hint: "Enter password",
+                obsecure: signUpBloc.showPass,
+                controller: passController,
+                onChanged: (pass) {
+                 context.read<SignUpBloc>().add(
                       SignUpTextFieldsChangedEvent(
                         UserModel(
                           email: emailController.text,
                           name: nameController.text,
-                          password: val,
+                          password: pass,
                           confrimP: confrimPassController.text,
                         ),
                       ),
                     );
-              },
-            ),
-            const SizedBox(height: 5),
+                },
+                prefix: const Icon(
+                  Icons.lock_outline,
+                  color: Colors.white,
+                ),
+                suffix:InkWell(
+                      onTap: () {
+                      
+                        signUpBloc.showPass = !signUpBloc.showPass;
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: signUpBloc.showPass
+                            ? const Icon(CupertinoIcons.eye)
+                            : const Icon(CupertinoIcons.eye_slash),
+                      ),
+                    )
+              );
+            },
+          ), const SizedBox(height: 5),
             BlocBuilder<SignUpBloc, SignUpState>(
               bloc: signUpBloc,
               builder: (context, state) {
@@ -168,24 +188,44 @@ class SignUpPage extends StatelessWidget {
               },
             ),
             const SizedBox(height: 10),
-            CustomTextField(
-              hint: "Confirm password",
-              controller: confrimPassController,
-              obsecure: true,
-              prefix: const Icon(Icons.lock_outline, color: Colors.white,),
-              onChanged: (val) {
-                context.read<SignUpBloc>().add(
+             BlocBuilder<SignInBloc, SignInState>(
+            builder: (context, state) {
+              return CustomTextField(
+                hint: "Confirm password",
+                obsecure: signUpBloc.showPass,
+                controller: confrimPassController,
+                onChanged: (pass) {
+                 context.read<SignUpBloc>().add(
                       SignUpTextFieldsChangedEvent(
                         UserModel(
                           email: emailController.text,
                           name: nameController.text,
-                          password: val,
+                          password: pass,
                           confrimP: confrimPassController.text,
                         ),
                       ),
                     );
-              },
-            ),
+                },
+                prefix: const Icon(
+                  Icons.lock_outline,
+                  color: Colors.white,
+                ),
+                suffix:InkWell(
+                      onTap: () {
+                      
+                        signUpBloc.showPass = !signUpBloc.showPass;
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: signUpBloc.showPass
+                            ? const Icon(CupertinoIcons.eye)
+                            : const Icon(CupertinoIcons.eye_slash),
+                      ),
+                    )
+              );
+            },
+          ),
+           
             const SizedBox(height: 5),
             BlocBuilder<SignUpBloc, SignUpState>(
               bloc: signUpBloc,
