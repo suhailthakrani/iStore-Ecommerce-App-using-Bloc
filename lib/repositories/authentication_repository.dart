@@ -7,6 +7,13 @@ import 'package:flutter/foundation.dart';
 class AuthenticationRepository {
   SharedPrefs sharedPrefs = SharedPrefs();
   bool isSignedIn = false;
+  Future<void> setSignedInStatus({required String key, required bool value}) async {
+    await sharedPrefs.setBool(key, value);
+  }
+  bool getSignedInStatus({required String key}) {
+    bool isSignedIn = sharedPrefs.getBool(key);
+    return isSignedIn;
+  }
   Future<bool> login({required String email, required String pass}) async {
     final userString = sharedPrefs.getString(email);
     if (kDebugMode) {

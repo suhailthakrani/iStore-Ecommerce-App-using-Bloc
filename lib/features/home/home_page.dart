@@ -20,76 +20,24 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor:Colors.white,
+        appBar: AppBar(
+        backgroundColor: Colors.white,
         elevation: 0,
-        
-        title: Image.asset("assets/images/ecommerc.png",height: 65, width: 80,),
-        
-        // Text(
-        //   "E Commerce",
-        //   style: TextStyle(
-        //     color: Theme.of(context).primaryColor,
-        //     fontWeight: FontWeight.w600,
-        //   ),
-        // ),
-        actions: [
-          ElevatedButton(
-            onPressed: () {
-              context.read<HomeBloc>().add(HomeNavigateToCartEvent());
-            },
-            style: IconButton.styleFrom(
-              
-              padding: const EdgeInsets.all(8),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-                side: BorderSide(
-                  color: Colors.yellow.shade900,
-                ),
-              ),
-            ),
-            child: const Icon(CupertinoIcons.cart),
+        leadingWidth: 100,
+        leading: Image.asset(
+          "assets/images/ecommerc.png",
+          height: 65,
+          width: 80,
+        ),
+
+        title:Text(
+          "Your E Commerce App",
+          style: TextStyle(
+            fontSize: 18,
+            color: Theme.of(context).primaryColor,
+            fontWeight: FontWeight.w600,
           ),
-          BlocListener<HomeBloc, HomeState>(
-            listener:(context, state) {
-              if (state is HomeLogoutState) {
-                AuthenticationRepository authRepository = AuthenticationRepository();
-                 Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BlocProvider.value(
-                        value: BlocProvider.of<SignInBloc>(context),
-                        child: SignInPage(signInBloc: SignInBloc(authRepository),),
-                      ),
-                    ),
-                  );
-              }
-            },
-            child:  PopupMenuButton(
-              color: Theme.of(context).primaryColor,
-              shadowColor: Colors.white,
-                onOpened: () {
-                  // context.read<HomeBloc>().add(HomeMoreMenuButtonPressedEvent());
-                },
-                itemBuilder: (context) {
-                  return [
-                    PopupMenuItem(
-                      onTap: () {
-                        context
-                            .read<HomeBloc>()
-                            .add(HomeLogoutButtonPressedEvent());
-                      },
-                      child: const Text("Logout"),
-                    )
-                  ];
-                } 
-            ),
-            
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-        ],
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -110,8 +58,7 @@ class HomePage extends StatelessWidget {
                     print(state.products);
                     final product = loadedState.products[index];
                     return Container(
-                      margin:
-                          const EdgeInsets.only( bottom: 16),
+                      margin: const EdgeInsets.only(bottom: 16),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
@@ -121,13 +68,14 @@ class HomePage extends StatelessWidget {
                           const SizedBox(width: 8),
                           InkWell(
                             onTap: () {
-                               Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>  ProductDetails(product: product,),
-                        
-                      ),
-                    );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProductDetails(
+                                    product: product,
+                                  ),
+                                ),
+                              );
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -138,8 +86,10 @@ class HomePage extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: Image(
-                                  width: MediaQuery.of(context).size.width * 0.3,
-                                  height: MediaQuery.of(context).size.width * 0.3,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.3,
+                                  height:
+                                      MediaQuery.of(context).size.width * 0.3,
                                   fit: BoxFit.contain,
                                   image: AssetImage(
                                     product.image,
@@ -148,7 +98,6 @@ class HomePage extends StatelessWidget {
                               ),
                             ),
                           ),
-                         
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsets.all(16),
@@ -159,7 +108,7 @@ class HomePage extends StatelessWidget {
                                     product.name,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
-                                    style:  const TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.black54,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
@@ -201,7 +150,6 @@ class HomePage extends StatelessWidget {
                                           );
                                         },
                                         style: IconButton.styleFrom(
-                                          
                                           padding: const EdgeInsets.all(8),
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -228,7 +176,7 @@ class HomePage extends StatelessWidget {
                 return const Center(
                   child: Text("Ups! Something went wrong!"),
                 );
-      
+
               default:
                 return const Center(
                   child: Text("No Products!"),

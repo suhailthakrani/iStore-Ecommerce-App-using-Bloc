@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:bloc_cart_app/blocs/home/home_bloc.dart';
 import 'package:bloc_cart_app/features/home/product/components/see_more.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/product_model.dart';
 
@@ -24,7 +26,11 @@ class ProductDetails extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.45,
               child: Stack(
                 children: [
-                  Center(child: Image.asset(product.image, filterQuality: FilterQuality.high,)),
+                  Center(
+                      child: Image.asset(
+                    product.image,
+                    filterQuality: FilterQuality.high,
+                  )),
                   Positioned(
                     top: 35,
                     left: 16,
@@ -42,18 +48,20 @@ class ProductDetails extends StatelessWidget {
                   Positioned(
                     right: 10,
                     bottom: 35,
-                    child:  Chip(
-                        backgroundColor: Colors.white10,
-                        shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-                        side: BorderSide.none,
-                        label: Text(
-                          product.brand,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                          ),
+                    child: Chip(
+                      backgroundColor: Colors.white10,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24)),
+                      side: BorderSide.none,
+                      label: Text(
+                        product.brand,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
                         ),
-                      ),)
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
@@ -87,11 +95,12 @@ class ProductDetails extends StatelessWidget {
                           ),
                         ),
                       ),
-                     
                     ],
                   ),
-                  SeeMore( productDescription: product.description,),
-                Row(
+                  SeeMore(
+                    productDescription: product.description,
+                  ),
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Text(
@@ -104,8 +113,7 @@ class ProductDetails extends StatelessWidget {
                       Text(product.brand),
                     ],
                   ),
-
-                 Row(
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Text(
@@ -118,7 +126,7 @@ class ProductDetails extends StatelessWidget {
                       Text(product.color),
                     ],
                   ),
-                         Row(
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Text(
@@ -131,7 +139,7 @@ class ProductDetails extends StatelessWidget {
                       Text(product.displaySize),
                     ],
                   ),
-                         Row(
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Text(
@@ -144,7 +152,7 @@ class ProductDetails extends StatelessWidget {
                       Text(product.storage),
                     ],
                   ),
-                         Row(
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Text(
@@ -209,17 +217,27 @@ class ProductDetails extends StatelessWidget {
                         height: 60,
                         width: 200,
                         child: ElevatedButton(
-                          onPressed: () {},
-                          child: Text("Add to Cart"),
+                          onPressed: () {
+                            context
+                                .read<HomeBloc>()
+                                .add(HomeAddToCartEvent(product, context));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content:
+                                    Text("${product.name} added to the cart"),
+                              ),
+                            );
+                          },
+                          child: const Text("Add to Cart"),
                         ),
                       ),
-                       Text(
-                          "\$${product.price}",
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                          ),
+                      Text(
+                        "\$${product.price}",
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
                         ),
+                      ),
                     ],
                   ),
                 ],

@@ -1,13 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc_cart_app/blocs/signup/signup_bloc.dart';
 import 'package:bloc_cart_app/features/auth/sign_up_page.dart';
-import 'package:bloc_cart_app/features/home/home_page.dart';
+import 'package:bloc_cart_app/features/main/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bloc_cart_app/commons/widgets/custom_text_field.dart';
 
-import '../../blocs/home/home_bloc.dart';
+import '../../blocs/bloc/main_bloc.dart';
 import '../../blocs/signin/signin_bloc.dart';
 
 class SignInPage extends StatelessWidget {
@@ -21,13 +21,26 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     signInBloc = BlocProvider.of<SignInBloc>(context);
-
     return Scaffold(
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const SizedBox(height: 60),
+          const SizedBox(height: 80),
+            Row(
+               mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                    "Welcome Back",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).primaryColor
+                    ),
+                  ),
+              ],
+            ),
+              const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -41,7 +54,7 @@ class SignInPage extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 30),
           CircleAvatar(
               radius: 70,
               backgroundColor: Colors.white,
@@ -50,7 +63,7 @@ class SignInPage extends StatelessWidget {
                 child: Image.asset("assets/images/ecommerc.png"),
               ),
             ),
-          const SizedBox(height: 80),
+          const SizedBox(height: 60),
           CustomTextField(
             hint: "Enter your email",
             controller: emailController,
@@ -77,7 +90,7 @@ class SignInPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     state.errors["email"] != null
-                        ? Text(" * ${state.errors["email"]}" ?? "", style: TextStyle(color: Colors.red),)
+                        ? Text(" * ${state.errors["email"]}", style: TextStyle(color: Colors.red),)
                         : Container(),
                   ],
                 );
@@ -112,7 +125,7 @@ class SignInPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     state.errors["password"] != null
-                        ? Text(" * ${state.errors["password"]}" ?? "", style: TextStyle(color: Colors.red),)
+                        ? Text(" * ${state.errors["password"]}", style: TextStyle(color: Colors.red),)
                         : Container(),
                   ],
                 );
@@ -139,8 +152,8 @@ class SignInPage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => BlocProvider.value(
-                      value: BlocProvider.of<HomeBloc>(context),
-                      child: const HomePage(),
+                      value: BlocProvider.of<MainBloc>(context),
+                      child: const MainPage(),
                     ),
                   ),
                 );

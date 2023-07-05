@@ -229,6 +229,8 @@ class SignUpPage extends StatelessWidget {
                 return ElevatedButton(
                   onPressed: () {
                     print(context.read<SignUpBloc>().state.toString());
+                    AuthenticationRepository authenticationRepository = AuthenticationRepository();
+                    authenticationRepository.setSignedInStatus(key: "isSignedUp", value: true);
                     context.read<SignUpBloc>().add(
                           SignUpButtonPressedEvent(
                             UserModel(
