@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:bloc/bloc.dart';
+import 'package:bloc_cart_app/blocs/wishlist/wishlist_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,12 +14,11 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  List<Product> products = [
-  
-  ];
+  List<Product> products = [];
   HomeBloc() : super(HomeInitialState()) {
     on<HomeInitialEvent>(mapHomeInitialEvent);
     on<HomeAddToCartEvent>(mapHomeAddToCartEvent);
+    on<HomeAddToWishlistEvent>(mapHomeAddToWishlistEvent);
     on<HomeNavigateToCartEvent>(mapHomeNavigateToCartEvent);
     on<HomeLogoutButtonPressedEvent>(mapHomeLogoutButtonEventtoState);
   }
@@ -41,7 +40,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try {
       final cartBloc = BlocProvider.of<CartBloc>(event.context);
       cartBloc.add(CartAddItemEvent(product: event.product));
-
+     
+    } on Exception catch (e) {
+      emit(HomeErrorState(errorMessage: e.toString()));
+    }
+  }
+  FutureOr<void> mapHomeAddToWishlistEvent(
+    HomeAddToWishlistEvent event, Emitter<HomeState> emit) {
+    try {
+      final wishlistBloc = BlocProvider.of<WishlistBloc>(event.context);
+      wishlistBloc.add(WishlistAddItemEvent(event.product));
+ 
      
     } on Exception catch (e) {
       emit(HomeErrorState(errorMessage: e.toString()));

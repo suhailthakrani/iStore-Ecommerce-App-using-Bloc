@@ -1,9 +1,7 @@
 import 'package:bloc_cart_app/blocs/cart/cart_bloc.dart';
 import 'package:bloc_cart_app/blocs/home/home_bloc.dart';
-import 'package:bloc_cart_app/blocs/signin/signin_bloc.dart';
-import 'package:bloc_cart_app/features/auth/sign_in_page.dart';
+import 'package:bloc_cart_app/blocs/wishlist/wishlist_bloc.dart';
 import 'package:bloc_cart_app/features/home/product/product_details_page.dart';
-import 'package:bloc_cart_app/repositories/authentication_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +18,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-        appBar: AppBar(
+      appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leadingWidth: 100,
@@ -29,8 +27,7 @@ class HomePage extends StatelessWidget {
           height: 65,
           width: 80,
         ),
-
-        title:Text(
+        title: Text(
           "Your E Commerce App",
           style: TextStyle(
             fontSize: 18,
@@ -44,7 +41,6 @@ class HomePage extends StatelessWidget {
         child: BlocConsumer<HomeBloc, HomeState>(
           bloc: bloc,
           builder: (context, state) {
-            print(state.toString());
             switch (state.runtimeType) {
               case HomeLoadingState:
                 return const Center(
@@ -55,7 +51,6 @@ class HomePage extends StatelessWidget {
                 return ListView.builder(
                   itemCount: loadedState.products.length,
                   itemBuilder: (context, index) {
-                    print(state.products);
                     final product = loadedState.products[index];
                     return Container(
                       margin: const EdgeInsets.only(bottom: 16),
@@ -136,30 +131,87 @@ class HomePage extends StatelessWidget {
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          context.read<HomeBloc>().add(
-                                              HomeAddToCartEvent(
-                                                  product, context));
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                  "${product.name} added to the cart"),
-                                            ),
-                                          );
-                                        },
-                                        style: IconButton.styleFrom(
-                                          padding: const EdgeInsets.all(8),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            side: BorderSide(
-                                              color: Colors.yellow.shade900,
-                                            ),
+                                      Wrap(
+                                        children: [
+                                          BlocBuilder<HomeBloc, HomeState>(
+                                            
+                                            builder: (context, state) {
+                                              final wishlistState =
+                                                  BlocProvider.of<WishlistBloc>(
+                                                      context);
+                                              return IconButton(
+                                                onPressed: () {
+                                                  context.read<HomeBloc>().add(
+                                                      HomeAddToWishlistEvent(
+                                                          product, context));
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                          "${product.name} added to the wishlist"),
+                                                    ),
+                                                  );
+                                                },
+                                                style: IconButton.styleFrom(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                  ),
+                                                ),
+                                                icon: wishlistState
+                                                        .wishlistItems
+                                                        .contains(product)
+                                                    ? Icon(
+                                                        CupertinoIcons
+                                                            .heart_fill,
+                                                        color: Colors
+                                                            .yellow.shade700,
+                                                      )
+                                                    : const Icon(
+                                                        CupertinoIcons.heart),
+                                              );
+                                            },
                                           ),
-                                        ),
-                                        child: const Icon(CupertinoIcons.cart),
+                                          BlocBuilder<CartBloc, CartState>(
+                                            bloc: BlocProvider.of<CartBloc>(context),
+                                            builder: (context, state) {
+                                             
+                                              return IconButton(
+                                                onPressed: () {
+                                                  context.read<HomeBloc>().add(
+                                                      HomeAddToCartEvent(
+                                                          product, context));
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                          "${product.name} added to the cart"),
+                                                    ),
+                                                  );
+                                                },
+                                                style: IconButton.styleFrom(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                  ),
+                                                ),
+                                                icon: BlocProvider.of<CartBloc>(
+                                                            context)
+                                                        .cartItems
+                                                        .contains(product)
+                                                    ? const Icon(Icons.done)
+                                                    : const Icon(
+                                                        CupertinoIcons.cart),
+                                              );
+                                            },
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   )

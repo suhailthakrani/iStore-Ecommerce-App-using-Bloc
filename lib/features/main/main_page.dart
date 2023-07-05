@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../blocs/bloc/main_bloc.dart';
+import '../../blocs/main/main_bloc.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});

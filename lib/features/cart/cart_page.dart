@@ -25,14 +25,7 @@ class _CartPageState extends State<CartPage> {
     return Scaffold(
       // backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            final homeBloc = BlocProvider.of<HomeBloc>(context);
-            homeBloc.add(const HomeInitialEvent());
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(Icons.arrow_back),
-        ),
+        centerTitle: true,
         title: const Text(
           "Your Cart",
           style: TextStyle(
@@ -101,6 +94,16 @@ class _CartPageState extends State<CartPage> {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
+                               Text(
+                                    product.description,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      color: Colors.black45,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -129,7 +132,7 @@ class _CartPageState extends State<CartPage> {
                                 children: [
                                   ElevatedButton(
                                     style: IconButton.styleFrom(
-                                      padding: const EdgeInsets.all(8),
+                                      padding: const EdgeInsets.symmetric(horizontal:8),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(20),
                                         side: BorderSide(
@@ -165,7 +168,7 @@ class _CartPageState extends State<CartPage> {
                                   const SizedBox(width: 10),
                                   ElevatedButton(
                                     style: IconButton.styleFrom(
-                                      padding: const EdgeInsets.all(8),
+                                      padding: const EdgeInsets.symmetric(horizontal:8),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(20),
                                         side: BorderSide(
@@ -221,7 +224,7 @@ class _CartPageState extends State<CartPage> {
           }
         },
       ),
-      bottomSheet: Container(
+      bottomSheet: SizedBox(
         height: 150,
         child: BlocBuilder<CartBloc, CartState>(
           builder: (context, state) {

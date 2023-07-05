@@ -22,7 +22,18 @@ class HomeAddToCartEvent extends HomeEvent {
   );
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [product,context];
+}
+class HomeAddToWishlistEvent extends HomeEvent {
+  final Product product;
+  final BuildContext context;
+  const HomeAddToWishlistEvent(
+    this.product,
+    this.context,
+  );
+
+  @override
+  List<Object> get props => [product, context];
 }
 class HomeNavigateToCartEvent extends HomeEvent {
   @override

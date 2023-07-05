@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bloc_cart_app/commons/widgets/custom_text_field.dart';
 
-import '../../blocs/bloc/main_bloc.dart';
+import '../../blocs/main/main_bloc.dart';
 import '../../blocs/signin/signin_bloc.dart';
 
 class SignInPage extends StatelessWidget {

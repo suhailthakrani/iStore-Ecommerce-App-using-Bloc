@@ -28,15 +28,15 @@ class MainBloc extends Bloc<MainEvent, MainState> {
       label: 'Home',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.category),
+      icon: Icon(Icons.category_outlined),
       label: 'Categories',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.shopping_cart),
+      icon: Icon(Icons.shopping_cart_outlined),
       label: 'Cart',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.favorite),
+      icon: Icon(Icons.favorite_outline_rounded),
       label: 'Wishlist',
     ),
     BottomNavigationBarItem(
