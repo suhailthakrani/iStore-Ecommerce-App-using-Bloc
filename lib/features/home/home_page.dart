@@ -8,14 +8,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../cart/cart_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<HomeBloc>(context);
-    bloc.add(const HomeInitialEvent());
+  State<HomePage> createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
+  late HomeBloc homeBloc;
+  @override
+  void initState() {
+    homeBloc = BlocProvider.of<HomeBloc>(context);
+    homeBloc.add(const HomeInitialEvent());
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -39,7 +49,7 @@ class HomePage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: BlocConsumer<HomeBloc, HomeState>(
-          bloc: bloc,
+          bloc: homeBloc,
           builder: (context, state) {
             switch (state.runtimeType) {
               case HomeLoadingState:
@@ -133,13 +143,7 @@ class HomePage extends StatelessWidget {
                                       ),
                                       Wrap(
                                         children: [
-                                          BlocBuilder<HomeBloc, HomeState>(
-                                            
-                                            builder: (context, state) {
-                                              final wishlistState =
-                                                  BlocProvider.of<WishlistBloc>(
-                                                      context);
-                                              return IconButton(
+                                         IconButton(
                                                 onPressed: () {
                                                   context.read<HomeBloc>().add(
                                                       HomeAddToWishlistEvent(
@@ -161,7 +165,7 @@ class HomePage extends StatelessWidget {
                                                             20),
                                                   ),
                                                 ),
-                                                icon: wishlistState
+                                                icon: context.read<WishlistBloc>()
                                                         .wishlistItems
                                                         .contains(product)
                                                     ? Icon(
@@ -172,18 +176,13 @@ class HomePage extends StatelessWidget {
                                                       )
                                                     : const Icon(
                                                         CupertinoIcons.heart),
-                                              );
-                                            },
-                                          ),
-                                          BlocBuilder<CartBloc, CartState>(
-                                            bloc: BlocProvider.of<CartBloc>(context),
-                                            builder: (context, state) {
-                                             
-                                              return IconButton(
+                                              ),
+                                          IconButton(
                                                 onPressed: () {
                                                   context.read<HomeBloc>().add(
                                                       HomeAddToCartEvent(
                                                           product, context));
+                                                          
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(
                                                     SnackBar(
@@ -201,16 +200,16 @@ class HomePage extends StatelessWidget {
                                                             20),
                                                   ),
                                                 ),
-                                                icon: BlocProvider.of<CartBloc>(
-                                                            context)
-                                                        .cartItems
-                                                        .contains(product)
-                                                    ? const Icon(Icons.done)
-                                                    : const Icon(
-                                                        CupertinoIcons.cart),
-                                              );
-                                            },
-                                          ),
+                                                icon: context.read<CartBloc>().cartItems
+                                                            .contains(product)
+                                                        ? const Icon(Icons.done)
+                                                        : const Icon(
+                                                            CupertinoIcons.cart)
+                                                            
+                                                
+                                               
+                                              )
+                                          
                                         ],
                                       ),
                                     ],
@@ -236,6 +235,9 @@ class HomePage extends StatelessWidget {
             }
           },
           listener: (context, state) {
+            if (state is HomeInitialState) {
+              context.read<HomeBloc>().add(const HomeInitialEvent());
+            }
             if (state is HomeNavigateToCartState) {
               Navigator.push(
                 context,

@@ -29,7 +29,7 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
   FutureOr<void> mapWishlistRemoveItemEventToState(
       WishlistRemoveItemEvent event, Emitter<WishlistState> emit) {
       wishlistItems.remove(event.product);
-      emit(WishlistLoadedState(wishlistItems: wishlistItems));
+      emit(WishlistInitialState());
   }
 
   FutureOr<void> mapWishlistInitialEventToState(WishlistInitialEvent event, Emitter<WishlistState> emit) {

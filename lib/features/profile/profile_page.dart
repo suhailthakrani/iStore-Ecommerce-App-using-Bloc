@@ -35,7 +35,7 @@ class ProfilePage extends StatelessWidget {
             Container(
               height: 200,
               decoration: ShapeDecoration(
-                shape: RoundedRectangleBorder(),
+                shape: const RoundedRectangleBorder(),
                 gradient: SweepGradient(
                   colors: [
                     Colors.grey.shade300,
@@ -48,6 +48,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(height: 30),
             ProfileTile(
               icon: Icons.person,
               title: 'My Account',

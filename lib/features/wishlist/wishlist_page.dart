@@ -39,8 +39,8 @@ class _WishlistPageState extends State<WishlistPage> {
       ),
       body: BlocConsumer<WishlistBloc, WishlistState>(
          listener: (context, state) {
-          if (state is CartInitialState) {
-            context.read<CartBloc>().add(CartInitialEvent());
+          if (state is WishlistInitialState) {
+            context.read<WishlistBloc>().add(WishlistInitialEvent());
           }
         },
         builder: (context, state) {

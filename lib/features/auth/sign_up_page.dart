@@ -178,7 +178,7 @@ class SignUpPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       state.fieldErrors["password"] != null
-                          ? Text(state.fieldErrors["password"] ?? "", style: TextStyle(color: Colors.red))
+                          ? Text(state.fieldErrors["password"] ?? "", style: const TextStyle(color: Colors.red))
                           : Container(),
                     ],
                   );

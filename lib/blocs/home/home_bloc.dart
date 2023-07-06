@@ -40,7 +40,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try {
       final cartBloc = BlocProvider.of<CartBloc>(event.context);
       cartBloc.add(CartAddItemEvent(product: event.product));
-     
+      emit(HomeInitialState());
     } on Exception catch (e) {
       emit(HomeErrorState(errorMessage: e.toString()));
     }
@@ -50,7 +50,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try {
       final wishlistBloc = BlocProvider.of<WishlistBloc>(event.context);
       wishlistBloc.add(WishlistAddItemEvent(event.product));
- 
+      emit(HomeInitialState());
      
     } on Exception catch (e) {
       emit(HomeErrorState(errorMessage: e.toString()));

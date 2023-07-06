@@ -52,6 +52,7 @@ class _CartPageState extends State<CartPage> {
             final loadedState = state;
             if (loadedState.cartItems.isNotEmpty) {
               return ListView.builder(
+                padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.15),
                 itemCount: loadedState.cartItems.length,
                 itemBuilder: (context, index) {
                   final product = loadedState.cartItems[index];
@@ -225,7 +226,7 @@ class _CartPageState extends State<CartPage> {
         },
       ),
       bottomSheet: SizedBox(
-        height: 150,
+        height: 120,
         child: BlocBuilder<CartBloc, CartState>(
           builder: (context, state) {
             return Padding(
