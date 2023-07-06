@@ -136,7 +136,11 @@ class _WishlistPageState extends State<WishlistPage> {
                                             CartAddItemEvent(product: product),
                                           );
                                     },
-                                    child: const Icon(CupertinoIcons.cart),
+                                    child: context.read<CartBloc>().cartItems
+                                                            .contains(product)
+                                                        ? const Icon(Icons.done)
+                                                        : const Icon(
+                                                            CupertinoIcons.cart),
                                   )
                                 ],
                               )

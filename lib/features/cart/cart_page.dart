@@ -243,13 +243,13 @@ class _CartPageState extends State<CartPage> {
                         style: TextStyle(
                           color: Colors.black54,
                           fontWeight: FontWeight.w600,
-                          fontSize: 18,
+                          fontSize: 16,
                         ),
                       ),
                       Text("${cartBloc.cartItems.fold(cartBloc.totalCartItems, (previousValue, element) => previousValue+element.quantity).toInt()}", style: const TextStyle(
                           color: Colors.black54,
                           fontWeight: FontWeight.w600,
-                          fontSize: 18,
+                          fontSize: 16,
                         ),),
                     ],
                   ),
@@ -261,13 +261,13 @@ class _CartPageState extends State<CartPage> {
                         style: TextStyle(
                           color: Colors.black54,
                           fontWeight: FontWeight.w600,
-                          fontSize: 18,
+                          fontSize: 16,
                         ),
                       ),
-                      Text("${cartBloc.totalPrice}", style: const TextStyle(
+                      Text("\$ ${cartBloc.totalPrice}", style: const TextStyle(
                           color: Colors.black54,
                           fontWeight: FontWeight.w600,
-                          fontSize: 18,
+                          fontSize: 16,
                         ),),
                     ],
                   ),

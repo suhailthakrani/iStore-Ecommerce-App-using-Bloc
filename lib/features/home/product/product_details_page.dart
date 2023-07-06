@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc_cart_app/blocs/home/home_bloc.dart';
 import 'package:bloc_cart_app/features/home/product/components/see_more.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,7 +47,7 @@ class ProductDetails extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    right: 10,
+                    left: 10,
                     bottom: 35,
                     child: Chip(
                       backgroundColor: Colors.white10,
@@ -61,7 +62,23 @@ class ProductDetails extends StatelessWidget {
                         ),
                       ),
                     ),
-                  )
+                  ),
+                  Positioned(
+                      right: 20,
+                      bottom: 35,
+                      child: IconButton(
+                        onPressed: () {},
+                        style: OutlinedButton.styleFrom(
+                            backgroundColor: Colors.blueGrey.shade50,
+                            shape: const CircleBorder(),
+                            padding: const EdgeInsets.all(10)),
+                        icon: Icon(
+                          CupertinoIcons.heart,
+                          color: Colors.amber.shade800,
+                          size: 30,
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -210,35 +227,40 @@ class ProductDetails extends StatelessWidget {
                     ],
                   ),
                   const Expanded(child: SizedBox()),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(
-                        height: 60,
-                        width: 200,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            context
-                                .read<HomeBloc>()
-                                .add(HomeAddToCartEvent(product, context));
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content:
-                                    Text("${product.name} added to the cart"),
-                              ),
-                            );
-                          },
-                          child: const Text("Add to Cart"),
+                  Container(
+                    decoration: BoxDecoration(color: Colors.white,),
+                    padding: EdgeInsets.all(16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "\$${product.price}",
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                      Text(
-                        "\$${product.price}",
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
+                        SizedBox(
+                          height: 60,
+                          width: 200,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              context
+                                  .read<HomeBloc>()
+                                  .add(HomeAddToCartEvent(product, context));
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content:
+                                      Text("${product.name} added to the cart"),
+                                ),
+                              );
+                            },
+                            child: const Text("Add to Cart"),
+                          ),
                         ),
-                      ),
-                    ],
+                        
+                      ],
+                    ),
                   ),
                 ],
               ),
