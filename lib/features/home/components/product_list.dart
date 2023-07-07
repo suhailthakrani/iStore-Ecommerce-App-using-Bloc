@@ -45,21 +45,24 @@ class ProductList extends StatelessWidget {
                     ),
                   );
                 },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  padding: const EdgeInsets.all(8),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image(
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      height: MediaQuery.of(context).size.width * 0.3,
-                      fit: BoxFit.contain,
-                      image: AssetImage(
-                        product.image,
-                      ), // Replace with your image path
+                child: Hero(
+                   tag: "product",
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade100,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: const EdgeInsets.all(8),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image(
+                        width: MediaQuery.of(context).size.width * 0.3,
+                        height: MediaQuery.of(context).size.width * 0.3,
+                        fit: BoxFit.contain,
+                        image: AssetImage(
+                          product.image,
+                        ), // Replace with your image path
+                      ),
                     ),
                   ),
                 ),

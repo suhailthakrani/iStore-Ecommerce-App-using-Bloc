@@ -28,10 +28,13 @@ class ProductDetails extends StatelessWidget {
               child: Stack(
                 children: [
                   Center(
-                      child: Image.asset(
-                    product.image,
-                    filterQuality: FilterQuality.high,
-                  )),
+                      child: Hero(
+                         tag: "product",
+                        child: Image.asset(
+                                          product.image,
+                                          filterQuality: FilterQuality.high,
+                                        ),
+                      )),
                   Positioned(
                     top: 35,
                     left: 16,

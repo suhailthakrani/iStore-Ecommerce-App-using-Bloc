@@ -11,8 +11,10 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: BlocListener<HomeBloc, HomeState>(
+    return Scaffold(
+      extendBody: true,
+      backgroundColor: Colors.white,
+      body: BlocListener<HomeBloc, HomeState>(
         listener: (context, state) {
           if (state is HomeLogoutState) {
             AuthenticationRepository authRepository =
@@ -32,19 +34,54 @@ class ProfilePage extends StatelessWidget {
           children: [
             Container(
               height: 200,
-              decoration: ShapeDecoration(
-                shape: const RoundedRectangleBorder(),
-                gradient: SweepGradient(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
                   colors: [
-                    Colors.grey.shade300,
+                    Colors.white,
+                    Colors.grey.shade200,
                     Colors.grey.shade100,
                     Colors.grey.shade200,
-                     Colors.grey.shade300,
-                    Colors.grey.shade100,
-                    Colors.grey.shade200,
+                    Colors.white,
                   ],
                 ),
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(40),
+                  bottomRight: Radius.circular(40),
+                ),
               ),
+              // child: Stack(
+              //   children: [
+
+              //     Align(
+              //       alignment: Alignment.center,
+              //       child: Padding(
+              //         padding: const EdgeInsets.only(bottom: 20),
+              //         child: Container(
+              //           width: 120,
+              //           height: 120,
+              //           decoration: BoxDecoration(
+              //             shape: BoxShape.circle,
+              //             border: Border.all(
+              //               color: Colors.white,
+              //               width: 5,
+              //             ),
+              //             boxShadow: [
+              //               BoxShadow(
+              //                 color: Colors.black26,
+              //                 blurRadius: 8,
+              //                 offset: Offset(0, 4),
+              //               ),
+              //             ],
+              //             image: DecorationImage(
+              //               image: AssetImage('assets/profile_image.jpg'),
+              //               fit: BoxFit.cover,
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
             ),
             const SizedBox(height: 30),
             ProfileTile(
