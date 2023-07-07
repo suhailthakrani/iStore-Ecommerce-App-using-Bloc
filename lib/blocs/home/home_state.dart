@@ -24,8 +24,18 @@ class HomeLoadingState extends HomeState {
 }
 class HomeLoadedState extends HomeState {
   final List<Product> products;
+  final List<Product> recommended;
+  final List<Product> sepcialDiccountOffers;
+  final List<Product> lootLo;
+  final List<Product> flashSale;
+  final List<Product> superDeals;
   const HomeLoadedState({
     required this.products,
+    required this.recommended,
+    required this.sepcialDiccountOffers,
+    required this.lootLo,
+    required this.flashSale,
+    required this.superDeals,
   });
     @override
   List<Object> get props => [products];

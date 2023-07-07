@@ -1,6 +1,7 @@
 import 'package:bloc_cart_app/blocs/cart/cart_bloc.dart';
 import 'package:bloc_cart_app/blocs/home/home_bloc.dart';
 import 'package:bloc_cart_app/blocs/wishlist/wishlist_bloc.dart';
+import 'package:bloc_cart_app/features/home/components/product_list.dart';
 import 'package:bloc_cart_app/features/home/product/components/image_slider.dart';
 import 'package:bloc_cart_app/features/home/product/product_details_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,16 +17,19 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   late HomeBloc homeBloc;
   List<String> imagePaths = [
     'assets/images/mac.jpg',
     'assets/images/sony.jpg',
     'assets/images/mac.jpg',
   ];
+  late TabController tabController;
 
   @override
   void initState() {
+    tabController = TabController(length: 6, vsync: this);
     homeBloc = BlocProvider.of<HomeBloc>(context);
     homeBloc.add(const HomeInitialEvent());
     super.initState();
@@ -69,291 +73,132 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(width: 20)
         ],
       ),
-      body: SingleChildScrollView(
-        
-        padding: const EdgeInsets.all(16),
-        child: BlocConsumer<HomeBloc, HomeState>(
-          bloc: homeBloc,
-          builder: (context, state) {
-            switch (state.runtimeType) {
-              case HomeLoadingState:
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              case HomeLoadedState:
-                final loadedState = state as HomeLoadedState;
-                return Column(
-                 
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: 200,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              "Top Suggestions for You!",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                  color: Colors.blue.shade900),
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          Expanded(
-                            child: ImageSlider(
-                              imagePaths: imagePaths,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      body: BlocConsumer<HomeBloc, HomeState>(
+        bloc: homeBloc,
+        builder: (context, state) {
+          switch (state.runtimeType) {
+            case HomeLoadingState:
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            case HomeLoadedState:
+              final loadedState = state as HomeLoadedState;
+              return Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    width: MediaQuery.of(context).size.width,
+                    height: 150,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Trending",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                            color: Colors.blue.shade900,
-                          ),
-                        ),
-                        const Text(
-                          "Discount Offers",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const Text(
-                          "Recommended",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
+                        Expanded(
+                          child: ImageSlider(
+                            imagePaths: imagePaths,
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: loadedState.products.length,
-                      itemBuilder: (context, index) {
-                        final product = loadedState.products[index];
-                        return Container(
-                          margin: const EdgeInsets.only(bottom: 16),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Row(
-                            children: [
-                              const SizedBox(width: 8),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ProductDetails(
-                                        product: product,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey.shade100,
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(20),
-                                    child: Image(
-                                      width:
-                                          MediaQuery.of(context).size.width *
-                                              0.3,
-                                      height:
-                                          MediaQuery.of(context).size.width *
-                                              0.3,
-                                      fit: BoxFit.contain,
-                                      image: AssetImage(
-                                        product.image,
-                                      ), // Replace with your image path
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        product.name,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 2,
-                                        style: const TextStyle(
-                                          color: Colors.black54,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        product.description,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
-                                          color: Colors.black45,
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "\$ ${product.price}",
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.black54,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                          Wrap(
-                                            children: [
-                                              IconButton(
-                                                onPressed: () {
-                                                  context.read<HomeBloc>().add(
-                                                      HomeAddToWishlistEvent(
-                                                          product, context));
-                                                  ScaffoldMessenger.of(
-                                                          context)
-                                                      .showSnackBar(
-                                                    SnackBar(
-                                                      content: Text(
-                                                          "${product.name} added to the wishlist"),
-                                                    ),
-                                                  );
-                                                },
-                                                style: IconButton.styleFrom(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  shape:
-                                                      RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                  ),
-                                                ),
-                                                icon: context
-                                                        .read<WishlistBloc>()
-                                                        .wishlistItems
-                                                        .contains(product)
-                                                    ? Icon(
-                                                        CupertinoIcons
-                                                            .heart_fill,
-                                                        color: Colors
-                                                            .yellow.shade700,
-                                                      )
-                                                    : const Icon(
-                                                        CupertinoIcons.heart),
-                                              ),
-                                              IconButton(
-                                                  onPressed: () {
-                                                    context
-                                                        .read<HomeBloc>()
-                                                        .add(
-                                                            HomeAddToCartEvent(
-                                                                product,
-                                                                context));
-                
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                            "${product.name} added to the cart"),
-                                                      ),
-                                                    );
-                                                  },
-                                                  style: IconButton.styleFrom(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8),
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius
-                                                              .circular(20),
-                                                    ),
-                                                  ),
-                                                  icon: context
-                                                          .read<CartBloc>()
-                                                          .cartItems
-                                                          .contains(product)
-                                                      ? const Icon(Icons.done)
-                                                      : const Icon(
-                                                          CupertinoIcons
-                                                              .cart))
-                                            ],
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                );
-              case HomeErrorState:
-                return const Center(
-                  child: Text("Ups! Something went wrong!"),
-                );
-
-              default:
-                return const Center(
-                  child: Text("No Products!"),
-                );
-            }
-          },
-          listener: (context, state) {
-            if (state is HomeInitialState) {
-              context.read<HomeBloc>().add(const HomeInitialEvent());
-            }
-            if (state is HomeNavigateToCartState) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BlocProvider.value(
-                    value: BlocProvider.of<CartBloc>(context),
-                    child: const CartPage(),
                   ),
-                ),
+                  SizedBox(
+                    height: 60,
+                    width: MediaQuery.of(context).size.width,
+                    child: TabBar(
+                      
+                      dividerColor: Colors.white,
+                        isScrollable: true,
+                        labelStyle: TextStyle(
+                          color: Colors.blue.shade900,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                        ),
+                        unselectedLabelStyle: const TextStyle(
+                          color: Colors.black45,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                        indicator: const BoxDecoration(),
+                        controller: tabController,
+                        tabs: const [
+                          Tab(
+                            child: Text(
+                              "Trending",
+                            ),
+                          ),
+                          Tab(
+                            child: Text(
+                              "Recommended",
+                            ),
+                          ),
+                          Tab(
+                            child: Text(
+                              "Sepcial Diccount Offers",
+                            ),
+                          ),
+                          Tab(
+                            child: Text(
+                              "Loot Lo",
+                            ),
+                          ),
+                          Tab(
+                            child: Text(
+                              "Flash Sale",
+                            ),
+                          ),
+                          Tab(
+                            child: Text(
+                              "Super Deals",
+                            ),
+                          ),
+                        ]),
+                  ), 
+                  Expanded(
+                    child: TabBarView(controller: tabController, children: [
+                      ProductList(products: loadedState.products),
+                      ProductList(products: loadedState.recommended),
+                      ProductList(products: loadedState.sepcialDiccountOffers),
+                      ProductList(products: loadedState.lootLo),
+                      ProductList(products: loadedState.flashSale),
+                      ProductList(products: loadedState.superDeals),
+                    ]),
+                  )
+                ],
               );
-            } else if (state is HomeItemAddedToCartState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text("${state.product.name} added to the cart"),
-                ),
+            case HomeErrorState:
+              return const Center(
+                child: Text("Ups! Something went wrong!"),
               );
-            }
-          },
-        ),
+
+            default:
+              return const Center(
+                child: Text("No Products!"),
+              );
+          }
+        },
+        listener: (context, state) {
+          if (state is HomeInitialState) {
+            context.read<HomeBloc>().add(const HomeInitialEvent());
+          }
+          if (state is HomeNavigateToCartState) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BlocProvider.value(
+                  value: BlocProvider.of<CartBloc>(context),
+                  child: const CartPage(),
+                ),
+              ),
+            );
+          } else if (state is HomeItemAddedToCartState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("${state.product.name} added to the cart"),
+              ),
+            );
+          }
+        },
       ),
     );
   }

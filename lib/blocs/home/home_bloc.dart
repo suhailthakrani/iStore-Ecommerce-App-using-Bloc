@@ -14,7 +14,13 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  List<Product> products = [];
+  List<Product> trendings = [];
+  List<Product> recommended = [];
+  List<Product> sepcialDiccountOffers = [];
+  List<Product> lootLo = [];
+  List<Product> flashSale = [];
+  List<Product> superDeals = [];
+
   HomeBloc() : super(HomeInitialState()) {
     on<HomeInitialEvent>(mapHomeInitialEvent);
     on<HomeAddToCartEvent>(mapHomeAddToCartEvent);
@@ -27,9 +33,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       HomeInitialEvent event, Emitter<HomeState> emit) async {
     try {
       emit(HomeLoadingState());
-      products = await loadJsonFile();
+      trendings = await loadJsonFile();
+      recommended = await loadJsonFile();
+      sepcialDiccountOffers = await loadJsonFile();
+      lootLo = await loadJsonFile();
+      flashSale = await loadJsonFile();
+      superDeals = await loadJsonFile();
 
-      emit(HomeLoadedState(products: products));
+
+      emit(HomeLoadedState(products: trendings, recommended: recommended, sepcialDiccountOffers: sepcialDiccountOffers, lootLo: lootLo, flashSale: flashSale, superDeals: superDeals));
     } on Exception catch (e) {
       emit(HomeErrorState(errorMessage: e.toString()));
     }
