@@ -13,6 +13,7 @@ class SignInInitialEvent extends SignInEvent {
   @override
   List<Object> get props => [];
 }
+
 class SignInTextFieldsChangedEvent extends SignInEvent {
   final String email;
   final String password;

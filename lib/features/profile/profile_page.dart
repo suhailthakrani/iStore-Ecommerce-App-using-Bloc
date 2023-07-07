@@ -22,9 +22,7 @@ class ProfilePage extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) => BlocProvider.value(
                   value: BlocProvider.of<SignInBloc>(context),
-                  child: SignInPage(
-                    signInBloc: SignInBloc(authRepository),
-                  ),
+                  child: const SignInPage(),
                 ),
               ),
             );

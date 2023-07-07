@@ -13,36 +13,63 @@ import 'package:bloc_cart_app/models/user_model.dart';
 
 import '../../blocs/signup/signup_bloc.dart';
 
-class SignUpPage extends StatelessWidget {
-  SignUpBloc signUpBloc;
+class SignUpPage extends StatefulWidget {
+  
   
 
-  SignUpPage({
+  const SignUpPage({
     Key? key,
-    required this.signUpBloc,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    signUpBloc = BlocProvider.of<SignUpBloc>(context);
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  late SignUpBloc signUpBloc;
+  bool showPass = false;
+  bool showConfrimPass = false;
     final TextEditingController nameController = TextEditingController();
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passController = TextEditingController();
     final TextEditingController confrimPassController = TextEditingController();
+  @override
+  void initState() {
+    signUpBloc = BlocProvider.of<SignUpBloc>(context);
+    signUpBloc.add(const SignUpInitialEvent());
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Welcome!",
+              style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).primaryColor),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "S I G N U P  H E R E !",
+                  "S I G N U P H E R E !",
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: 24,
                     color: Colors.blue,
                     fontWeight: FontWeight.w500,
                   
@@ -50,8 +77,6 @@ class SignUpPage extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
-            
                Container(
                 height: 150,
                 width: 150,
@@ -136,7 +161,7 @@ class SignUpPage extends StatelessWidget {
             builder: (context, state) {
               return CustomTextField(
                 hint: "Enter password",
-                obsecure: signUpBloc.showPass,
+                obsecure: showPass,
                 controller: passController,
                 onChanged: (pass) {
                  context.read<SignUpBloc>().add(
@@ -156,12 +181,12 @@ class SignUpPage extends StatelessWidget {
                 ),
                 suffix:InkWell(
                       onTap: () {
-                      
-                        signUpBloc.showPass = !signUpBloc.showPass;
+                        showPass = !showPass;
+                        setState(() {});
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(right: 10),
-                        child: signUpBloc.showPass
+                        child: showPass
                             ? const Icon(CupertinoIcons.eye)
                             : const Icon(CupertinoIcons.eye_slash),
                       ),
@@ -192,7 +217,7 @@ class SignUpPage extends StatelessWidget {
             builder: (context, state) {
               return CustomTextField(
                 hint: "Confirm password",
-                obsecure: signUpBloc.showPass,
+                obsecure: showConfrimPass,
                 controller: confrimPassController,
                 onChanged: (pass) {
                  context.read<SignUpBloc>().add(
@@ -213,11 +238,12 @@ class SignUpPage extends StatelessWidget {
                 suffix:InkWell(
                       onTap: () {
                       
-                        signUpBloc.showPass = !signUpBloc.showPass;
+                        showConfrimPass = !showConfrimPass;
+                        setState(() {});
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(right: 10),
-                        child: signUpBloc.showPass
+                        child: showConfrimPass
                             ? const Icon(CupertinoIcons.eye)
                             : const Icon(CupertinoIcons.eye_slash),
                       ),
@@ -250,16 +276,12 @@ class SignUpPage extends StatelessWidget {
                   (current is SignUpNavigateState),
               listener: (context, state) {
                 if (state is SignUpNavigateState) {
-                  AuthenticationRepository authenticationRepository =
-                      AuthenticationRepository();
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => BlocProvider.value(
                         value: BlocProvider.of<SignInBloc>(context),
-                        child: SignInPage(
-                          signInBloc: SignInBloc(authenticationRepository),
-                        ),
+                        child: const SignInPage(),
                       ),
                     ),
                   );
@@ -312,11 +334,8 @@ class SignUpPage extends StatelessWidget {
                           MaterialPageRoute(
                             builder: (context) => BlocProvider.value(
                               value: BlocProvider.of<SignInBloc>(context),
-                              child: SignInPage(
-                                signInBloc: SignInBloc(
-                                  AuthenticationRepository(),
-                                ),
-                              ),
+                              child: const SignInPage(),
+                              
                             ),
                           ),
                         );

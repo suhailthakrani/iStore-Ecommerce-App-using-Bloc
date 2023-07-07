@@ -17,7 +17,7 @@ class _WishlistPageState extends State<WishlistPage> {
     late WishlistBloc wishlistBloc;
   @override
   void initState() {
-    final wishlistBloc = BlocProvider.of<WishlistBloc>(context);
+    wishlistBloc = BlocProvider.of<WishlistBloc>(context);
     wishlistBloc.add(WishlistInitialEvent());
     super.initState();
   }
@@ -132,8 +132,8 @@ class _WishlistPageState extends State<WishlistPage> {
                                     style: OutlinedButton.styleFrom(
                                         padding: EdgeInsets.zero),
                                     onPressed: () {
-                                      context.read<CartBloc>().add(
-                                            CartAddItemEvent(product: product),
+                                      wishlistBloc.add(
+                                            WishlistAddItemToCartEvent(product, context),
                                           );
                                     },
                                     child: context.read<CartBloc>().cartItems

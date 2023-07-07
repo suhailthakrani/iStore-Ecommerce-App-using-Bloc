@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:bloc_cart_app/blocs/cart/cart_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/product_model.dart';
@@ -14,6 +16,7 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
     on<WishlistInitialEvent>(mapWishlistInitialEventToState);
     on<WishlistAddItemEvent>(mapWishlistAddItemEventToState);
     on<WishlistRemoveItemEvent>(mapWishlistRemoveItemEventToState);
+    on<WishlistAddItemToCartEvent>(mapWishlistAddItemToCartEventToState);
   }
 
   FutureOr<void> mapWishlistAddItemEventToState(
@@ -34,5 +37,15 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
 
   FutureOr<void> mapWishlistInitialEventToState(WishlistInitialEvent event, Emitter<WishlistState> emit) {
   emit(WishlistLoadedState(wishlistItems: wishlistItems));
+  }
+
+  FutureOr<void> mapWishlistAddItemToCartEventToState(WishlistAddItemToCartEvent event, Emitter<WishlistState> emit) {
+    try {
+      final cartBloc = BlocProvider.of<CartBloc>(event.context);
+      cartBloc.add(CartAddItemEvent(product: event.product));
+      emit(WishlistInitialState());
+    } catch (error) {
+      emit(WishlistErrorState(error: error.toString()));
+    }
   }
 }

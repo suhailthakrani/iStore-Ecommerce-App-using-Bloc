@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:bloc_cart_app/repositories/authentication_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,9 +8,9 @@ part 'signin_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final AuthenticationRepository authRepository;
-  bool showPass = false;
   SignInBloc(this.authRepository) : super(SignInInitialState()) {
     on<SignInInitialEvent>(mapSignInInitialEventWithState);
+    // on<SignInShowOrHidePasswordEvent>(mapSignInShowOrHidePasswordEventTOState);
     on<SignInTextFieldsChangedEvent>(mapSignInTextfieldsChangedEventWithState);
     on<SignInButtonPressedeEvent>(mapSignInButtonPressedEventWithState);
   }
@@ -72,4 +71,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       ));
     }
   }
+
+
 }

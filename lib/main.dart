@@ -72,12 +72,8 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           home: isSignedIn
-              ? SignInPage(
-                  signInBloc: SignInBloc(authRepository),
-                )
-              : SignUpPage(
-                  signUpBloc: SignUpBloc(authRepository),
-                ),
+              ? const SignInPage()
+              : const SignUpPage(),
         ),
       ),
     );

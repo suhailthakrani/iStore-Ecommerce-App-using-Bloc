@@ -12,6 +12,17 @@ class WishlistInitialEvent extends WishlistEvent {
   @override
   List<Object> get props => [];
 }
+class WishlistAddItemToCartEvent extends WishlistEvent {
+  final Product product;
+  final BuildContext context;
+  const WishlistAddItemToCartEvent(
+    this.product,
+    this.context,
+  );
+
+  @override
+  List<Object> get props => [product];
+}
 class WishlistAddItemEvent extends WishlistEvent {
   final Product product;
   const WishlistAddItemEvent(
