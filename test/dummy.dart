@@ -1,9 +1,16 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:bloc_cart_app/blocs/localization/localization_bloc.dart';
+import 'package:bloc_cart_app/blocs/localization/localization_event.dart';
+import 'package:bloc_cart_app/blocs/main/main_bloc.dart';
 import 'package:bloc_cart_app/blocs/signin/signin_bloc.dart';
+import 'package:bloc_cart_app/blocs/signup/signup_bloc.dart';
 import 'package:bloc_cart_app/blocs/wishlist/wishlist_bloc.dart';
 import 'package:bloc_cart_app/commons/models/language_model.dart';
+import 'package:bloc_cart_app/features/auth/signin/sign_in_page.dart';
+import 'package:bloc_cart_app/features/auth/signup/sign_up_page.dart';
+import 'package:bloc_cart_app/localizations/localization_service.dart';
+import 'package:bloc_cart_app/obersver/bloc_observer.dart';
+import 'package:bloc_cart_app/repositories/authentication_repository.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,13 +21,6 @@ import 'package:bloc_cart_app/commons/shared_prefs/my_shared_prefs.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import 'blocs/main/main_bloc.dart';
-import 'blocs/signup/signup_bloc.dart';
-import 'features/auth/signin/sign_in_page.dart';
-import 'features/auth/signup/sign_up_page.dart';
-import 'localizations/localization_service.dart';
-import 'obersver/bloc_observer.dart';
-import 'repositories/authentication_repository.dart';
 
 Future<void> main() async {
   Bloc.observer = SimpleBlocObserver();
@@ -45,7 +45,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizationController = Get.put(LocalizationController());
     bool isSignedIn = authRepository.getSignedInStatus(key: "isSignedUp");
-
     final box = GetStorage();
 
     return MultiRepositoryProvider(
@@ -55,14 +54,14 @@ class MyApp extends StatelessWidget {
         ),
         RepositoryProvider(
           create: (context) => LocalizationService(
-            locale: Locale(localizationController.currentLanguage),
-          ),
+              locale: Locale(localizationController.currentLanguage)),
         ),
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (context) => LocalizationBloc(box),
+          BlocProvider<LocalizationBloc>(
+            create: (context) =>
+                LocalizationBloc(box)..add(LocalizationInitialEvent()),
           ),
           BlocProvider(create: (context) => MainBloc()),
           BlocProvider(
@@ -83,9 +82,8 @@ class MyApp extends StatelessWidget {
             create: (context) => WishlistBloc(),
           )
         ],
-        child: GetBuilder<LocalizationController>(
-          init: localizationController,
-          builder: (LocalizationController localizationController) {
+        child: BlocBuilder<LocalizationBloc, LocalizationState>(
+          builder: (context, state) {
             return MaterialApp(
               title: 'Flutter Demo',
               debugShowCheckedModeBanner: false,
@@ -93,7 +91,9 @@ class MyApp extends StatelessWidget {
                 primaryColor: Colors.blue.shade700,
                 useMaterial3: true,
               ),
-              locale: Locale(box.read('lang') ?? 'en', ''),
+              locale: state is LocalizationLoadedState
+                  ? state.locale
+                  : LocalizationService.currentLocale,
               localizationsDelegates: LocalizationService.localizationDelegates,
               supportedLocales: LocalizationService.supportedLocales,
               localeResolutionCallback:

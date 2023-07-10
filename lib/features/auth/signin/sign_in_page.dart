@@ -1,19 +1,21 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:bloc_cart_app/blocs/signup/signup_bloc.dart';
-import 'package:bloc_cart_app/features/auth/sign_up_page.dart';
-import 'package:bloc_cart_app/features/main/main_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:bloc_cart_app/blocs/signup/signup_bloc.dart';
 import 'package:bloc_cart_app/commons/widgets/custom_text_field.dart';
+import 'package:bloc_cart_app/features/auth/signup/sign_up_page.dart';
+import 'package:bloc_cart_app/features/main/main_page.dart';
 
-import '../../blocs/main/main_bloc.dart';
-import '../../blocs/signin/signin_bloc.dart';
+import '../../../blocs/main/main_bloc.dart';
+import '../../../blocs/signin/signin_bloc.dart';
 
 class SignInPage extends StatefulWidget {
+
   const SignInPage({
     Key? key,
+  
   }) : super(key: key);
 
   @override
@@ -47,7 +49,7 @@ class _SignInPageState extends State<SignInPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Welcome Back",
+              "Welcome Back !",
               style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
@@ -56,18 +58,7 @@ class _SignInPageState extends State<SignInPage> {
           ],
         ),
         const SizedBox(height: 16),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "S I G N I N  H E R E !",
-              style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
-                  color: Theme.of(context).primaryColor),
-            ),
-          ],
-        ),
+        
         const SizedBox(height: 20),
         CircleAvatar(
           radius: 70,

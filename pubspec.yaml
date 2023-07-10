@@ -39,6 +39,10 @@ dependencies:
   equatable: ^2.0.5
   shared_preferences: ^2.1.2
   carousel_slider: ^4.2.1
+  flutter_localizations:
+    sdk: flutter
+  get: ^4.6.5
+  get_storage: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +71,8 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/json/
+    - assets/locales/
+    - assets/translations/
     # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

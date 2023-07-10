@@ -1,8 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:bloc_cart_app/blocs/home/home_bloc.dart';
+
+
 import 'package:bloc_cart_app/blocs/signin/signin_bloc.dart';
-import 'package:bloc_cart_app/features/auth/sign_in_page.dart';
-import 'package:bloc_cart_app/features/home/home_page.dart';
+import 'package:bloc_cart_app/features/auth/signin/sign_in_page.dart';
+import 'package:bloc_cart_app/features/auth/signup/components/language_widget.dart';
+import 'package:bloc_cart_app/localizations/localization.dart';
+
+import 'package:bloc_cart_app/localizations/localization_service.dart';
 import 'package:bloc_cart_app/repositories/authentication_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,13 +14,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bloc_cart_app/commons/widgets/custom_text_field.dart';
 import 'package:bloc_cart_app/models/user_model.dart';
+import 'package:get/get.dart';
 
-import '../../blocs/signup/signup_bloc.dart';
+import '../../../blocs/localization/localization_bloc.dart';
+import '../../../blocs/localization/localization_event.dart';
+import '../../../blocs/signup/signup_bloc.dart';
+
 
 class SignUpPage extends StatefulWidget {
-  
-  
-
   const SignUpPage({
     Key? key,
   }) : super(key: key);
@@ -27,21 +32,27 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   late SignUpBloc signUpBloc;
+
   bool showPass = false;
   bool showConfrimPass = false;
-    final TextEditingController nameController = TextEditingController();
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passController = TextEditingController();
-    final TextEditingController confrimPassController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
+  final TextEditingController confrimPassController = TextEditingController();
   @override
   void initState() {
     signUpBloc = BlocProvider.of<SignUpBloc>(context);
     signUpBloc.add(const SignUpInitialEvent());
+    BlocProvider.of<LocalizationBloc>(context).add(LocalizationInitialEvent());
+    
+    
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    
+    final localizationController = Get.find<LocalizationController>();
+    final localizationService = LocalizationService.of(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -49,46 +60,44 @@ class _SignUpPageState extends State<SignUpPage> {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            const SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Welcome!",
-              style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
-                  color: Theme.of(context).primaryColor),
-            ),
-          ],
-        ),
-        const SizedBox(height: 16),
-            const Row(
+            const SizedBox(height: 50),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "S I G N U P H E R E !",
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.blue,
-                    fontWeight: FontWeight.w500,
-                  
-                  ),
-                ),
+               Text(
+                      localizationService.translate("Login_text"),
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
+                          color: Theme.of(context).primaryColor),
+                    )
               ],
             ),
-               Container(
-                height: 150,
-                width: 150,
-                padding: const EdgeInsets.all(20),
-                child: Image.asset("assets/images/ecommerc.png"),
-            
+            Container(
+              height: 150,
+              width: 150,
+              padding: const EdgeInsets.all(20),
+              child: Image.asset("assets/images/ecommerc.png"),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
+            LanguageWidget(
+              height: 60,
+              localizationController: localizationController,
+              onChange: (String value) {
+                context
+                    .read<LocalizationBloc>()
+                    .add(LocalizationSetLanguageEvent(languageCode: value));
+                
+              },
+            ),
+            const SizedBox(height: 20),
             CustomTextField(
               hint: "Enter your name",
               controller: nameController,
-              prefix: const Icon(Icons.person_outline, color: Colors.white,),
+              prefix: const Icon(
+                Icons.person_outline,
+                color: Colors.white,
+              ),
               onChanged: (val) {
                 context.read<SignUpBloc>().add(
                       SignUpTextFieldsChangedEvent(
@@ -111,7 +120,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       state.fieldErrors["name"] != null
-                          ? Text(state.fieldErrors["name"] ?? "", style: TextStyle(color: Colors.red),)
+                          ? Text(
+                              state.fieldErrors["name"] ?? "",
+                              style: TextStyle(color: Colors.red),
+                            )
                           : Container(),
                     ],
                   );
@@ -124,7 +136,10 @@ class _SignUpPageState extends State<SignUpPage> {
             CustomTextField(
               hint: "Enter your email",
               controller: emailController,
-              prefix: const Icon(Icons.email_outlined, color: Colors.white,),
+              prefix: const Icon(
+                Icons.email_outlined,
+                color: Colors.white,
+              ),
               onChanged: (val) {
                 context.read<SignUpBloc>().add(
                       SignUpTextFieldsChangedEvent(
@@ -147,7 +162,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       state.fieldErrors["email"] != null
-                          ? Text(state.fieldErrors["email"] ?? "", style: TextStyle(color: Colors.red), )
+                          ? Text(
+                              state.fieldErrors["email"] ?? "",
+                              style: TextStyle(color: Colors.red),
+                            )
                           : Container(),
                     ],
                   );
@@ -158,28 +176,28 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             const SizedBox(height: 10),
             BlocBuilder<SignInBloc, SignInState>(
-            builder: (context, state) {
-              return CustomTextField(
-                hint: "Enter password",
-                obsecure: showPass,
-                controller: passController,
-                onChanged: (pass) {
-                 context.read<SignUpBloc>().add(
-                      SignUpTextFieldsChangedEvent(
-                        UserModel(
-                          email: emailController.text,
-                          name: nameController.text,
-                          password: pass,
-                          confrimP: confrimPassController.text,
-                        ),
-                      ),
-                    );
-                },
-                prefix: const Icon(
-                  Icons.lock_outline,
-                  color: Colors.white,
-                ),
-                suffix:InkWell(
+              builder: (context, state) {
+                return CustomTextField(
+                    hint: "Enter password",
+                    obsecure: showPass,
+                    controller: passController,
+                    onChanged: (pass) {
+                      context.read<SignUpBloc>().add(
+                            SignUpTextFieldsChangedEvent(
+                              UserModel(
+                                email: emailController.text,
+                                name: nameController.text,
+                                password: pass,
+                                confrimP: confrimPassController.text,
+                              ),
+                            ),
+                          );
+                    },
+                    prefix: const Icon(
+                      Icons.lock_outline,
+                      color: Colors.white,
+                    ),
+                    suffix: InkWell(
                       onTap: () {
                         showPass = !showPass;
                         setState(() {});
@@ -190,20 +208,20 @@ class _SignUpPageState extends State<SignUpPage> {
                             ? const Icon(CupertinoIcons.eye)
                             : const Icon(CupertinoIcons.eye_slash),
                       ),
-                    )
-              );
-            },
-          ), const SizedBox(height: 5),
+                    ));
+              },
+            ),
+            const SizedBox(height: 5),
             BlocBuilder<SignUpBloc, SignUpState>(
               bloc: signUpBloc,
               builder: (context, state) {
-
                 if (state is SignUpErrorState) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       state.fieldErrors["password"] != null
-                          ? Text(state.fieldErrors["password"] ?? "", style: const TextStyle(color: Colors.red))
+                          ? Text(state.fieldErrors["password"] ?? "",
+                              style: const TextStyle(color: Colors.red))
                           : Container(),
                     ],
                   );
@@ -213,31 +231,30 @@ class _SignUpPageState extends State<SignUpPage> {
               },
             ),
             const SizedBox(height: 10),
-             BlocBuilder<SignInBloc, SignInState>(
-            builder: (context, state) {
-              return CustomTextField(
-                hint: "Confirm password",
-                obsecure: showConfrimPass,
-                controller: confrimPassController,
-                onChanged: (pass) {
-                 context.read<SignUpBloc>().add(
-                      SignUpTextFieldsChangedEvent(
-                        UserModel(
-                          email: emailController.text,
-                          name: nameController.text,
-                          password: pass,
-                          confrimP: confrimPassController.text,
-                        ),
-                      ),
-                    );
-                },
-                prefix: const Icon(
-                  Icons.lock_outline,
-                  color: Colors.white,
-                ),
-                suffix:InkWell(
+            BlocBuilder<SignInBloc, SignInState>(
+              builder: (context, state) {
+                return CustomTextField(
+                    hint: "Confirm password",
+                    obsecure: showConfrimPass,
+                    controller: confrimPassController,
+                    onChanged: (pass) {
+                      context.read<SignUpBloc>().add(
+                            SignUpTextFieldsChangedEvent(
+                              UserModel(
+                                email: emailController.text,
+                                name: nameController.text,
+                                password: pass,
+                                confrimP: confrimPassController.text,
+                              ),
+                            ),
+                          );
+                    },
+                    prefix: const Icon(
+                      Icons.lock_outline,
+                      color: Colors.white,
+                    ),
+                    suffix: InkWell(
                       onTap: () {
-                      
                         showConfrimPass = !showConfrimPass;
                         setState(() {});
                       },
@@ -247,11 +264,9 @@ class _SignUpPageState extends State<SignUpPage> {
                             ? const Icon(CupertinoIcons.eye)
                             : const Icon(CupertinoIcons.eye_slash),
                       ),
-                    )
-              );
-            },
-          ),
-           
+                    ));
+              },
+            ),
             const SizedBox(height: 5),
             BlocBuilder<SignUpBloc, SignUpState>(
               bloc: signUpBloc,
@@ -261,7 +276,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       state.fieldErrors["confrimP"] != null
-                          ? Text(state.fieldErrors["confrimP"] ?? "", style: TextStyle(color: Colors.red),)
+                          ? Text(
+                              state.fieldErrors["confrimP"] ?? "",
+                              style: TextStyle(color: Colors.red),
+                            )
                           : Container(),
                     ],
                   );
@@ -291,8 +309,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 return ElevatedButton(
                   onPressed: () {
                     print(context.read<SignUpBloc>().state.toString());
-                    AuthenticationRepository authenticationRepository = AuthenticationRepository();
-                    authenticationRepository.setSignedInStatus(key: "isSignedUp", value: true);
+                    AuthenticationRepository authenticationRepository =
+                        AuthenticationRepository();
+                    authenticationRepository.setSignedInStatus(
+                        key: "isSignedUp", value: true);
                     context.read<SignUpBloc>().add(
                           SignUpButtonPressedEvent(
                             UserModel(
@@ -305,9 +325,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).primaryColor,
-                    foregroundColor: Colors.white
-                  ),
+                      backgroundColor: Theme.of(context).primaryColor,
+                      foregroundColor: Colors.white),
                   child: const Text("Sign Up"),
                 );
               },
@@ -320,11 +339,11 @@ class _SignUpPageState extends State<SignUpPage> {
                   crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
                     const Text(
-                      "Alrady member?",
-                       style: TextStyle(
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      "Already member?",
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     const SizedBox(width: 8),
                     TextButton(
@@ -335,7 +354,6 @@ class _SignUpPageState extends State<SignUpPage> {
                             builder: (context) => BlocProvider.value(
                               value: BlocProvider.of<SignInBloc>(context),
                               child: const SignInPage(),
-                              
                             ),
                           ),
                         );
