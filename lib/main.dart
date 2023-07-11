@@ -35,7 +35,7 @@ Future<void> main() async {
     path: 'assets/translations',
     fallbackLocale: const Locale('en', ''),
     startLocale: const Locale('en', ''),
-    saveLocale: false,
+    saveLocale: true,
     useOnlyLangCode: true,
     child: MyApp(
       authRepository: authRepository,

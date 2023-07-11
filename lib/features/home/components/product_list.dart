@@ -45,9 +45,7 @@ class ProductList extends StatelessWidget {
                     ),
                   );
                 },
-                child: Hero(
-                   tag: "product",
-                  child: Container(
+                child: Container(
                     decoration: BoxDecoration(
                       color: Colors.grey.shade100,
                       borderRadius: BorderRadius.circular(12),
@@ -61,11 +59,15 @@ class ProductList extends StatelessWidget {
                         fit: BoxFit.contain,
                         image: AssetImage(
                           product.image,
+                        ),
+                        errorBuilder: (context, error, stackTrace) => SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          height: MediaQuery.of(context).size.width * 0.3,
                         ), // Replace with your image path
                       ),
                     ),
                   ),
-                ),
+                
               ),
               Expanded(
                 child: Padding(
@@ -77,8 +79,8 @@ class ProductList extends StatelessWidget {
                         product.name,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
-                        style: const TextStyle(
-                          color: Colors.black54,
+                        style:  TextStyle(
+                          color: Colors.blue.shade900,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),

@@ -1,6 +1,6 @@
 
 enum Tkeys {
-  language,
+  language.new(),
   signIn,
   signUp,
   alreadyMember,
@@ -11,3 +11,4 @@ enum Tkeys {
   newHere,
   welcomeBack,
 }
+

@@ -14,30 +14,39 @@ class _SeeMoreState extends State<SeeMore> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Stack(
       children: [
-        Stack(
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               showMore
                   ? widget.productDescription
-                  : "${widget.productDescription.substring(0,(( widget.productDescription.length~/2)))}...",
-              maxLines: 3,
+                  : "${widget.productDescription.substring(0, ((widget.productDescription.length ~/ 2)))}...",
+              maxLines: showMore ? null:3,
             ),
-           
+            Align(
+              alignment: Alignment.topRight,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    showMore = !showMore;
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 30),
+                  child: Text(
+                    showMore ? "See less" : "See more",
+
+                    style: TextStyle(
+                      color: Colors.purple.shade800,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
-        ),
-        Align(
-          alignment: Alignment.topRight,
-          child: TextButton(
-              onPressed: () {
-                setState(() {
-                  showMore = !showMore;
-                });
-              },
-              child: Text(showMore ? "See less" : "See more")
-            ),
         ),
       ],
     );

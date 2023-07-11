@@ -85,75 +85,59 @@ class _HomePageState extends State<HomePage>
               final loadedState = state as HomeLoadedState;
               return Column(
                 children: [
+                  // Container(
+                  //   margin: const EdgeInsets.only(top: 10),
+                  //   width: MediaQuery.of(context).size.width,
+                  //   height: 150,
+                  //   child: Column(
+                  //     mainAxisSize: MainAxisSize.min,
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //       Expanded(
+                  //         child: ImageSlider(
+                  //           imagePaths: imagePaths,
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   Container(
-                    margin: const EdgeInsets.only(top: 10),
+                    height: 80,
+                    
                     width: MediaQuery.of(context).size.width,
-                    height: 150,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: ImageSlider(
-                            imagePaths: imagePaths,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 60,
-                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     child: TabBar(
-                      
-                      dividerColor: Colors.white,
+                        dividerColor: Colors.white,
                         isScrollable: true,
-                        labelStyle: TextStyle(
-                          color: Colors.blue.shade900,
+                        labelStyle: const TextStyle(
+                          color: Colors.white,
                           fontWeight: FontWeight.w600,
-                          fontSize: 18,
+                          fontSize: 15,
                         ),
                         unselectedLabelStyle: const TextStyle(
                           color: Colors.black45,
                           fontWeight: FontWeight.w600,
-                          fontSize: 16,
+                          fontSize: 15,
                         ),
-                        indicator: const BoxDecoration(),
+                        indicatorSize: TabBarIndicatorSize.label,
+                        indicator: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(16)),
                         controller: tabController,
-                        tabs: const [
-                          Tab(
-                            child: Text(
-                              "Trending",
-                            ),
-                          ),
-                          Tab(
-                            child: Text(
-                              "Recommended",
-                            ),
-                          ),
-                          Tab(
-                            child: Text(
-                              "Sepcial Diccount Offers",
-                            ),
-                          ),
-                          Tab(
-                            child: Text(
-                              "Loot Lo",
-                            ),
-                          ),
-                          Tab(
-                            child: Text(
-                              "Flash Sale",
-                            ),
-                          ),
-                          Tab(
-                            child: Text(
-                              "Super Deals",
-                            ),
-                          ),
+                        padding: EdgeInsets.zero,
+                        indicatorPadding:
+                            const EdgeInsets.symmetric(vertical: 11.5),
+                            labelPadding: const EdgeInsets.only(right: 5,left: 5),
+                        tabs: [
+                          customTab("Trending"),
+                          customTab("Recommended"),
+                          customTab("Sepcial Diccount Offers"),
+                          customTab("Loot Lo!"),
+                          customTab("Flash Sale"),
+                          customTab("Super Deals"),
                         ]),
-                  ), 
+                  ),
                   Expanded(
                     child: TabBarView(controller: tabController, children: [
                       ProductList(products: loadedState.products),
@@ -199,6 +183,21 @@ class _HomePageState extends State<HomePage>
             );
           }
         },
+      ),
+    );
+  }
+
+  Tab customTab(String title) {
+    return Tab(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.blue),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Text(
+          title,
+        ),
       ),
     );
   }
