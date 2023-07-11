@@ -39,6 +39,14 @@ class LocalizationService {
     return _localizedString[key] ?? key;
   }
 
+  Future<void> changeLocale(String languageCode) async {
+    final newLocale = Locale(languageCode);
+    if (currentLocale != newLocale) {
+      currentLocale = newLocale;
+      await load();
+    }
+  }
+
   static List<Locale> supportedLocales = [
     const Locale('en', 'US'),
     const Locale('ar', ''),
@@ -61,7 +69,7 @@ class LocalizationService {
 
   static const LocalizationsDelegate<LocalizationService> _delegate = _LocalizationServiceDelegate();
 
-  static const localizationDelegates = [GlobalMaterialLocalizations.delegate,GlobalCupertinoLocalizations.delegate,_delegate];
+  static const localizationDelegates = [GlobalWidgetsLocalizations.delegate,GlobalMaterialLocalizations.delegate,GlobalCupertinoLocalizations.delegate,_delegate];
 }
 class _LocalizationServiceDelegate extends LocalizationsDelegate<LocalizationService> {
   const _LocalizationServiceDelegate();

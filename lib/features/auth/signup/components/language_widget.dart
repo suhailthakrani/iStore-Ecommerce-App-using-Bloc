@@ -1,21 +1,19 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:bloc_cart_app/blocs/localization/localization_bloc.dart';
-import 'package:bloc_cart_app/blocs/localization/localization_event.dart';
+
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:bloc_cart_app/commons/models/language_model.dart';
-import 'package:bloc_cart_app/localizations/localization_service.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 class LanguageWidget extends StatefulWidget {
   final double height;
-  final ValueSetter<String> onChange;
-  final LocalizationController localizationController;
+  // final ValueSetter<String> onChange;
+
   const LanguageWidget({
     Key? key,
     required this.height,
-    required this.onChange,
-    required this.localizationController,
+    // required this.onChange,
   }) : super(key: key);
 
   @override
@@ -23,13 +21,6 @@ class LanguageWidget extends StatefulWidget {
 }
 
 class _LanguageWidgetState extends State<LanguageWidget> {
-  int selectedIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,14 +28,20 @@ class _LanguageWidgetState extends State<LanguageWidget> {
       alignment: Alignment.center,
       height: widget.height,
       child: ListView.builder(
+    
         scrollDirection: Axis.horizontal,
         itemCount: languages.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () {
-              context.read<LocalizationBloc>().add(LocalizationSetLanguageEvent(
-                  languageCode: languages[index].code));
-                 widget.onChange(languages[index].code);
+            onTap: () async {
+              final selectedLocale = Locale(languages[index].code);
+              final isLocaleSupported = EasyLocalization.of(context)
+                      ?.supportedLocales
+                      .contains(selectedLocale) ??
+                  false;
+              if (isLocaleSupported) {
+                await EasyLocalization.of(context)?.setLocale(selectedLocale);
+              }
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -53,14 +50,14 @@ class _LanguageWidgetState extends State<LanguageWidget> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  color: widget.localizationController.currentLanguage ==
-                          languages[index].code
-                      ? Colors.blue.shade800
-                      : Colors.black54,
-                  fontSize: widget.localizationController.currentLanguage ==
-                          languages[index].code
-                      ? 18
-                      : 15,
+                  color: EasyLocalization.of(context)?.currentLocale?.languageCode
+                      == languages[index].code
+                          ? Colors.blue.shade800
+                          : Colors.black54,
+                  fontSize:
+                      EasyLocalization.of(context)?.currentLocale?.languageCode == languages[index].code
+                          ? 18
+                          : 15,
                 ),
               ),
             ),

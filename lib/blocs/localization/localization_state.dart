@@ -13,11 +13,6 @@ class LocalizationInitialState extends LocalizationState {
   List<Object> get props => [];
 }
 
-class LocalizationLoadingState extends LocalizationState {
-  @override
-  List<Object> get props => [];
-}
-
 class LocalizationLoadedState extends LocalizationState {
   final Locale locale;
   final bool isRtl;
@@ -36,15 +31,4 @@ class LocalizationErrorState extends LocalizationState {
   });
   @override
   List<Object> get props => [];
-}
-
-class LocalizationUpdateState extends LocalizationState {
-  final String languageCode;
-  final bool isRtl;
-  const LocalizationUpdateState({
-    required this.languageCode,
-    required this.isRtl,
-  });
-  @override
-  List<Object> get props => [languageCode,isRtl];
 }

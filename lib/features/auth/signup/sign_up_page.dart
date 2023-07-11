@@ -1,13 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-
 import 'package:bloc_cart_app/blocs/signin/signin_bloc.dart';
+import 'package:bloc_cart_app/commons/widgets/translated_text.dart';
 import 'package:bloc_cart_app/features/auth/signin/sign_in_page.dart';
 import 'package:bloc_cart_app/features/auth/signup/components/language_widget.dart';
-import 'package:bloc_cart_app/localizations/localization.dart';
 
 import 'package:bloc_cart_app/localizations/localization_service.dart';
 import 'package:bloc_cart_app/repositories/authentication_repository.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +20,6 @@ import '../../../blocs/localization/localization_bloc.dart';
 import '../../../blocs/localization/localization_event.dart';
 import '../../../blocs/signup/signup_bloc.dart';
 
-
 class SignUpPage extends StatefulWidget {
   const SignUpPage({
     Key? key,
@@ -32,6 +31,7 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   late SignUpBloc signUpBloc;
+  late LocalizationBloc localizationBloc;
 
   bool showPass = false;
   bool showConfrimPass = false;
@@ -43,17 +43,12 @@ class _SignUpPageState extends State<SignUpPage> {
   void initState() {
     signUpBloc = BlocProvider.of<SignUpBloc>(context);
     signUpBloc.add(const SignUpInitialEvent());
-    BlocProvider.of<LocalizationBloc>(context).add(LocalizationInitialEvent());
-    
-    
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final localizationController = Get.find<LocalizationController>();
-    final localizationService = LocalizationService.of(context);
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -64,13 +59,13 @@ class _SignUpPageState extends State<SignUpPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-               Text(
-                      localizationService.translate("Login_text"),
-                      style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(context).primaryColor),
-                    )
+                Text(
+                  "Login_text",
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).primaryColor),
+                ).tr()
               ],
             ),
             Container(
@@ -80,15 +75,8 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Image.asset("assets/images/ecommerc.png"),
             ),
             const SizedBox(height: 20),
-            LanguageWidget(
+            const LanguageWidget(
               height: 60,
-              localizationController: localizationController,
-              onChange: (String value) {
-                context
-                    .read<LocalizationBloc>()
-                    .add(LocalizationSetLanguageEvent(languageCode: value));
-                
-              },
             ),
             const SizedBox(height: 20),
             CustomTextField(
@@ -122,7 +110,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       state.fieldErrors["name"] != null
                           ? Text(
                               state.fieldErrors["name"] ?? "",
-                              style: TextStyle(color: Colors.red),
+                              style: const TextStyle(color: Colors.red),
                             )
                           : Container(),
                     ],

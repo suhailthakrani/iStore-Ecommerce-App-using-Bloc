@@ -1,9 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
-import 'package:bloc_cart_app/blocs/localization/localization_bloc.dart';
 import 'package:bloc_cart_app/blocs/signin/signin_bloc.dart';
 import 'package:bloc_cart_app/blocs/wishlist/wishlist_bloc.dart';
-import 'package:bloc_cart_app/commons/models/language_model.dart';
+
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,14 +9,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_cart_app/blocs/cart/cart_bloc.dart';
 import 'package:bloc_cart_app/blocs/home/home_bloc.dart';
 import 'package:bloc_cart_app/commons/shared_prefs/my_shared_prefs.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 import 'blocs/main/main_bloc.dart';
 import 'blocs/signup/signup_bloc.dart';
 import 'features/auth/signin/sign_in_page.dart';
 import 'features/auth/signup/sign_up_page.dart';
-import 'localizations/localization_service.dart';
 import 'obersver/bloc_observer.dart';
 import 'repositories/authentication_repository.dart';
 
@@ -26,11 +21,29 @@ Future<void> main() async {
   Bloc.observer = SimpleBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefs.initialize();
-  await GetStorage.init();
+  await EasyLocalization.ensureInitialized();
+
   final authRepository = AuthenticationRepository();
-  runApp(MyApp(
-    authRepository: authRepository,
+  runApp(EasyLocalization(
+    supportedLocales: const [
+      Locale('en', ''),
+      Locale('ar', ''),
+      Locale('es', ''),
+      Locale('he', ''),
+      Locale('ru', ''),
+    ],
+    path: 'assets/translations',
+    fallbackLocale: const Locale('en', ''),
+    startLocale: const Locale('en', ''),
+    saveLocale: false,
+    useOnlyLangCode: true,
+    child: MyApp(
+      authRepository: authRepository,
+    ),
   ));
+  // runApp(MyApp(
+  //   authRepository: authRepository,
+  // ));
 }
 
 class MyApp extends StatelessWidget {
@@ -43,27 +56,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final localizationController = Get.put(LocalizationController());
     bool isSignedIn = authRepository.getSignedInStatus(key: "isSignedUp");
-
-    final box = GetStorage();
 
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider.value(
           value: authRepository,
         ),
-        RepositoryProvider(
-          create: (context) => LocalizationService(
-            locale: Locale(localizationController.currentLanguage),
-          ),
-        ),
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (context) => LocalizationBloc(box),
-          ),
+          // BlocProvider(
+          //   create: (context) => LocalizationBloc(
+          //       box: box, localizationService: localizationService),
+          // ),
           BlocProvider(create: (context) => MainBloc()),
           BlocProvider(
             create: (context) =>
@@ -83,24 +89,17 @@ class MyApp extends StatelessWidget {
             create: (context) => WishlistBloc(),
           )
         ],
-        child: GetBuilder<LocalizationController>(
-          init: localizationController,
-          builder: (LocalizationController localizationController) {
-            return MaterialApp(
-              title: 'Flutter Demo',
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                primaryColor: Colors.blue.shade700,
-                useMaterial3: true,
-              ),
-              locale: Locale(box.read('lang') ?? 'en', ''),
-              localizationsDelegates: LocalizationService.localizationDelegates,
-              supportedLocales: LocalizationService.supportedLocales,
-              localeResolutionCallback:
-                  LocalizationService.localeResolutionCallBack,
-              home: isSignedIn ? const SignInPage() : const SignUpPage(),
-            );
-          },
+        child: MaterialApp(
+          title: 'E Commerce App',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primaryColor: Colors.blue.shade700,
+            useMaterial3: true,
+          ),
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          home: isSignedIn ? const SignInPage() : const SignUpPage(),
         ),
       ),
     );

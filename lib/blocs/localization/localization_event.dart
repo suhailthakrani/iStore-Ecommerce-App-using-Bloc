@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 
 
 import 'package:equatable/equatable.dart';
@@ -11,31 +12,15 @@ abstract class LocalizationEvent extends Equatable {
 
 class LocalizationInitialEvent extends LocalizationEvent {}
 
-class LocalizationChangedEvent extends LocalizationEvent {}
-
-class LocalizationSetLanguageEvent extends LocalizationEvent {
+class LocalizationChangedEvent extends LocalizationEvent {
   final String languageCode;
+  final bool isLTR;
 
-  const LocalizationSetLanguageEvent({required this.languageCode});
-
-  @override
-  List<Object?> get props => [languageCode];
-}
-
-class LocalizationSetDirectionEvent extends LocalizationEvent {
-  final bool isRtl;
-
-  const LocalizationSetDirectionEvent(this.isRtl);
+  const LocalizationChangedEvent({
+    required this.languageCode,
+    required this.isLTR,
+  });
 
   @override
-  List<Object?> get props => [isRtl];
-}
-
-class LocalizationLanguageChangedEvent extends LocalizationEvent {
-  final String languageCode;
-
-  const LocalizationLanguageChangedEvent(this.languageCode);
-
-  @override
-  List<Object?> get props => [languageCode];
+  List<Object?> get props => [languageCode, isLTR];
 }
