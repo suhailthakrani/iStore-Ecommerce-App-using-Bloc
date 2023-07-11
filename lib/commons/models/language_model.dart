@@ -8,7 +8,7 @@ class Language {
 List<Language> languages = [
   Language('en', 'English'),
   Language('es', 'Spanish'),
-  Language('he', 'Hebrew'),
-  Language('ru', 'Russian'),
-  Language('ar', 'Arabic'),
+  Language('ur', 'Urdu'),
+  Language('hi', 'Hindi'),
+  Language('de', 'German'),
 ];

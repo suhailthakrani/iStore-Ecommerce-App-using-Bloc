@@ -19,6 +19,7 @@ import 'package:get/get.dart';
 import '../../../blocs/localization/localization_bloc.dart';
 import '../../../blocs/localization/localization_event.dart';
 import '../../../blocs/signup/signup_bloc.dart';
+import '../../../localizations/localization_keys.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({
@@ -60,7 +61,7 @@ class _SignUpPageState extends State<SignUpPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Login_text",
+                  Tkeys.signUp.name,
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w500,
@@ -80,7 +81,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             const SizedBox(height: 20),
             CustomTextField(
-              hint: "Enter your name",
+              hint: Tkeys.enterName.name,
               controller: nameController,
               prefix: const Icon(
                 Icons.person_outline,
@@ -122,7 +123,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             const SizedBox(height: 10),
             CustomTextField(
-              hint: "Enter your email",
+              hint: Tkeys.enterEmail.name,
               controller: emailController,
               prefix: const Icon(
                 Icons.email_outlined,
@@ -152,7 +153,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       state.fieldErrors["email"] != null
                           ? Text(
                               state.fieldErrors["email"] ?? "",
-                              style: TextStyle(color: Colors.red),
+                              style: const TextStyle(color: Colors.red),
                             )
                           : Container(),
                     ],
@@ -166,7 +167,7 @@ class _SignUpPageState extends State<SignUpPage> {
             BlocBuilder<SignInBloc, SignInState>(
               builder: (context, state) {
                 return CustomTextField(
-                    hint: "Enter password",
+                    hint: Tkeys.enterPassword.name,
                     obsecure: showPass,
                     controller: passController,
                     onChanged: (pass) {
@@ -222,7 +223,7 @@ class _SignUpPageState extends State<SignUpPage> {
             BlocBuilder<SignInBloc, SignInState>(
               builder: (context, state) {
                 return CustomTextField(
-                    hint: "Confirm password",
+                    hint: Tkeys.confirmPassword.name,
                     obsecure: showConfrimPass,
                     controller: confrimPassController,
                     onChanged: (pass) {
@@ -266,7 +267,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       state.fieldErrors["confrimP"] != null
                           ? Text(
                               state.fieldErrors["confrimP"] ?? "",
-                              style: TextStyle(color: Colors.red),
+                              style: const TextStyle(color: Colors.red),
                             )
                           : Container(),
                     ],
@@ -315,7 +316,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).primaryColor,
                       foregroundColor: Colors.white),
-                  child: const Text("Sign Up"),
+                  child: Text(Tkeys.alreadyMember.name).tr(),
                 );
               },
             ),
@@ -326,13 +327,13 @@ class _SignUpPageState extends State<SignUpPage> {
                 Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
-                    const Text(
-                      "Already member?",
-                      style: TextStyle(
+                     Text(
+                      Tkeys.alreadyMember.name,
+                      style: const TextStyle(
                         color: Colors.black54,
                         fontWeight: FontWeight.w600,
                       ),
-                    ),
+                    ).tr(),
                     const SizedBox(width: 8),
                     TextButton(
                       onPressed: () {
@@ -347,12 +348,12 @@ class _SignUpPageState extends State<SignUpPage> {
                         );
                       },
                       child: Text(
-                        "Sign In",
+                        Tkeys.signIn.name,
                         style: TextStyle(
                           color: Colors.blue.shade700,
                           fontWeight: FontWeight.w600,
                         ),
-                      ),
+                      ).tr(),
                     ),
                   ],
                 )

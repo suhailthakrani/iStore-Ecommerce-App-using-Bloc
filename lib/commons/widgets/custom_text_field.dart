@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +41,7 @@ class CustomTextField extends StatelessWidget {
       ),
       suffix: suffix,
       padding: const EdgeInsets.all(12),
-      placeholder: hint,
+      placeholder: hint.tr(),
       placeholderStyle: const TextStyle(color: Colors.black54),
       style: const TextStyle(color: Colors.black54),
       

@@ -1,0 +1,12 @@
+{
+    "language": "Deutsch",
+    "signIn": "Anmelden",
+    "signUp": "Registrieren",
+    "alreadyMember": "Bereits Mitglied?",
+    "enterName": "Geben Sie Ihren Namen ein",
+    "enterEmail": "Geben Sie Ihre E-Mail-Adresse ein",
+    "enterPassword": "Geben Sie Ihr Passwort ein",
+    "confirmPassword": "Bestätigen Sie Ihr Passwort",
+    "newHere": "Neu hier?",
+    "welcomeBack": "Willkommen zurück!"
+}

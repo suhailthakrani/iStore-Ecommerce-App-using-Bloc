@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +11,7 @@ import 'package:bloc_cart_app/features/main/main_page.dart';
 
 import '../../../blocs/main/main_bloc.dart';
 import '../../../blocs/signin/signin_bloc.dart';
+import '../../../localizations/localization_keys.dart';
 
 class SignInPage extends StatefulWidget {
 
@@ -49,12 +51,12 @@ class _SignInPageState extends State<SignInPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Welcome Back !",
+              Tkeys.welcomeBack.name,
               style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
                   color: Theme.of(context).primaryColor),
-            ),
+            ).tr(),
           ],
         ),
         const SizedBox(height: 16),
@@ -70,7 +72,7 @@ class _SignInPageState extends State<SignInPage> {
         ),
         const SizedBox(height: 60),
         CustomTextField(
-          hint: "Enter your email",
+          hint: Tkeys.enterEmail.name,
           controller: emailController,
           prefix: const Icon(
             Icons.email_outlined,
@@ -110,7 +112,7 @@ class _SignInPageState extends State<SignInPage> {
         BlocBuilder<SignInBloc, SignInState>(
           builder: (context, state) {
             return CustomTextField(
-                hint: "Enter password",
+                hint: Tkeys.enterPassword.name,
                 obsecure: !showPass,
                 controller: passController,
                 onChanged: (pass) {
@@ -200,7 +202,7 @@ class _SignInPageState extends State<SignInPage> {
               style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).primaryColor,
                   foregroundColor: Colors.white),
-              child: const Text("Sign In"),
+              child: Text(Tkeys.signIn.name).tr(),
             );
           },
         ),
@@ -211,13 +213,13 @@ class _SignInPageState extends State<SignInPage> {
             Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                const Text(
-                  "New here?",
-                  style: TextStyle(
+                Text(
+                  Tkeys.newHere.name,
+                  style: const TextStyle(
                     color: Colors.black54,
                     fontWeight: FontWeight.w600,
                   ),
-                ),
+                ).tr(),
                 const SizedBox(width: 8),
                 TextButton(
                   onPressed: () {
@@ -232,12 +234,12 @@ class _SignInPageState extends State<SignInPage> {
                     );
                   },
                   child: Text(
-                    "Sign Up",
+                    Tkeys.signUp.name,
                     style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w600,
                     ),
-                  ),
+                  ).tr(),
                 ),
               ],
             )
