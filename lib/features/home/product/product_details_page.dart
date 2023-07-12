@@ -1,15 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc_cart_app/blocs/home/home_bloc.dart';
+import 'package:bloc_cart_app/commons/models/products.dart';
 import 'package:bloc_cart_app/features/home/product/components/see_more.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../../../data/product_model.dart';
+import '../../../commons/models/product_model.dart';
 
 class ProductDetails extends StatelessWidget {
-  final Product product;
+  final CategoryProduct product;
   const ProductDetails({
     Key? key,
     required this.product,
@@ -68,39 +69,39 @@ class ProductDetails extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Positioned(
-                    left: 10,
-                    bottom: 35,
-                    child: Chip(
-                      backgroundColor: Colors.white10,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24)),
-                      side: BorderSide.none,
-                      label: Text(
-                        product.brand,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    right: 20,
-                    bottom: 35,
-                    child: IconButton(
-                      onPressed: () {},
-                      style: OutlinedButton.styleFrom(
-                          backgroundColor: Colors.blueGrey.shade50,
-                          shape: const CircleBorder(),
-                          padding: const EdgeInsets.all(10)),
-                      icon: Icon(
-                        CupertinoIcons.heart,
-                        color: Colors.amber.shade800,
-                        size: 30,
-                      ),
-                    ),
-                  ),
+                  // Positioned(
+                  //   left: 10,
+                  //   bottom: 35,
+                  //   child: Chip(
+                  //     backgroundColor: Colors.white10,
+                  //     shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(24)),
+                  //     side: BorderSide.none,
+                  //     label: Text(
+                  //       "product.brand",
+                  //       style: const TextStyle(
+                  //         fontSize: 20,
+                  //         fontWeight: FontWeight.w600,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // Positioned(
+                  //   right: 20,
+                  //   bottom: 35,
+                  //   child: IconButton(
+                  //     onPressed: () {},
+                  //     style: OutlinedButton.styleFrom(
+                  //         backgroundColor: Colors.blueGrey.shade50,
+                  //         shape: const CircleBorder(),
+                  //         padding: const EdgeInsets.all(10)),
+                  //     icon: Icon(
+                  //       CupertinoIcons.heart,
+                  //       color: Colors.amber.shade800,
+                  //       size: 30,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -137,6 +138,18 @@ class ProductDetails extends StatelessWidget {
                             ),
                           ),
                         ),
+                        IconButton(
+                      onPressed: () {},
+                      style: OutlinedButton.styleFrom(
+                          backgroundColor: Colors.blueGrey.shade50,
+                          shape: const CircleBorder(),
+                          padding: const EdgeInsets.all(10)),
+                      icon: Icon(
+                        CupertinoIcons.heart,
+                        color: Colors.amber.shade800,
+                        size: 30,
+                      ),
+                    ),
                       ],
                     ),
                     SizedBox(
@@ -198,7 +211,7 @@ class ProductDetails extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
-                        Text(product.brand),
+                        Text("product.brand"),
                       ],
                     ),
                     Row(
@@ -211,7 +224,7 @@ class ProductDetails extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
-                        Text(product.color),
+                        Text("product.color"),
                       ],
                     ),
                     Row(
@@ -224,7 +237,7 @@ class ProductDetails extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
-                        Text(product.displaySize),
+                        Text("product.displaySize"),
                       ],
                     ),
                     Row(
@@ -237,7 +250,7 @@ class ProductDetails extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
-                        Text(product.storage),
+                        Text("product.storage"),
                       ],
                     ),
                     Row(
@@ -250,7 +263,7 @@ class ProductDetails extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
-                        Text(product.waterResistance),
+                        Text("product.waterResistance"),
                       ],
                     ),
                     Row(
@@ -263,7 +276,7 @@ class ProductDetails extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
-                        Text(product.batteryLife),
+                        Text("product.batteryLife"),
                       ],
                     ),
                     Row(
@@ -276,7 +289,7 @@ class ProductDetails extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
-                        Text(product.batteryLife),
+                        Text("product.batteryLife"),
                       ],
                     ),
                     Row(
@@ -289,7 +302,7 @@ class ProductDetails extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
-                        Text(product.batteryLife),
+                        Text("product.batteryLife"),
                       ],
                     ),
                     Row(
@@ -302,7 +315,7 @@ class ProductDetails extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
-                        Text(product.batteryLife),
+                        Text("product.batteryLife"),
                       ],
                     ),
                     Row(
@@ -348,7 +361,7 @@ class ProductDetails extends StatelessWidget {
         decoration: const BoxDecoration(
           color: Colors.white,
         ),
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.only(left:24, top: 12, right: 24, bottom: 24),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

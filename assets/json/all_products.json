@@ -1,0 +1,379 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "category": "AirBods",
+            "categoryProducts": [
+                {
+                    "id": 1,
+                    "name": "AirPods (2nd generation)",
+                    "image": "assets/images/AirPods (2nd generation).jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 2,
+                    "name": "AirPods (3rd generation) with Lightning Charging Case",
+                    "image": "assets/images/AirPods (3rd generation) with Lightning Charging Case.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 3,
+                    "name": "ABeats Studio3 Wireless Over‑Ear Headphones - Blue",
+                    "image": "assets/images/Beats Studio3 Wireless Over‑Ear Headphones - Blue 349.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 4,
+                    "name": "Powerbeats Pro - True Wireless Earbuds - Navy 249",
+                    "image": "assets/images/Powerbeats Pro - True Wireless Earbuds - Navy 249.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 5,
+                    "name": "Incase Lanyard",
+                    "image": "assets/images/AirPods Pro (2nd generation) 249.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "category": "Apple Watch",
+            "categoryProducts": [
+                {
+                    "id": 1,
+                    "name": "Midnight Aluminum Case with Sport Band - Olive, 2",
+                    "image": "assets/images/Midnight Aluminum Case with Sport Band - Olive, 2.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 2,
+                    "name": "Titanium Case with Orange Alpine Loop - Orange, 2",
+                    "image": "assets/images/Titanium Case with Orange Alpine Loop - Orange, 2.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 3,
+                    "name": "Titanium Case with Orange Alpine Loop - Sliver 2",
+                    "image": "assets/images/Titanium Case with Orange Alpine Loop - Sliver 2.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                }
+
+            ]
+        },
+        {
+            "id": 2,
+            "category": "Iphone",
+            "categoryProducts": [
+                {
+                    "id": 1,
+                    "name": "iPhone 14",
+                    "image": "assets/images/iPhone 14.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 2,
+                    "name": "iPhone 13",
+                    "image": "assets/images/iPhone 13.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 3,
+                    "name": "iPhone 12",
+                    "image": "assets/images/iPhone 12.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 4,
+                    "name": "iPhone 11",
+                    "image": "assets/images/iPhone 11.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                }
+             
+            ]
+        },
+        {
+            "id": 3,
+            "category": "AirTag  & Accessories",
+            "categoryProducts": [
+                {
+                    "id": 1,
+                    "name": "AirTag Leather Key Ring - Baltic Blue",
+                    "image": "assets/images/AirTag Leather Key Ring - Baltic Blue.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 2,
+                    "name": "AirTag Leather Key Ring - Forest Green",
+                    "image": "assets/images/AirTag Leather Key Ring - Forest Green.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 3,
+                    "name": "AirTag Leather Key Ring – Golden Brown",
+                    "image": "assets/images/AirTag Leather Key Ring – Golden Brown.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 4,
+                    "name": "AirTag Leather Loop - (PRODUCT)RED",
+                    "image": "assets/images/AirTag Leather Loop - (PRODUCT)RED.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 5,
+                    "name": "AirTag Leather Loop - Baltic Blue",
+                    "image": "assets/images/AirTag Leather Loop - Baltic Blue.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "category": "Cases & Protection",
+            "categoryProducts": [
+                {
+                    "id": 1,
+                    "name": "Leather Sleeve for 10.5‑inch iPad Pro - Midnight Blue",
+                    "image": "assets/images/Leather Sleeve for 10.5‑inch iPad Pro - Midnight Blue.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 2,
+                    "name": "Magic Keyboard Folio for iPad (10th generation) - US English",
+                    "image": "assets/images/Magic Keyboard Folio for iPad (10th generation) - US English.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 3,
+                    "name": "Magic Keyboard for iPad Pro 12.9‑inch (6th Generation)",
+                    "image": "assets/images/Magic Keyboard for iPad Pro 12.9‑inch (6th Generation).jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 4,
+                    "name": "Magic Mouse - Black Multi-Touch Surface",
+                    "image": "assets/images/Magic Mouse - Black Multi-Touch Surface.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 5,
+                    "name": "Magic Trackpad - Black Multi-Touch Surface",
+                    "image": "assets/images/Magic Trackpad - Black Multi-Touch Surface.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "category": "Mice & Trackpads",
+            "categoryProducts": [
+                {
+                    "id": 1,
+                    "name": "Magic Mouse - Black Multi-Touch Surface",
+                    "image": "assets/images/Magic Mouse - Black Multi-Touch Surface.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 2,
+                    "name": "Magic Trackpad - Black Multi-Touch Surface",
+                    "image": "assets/images/Magic Trackpad - Black Multi-Touch Surface.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "category": "Keyboards",
+            "categoryProducts":  [
+                {
+                    "id": 1,
+                    "name": "Magic Keyboard - US English",
+                    "image": "assets/images/Magic Keyboard - US English.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 2,
+                    "name": "Magic Keyboard for iPad Pro 12.9‑inch (6th Generation) - US English - Back",
+                    "image": "assets/images/Magic Keyboard for iPad Pro 12.9‑inch (6th Generation) - US English - Back.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 3,
+                    "name": "Magic Keyboard with Numeric Keypad - US English",
+                    "image": "assets/images/Magic Keyboard with Numeric Keypad - US English.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 4,
+                    "name": "Smart Keyboard Folio for iPad Pro 11-inch (4th generation) and iPad Air (5th generation) - US English",
+                    "image": "assets/images/Smart Keyboard Folio for iPad Pro 11-inch (4th generation) and iPad Air (5th generation) - US English.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 5,
+                    "name": "Magic Keyboard for iPad Pro 12.9‑inch (6th Generation) - US English - White",
+                    "image": "assets/images/Magic Keyboard for iPad Pro 12.9‑inch (6th Generation) - US English - White.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "category": "Power & Cables",
+            "categoryProducts": [
+                {
+                    "id": 1,
+                    "name": "20W USB-C Power Adapter",
+                    "image": "assets/images/20W USB-C Power Adapter.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 2,
+                    "name": "35W Dual USB-C Port Power Adapter",
+                    "image": "assets/images/35W Dual USB-C Port Power Adapter.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 3,
+                    "name": "Apple Watch Magnetic Charger to USB-C Cable for Apple Watch Series",
+                    "image": "assets/images/Apple Watch Magnetic Charger to USB-C Cable for Apple Watch Series.jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 4,
+                    "name": "Lightning to USB Cable (2m)",
+                    "image": "assets/images/Lightning to USB Cable (2m).jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 5,
+                    "name": "Thunderbolt 4 Pro Cable (3m)",
+                    "image": "assets/images/Thunderbolt 4 Pro Cable (3m).jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 6,
+                    "name": "Lightning to USB Cable (2m)",
+                    "image": "assets/images/Lightning to USB Cable (2m).jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                },
+                {
+                    "id": 7,
+                    "name": "Thunderbolt 4 Pro Cable (3m)",
+                    "image": "assets/images/Thunderbolt 4 Pro Cable (3m).jpg",
+                    "price": "249",
+                    "reviews": "872",
+                    "description": "The Canon EOS R5 is a professional full-frame mirrorless camera with a high-resolution sensor, advanced autofocus capabilities, and 8K video recording, delivering exceptional image quality and performance.",
+                    "rating": "4.6"
+                }
+            ]
+        }
+      
+    ]
+}

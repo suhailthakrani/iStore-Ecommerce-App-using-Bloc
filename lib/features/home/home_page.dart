@@ -1,6 +1,7 @@
 import 'package:bloc_cart_app/blocs/cart/cart_bloc.dart';
 import 'package:bloc_cart_app/blocs/home/home_bloc.dart';
 import 'package:bloc_cart_app/blocs/wishlist/wishlist_bloc.dart';
+import 'package:bloc_cart_app/commons/constants/constants.dart';
 import 'package:bloc_cart_app/features/home/components/product_list.dart';
 import 'package:bloc_cart_app/features/home/product/components/image_slider.dart';
 import 'package:bloc_cart_app/features/home/product/product_details_page.dart';
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   void initState() {
-    tabController = TabController(length: 6, vsync: this);
+    tabController = TabController(length: 8, vsync: this);
     homeBloc = BlocProvider.of<HomeBloc>(context);
     homeBloc.add(const HomeInitialEvent());
     super.initState();
@@ -42,32 +43,27 @@ class _HomePageState extends State<HomePage>
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leadingWidth: 80,
-        leading: Image.asset(
-          "assets/images/ecommerc.png",
-          height: 65,
-          width: 80,
-        ),
-        title: Text(
-          "Your E Commerce App",
-          style: TextStyle(
-            fontSize: 17,
-            color: Theme.of(context).primaryColor,
-            fontWeight: FontWeight.w600,
+        leadingWidth: 160,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: Image.asset(
+            "assets/images/iStore.png",
+            height: 50,
+            width: 80,
           ),
         ),
         actions: [
           IconButton(
             onPressed: () {},
             style: OutlinedButton.styleFrom(
-              backgroundColor: Colors.blueGrey.shade100,
+              backgroundColor: Colors.black54,
               shape: const CircleBorder(),
               padding: const EdgeInsets.all(8),
             ),
-            icon: Icon(
+            icon: const Icon(
               Icons.notifications_outlined,
               size: 30,
-              color: Colors.blue.shade900,
+              color: Colors.white,
             ),
           ),
           const SizedBox(width: 20)
@@ -104,10 +100,10 @@ class _HomePageState extends State<HomePage>
                   // ),
                   Container(
                     height: 80,
-                    
                     width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: TabBar(
+                        labelColor: Colors.white,
                         dividerColor: Colors.white,
                         isScrollable: true,
                         labelStyle: const TextStyle(
@@ -116,36 +112,57 @@ class _HomePageState extends State<HomePage>
                           fontSize: 15,
                         ),
                         unselectedLabelStyle: const TextStyle(
-                          color: Colors.black45,
+                          color: Colors.black54,
                           fontWeight: FontWeight.w600,
                           fontSize: 15,
                         ),
                         indicatorSize: TabBarIndicatorSize.label,
                         indicator: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(16)),
+                          color: Colors.black54,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
                         controller: tabController,
                         padding: EdgeInsets.zero,
                         indicatorPadding:
                             const EdgeInsets.symmetric(vertical: 11.5),
-                            labelPadding: const EdgeInsets.only(right: 5,left: 5),
+                        labelPadding: const EdgeInsets.only(right: 5, left: 5),
                         tabs: [
-                          customTab("Trending"),
-                          customTab("Recommended"),
-                          customTab("Sepcial Diccount Offers"),
-                          customTab("Loot Lo!"),
-                          customTab("Flash Sale"),
-                          customTab("Super Deals"),
+                          customTab(AppConstants.airbods),
+                          customTab(AppConstants.appwatches),
+                          customTab(AppConstants.casesAndProtection),
+                          customTab(AppConstants.airTagAndAccessories),
+                          customTab(AppConstants.keyboards),
+                          customTab(AppConstants.miceAndTrackpads),
+                          customTab(AppConstants.powerAndCables),
+                          customTab(AppConstants.iphone),
                         ]),
                   ),
                   Expanded(
                     child: TabBarView(controller: tabController, children: [
-                      ProductList(products: loadedState.products),
-                      ProductList(products: loadedState.recommended),
-                      ProductList(products: loadedState.sepcialDiccountOffers),
-                      ProductList(products: loadedState.lootLo),
-                      ProductList(products: loadedState.flashSale),
-                      ProductList(products: loadedState.superDeals),
+                      ProductList(
+                          category: loadedState.products
+                              .getProductsByCategory(AppConstants.airbods)!),
+                      ProductList(
+                          category: loadedState.products
+                              .getProductsByCategory(AppConstants.appwatches)!),
+                      ProductList(
+                          category: loadedState.products.getProductsByCategory(
+                              AppConstants.casesAndProtection)!),
+                      ProductList(
+                          category: loadedState.products.getProductsByCategory(
+                              AppConstants.airTagAndAccessories)!),
+                      ProductList(
+                          category: loadedState.products
+                              .getProductsByCategory(AppConstants.keyboards)!),
+                      ProductList(
+                          category: loadedState.products.getProductsByCategory(
+                              AppConstants.miceAndTrackpads)!),
+                      ProductList(
+                          category: loadedState.products.getProductsByCategory(
+                              AppConstants.powerAndCables)!),
+                      ProductList(
+                          category: loadedState.products
+                              .getProductsByCategory(AppConstants.iphone)!),
                     ]),
                   )
                 ],
@@ -192,7 +209,7 @@ class _HomePageState extends State<HomePage>
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.blue),
+          border: Border.all(color: Colors.grey.shade600),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Text(

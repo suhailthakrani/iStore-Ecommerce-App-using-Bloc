@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bloc_cart_app/commons/widgets/custom_text_field.dart';
-import 'package:bloc_cart_app/models/user_model.dart';
+import 'package:bloc_cart_app/commons/models/user_model.dart';
 import 'package:get/get.dart';
 
 import '../../../blocs/localization/localization_bloc.dart';

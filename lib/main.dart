@@ -1,14 +1,14 @@
-import 'package:bloc_cart_app/blocs/signin/signin_bloc.dart';
-import 'package:bloc_cart_app/blocs/wishlist/wishlist_bloc.dart';
-
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:easy_localization/easy_localization.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bloc_cart_app/blocs/cart/cart_bloc.dart';
 import 'package:bloc_cart_app/blocs/home/home_bloc.dart';
-import 'package:bloc_cart_app/commons/shared_prefs/my_shared_prefs.dart';
+import 'package:bloc_cart_app/blocs/signin/signin_bloc.dart';
+import 'package:bloc_cart_app/blocs/wishlist/wishlist_bloc.dart';
+import 'package:bloc_cart_app/commons/storage/my_shared_prefs.dart';
+import 'package:bloc_cart_app/repositories/products_repository.dart';
 
 import 'blocs/main/main_bloc.dart';
 import 'blocs/signup/signup_bloc.dart';
@@ -24,6 +24,7 @@ Future<void> main() async {
   await EasyLocalization.ensureInitialized();
 
   final authRepository = AuthenticationRepository();
+  final  productsRepository  = ProductsRepository();
   runApp(EasyLocalization(
     supportedLocales: const [
       Locale('en', ''),
@@ -39,6 +40,7 @@ Future<void> main() async {
     useOnlyLangCode: true,
     child: MyApp(
       authRepository: authRepository,
+      productsRepository: productsRepository,
     ),
   ));
   // runApp(MyApp(
@@ -48,9 +50,11 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   final AuthenticationRepository authRepository;
+  final ProductsRepository productsRepository;  
   const MyApp({
     Key? key,
     required this.authRepository,
+    required this.productsRepository,
   }) : super(key: key);
 
   // This widget is the root of your application.
@@ -62,6 +66,9 @@ class MyApp extends StatelessWidget {
       providers: [
         RepositoryProvider.value(
           value: authRepository,
+        ),
+          RepositoryProvider.value(
+          value: productsRepository,
         ),
       ],
       child: MultiBlocProvider(
@@ -76,7 +83,7 @@ class MyApp extends StatelessWidget {
                 SignUpBloc(authRepository)..add(const SignUpInitialEvent()),
           ),
           BlocProvider(
-            create: (context) => HomeBloc()..add(const HomeInitialEvent()),
+            create: (context) => HomeBloc(productsRepository: productsRepository)..add(const HomeInitialEvent()),
           ),
           BlocProvider(
             create: (context) =>
@@ -93,7 +100,7 @@ class MyApp extends StatelessWidget {
           title: 'E Commerce App',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            primaryColor: Colors.blue.shade700,
+            primaryColor: Color(0xff343434),
             useMaterial3: true,
           ),
           localizationsDelegates: context.localizationDelegates,

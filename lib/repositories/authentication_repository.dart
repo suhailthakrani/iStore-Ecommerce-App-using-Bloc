@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:bloc_cart_app/commons/shared_prefs/my_shared_prefs.dart';
-import 'package:bloc_cart_app/models/user_model.dart';
+import 'package:bloc_cart_app/commons/storage/my_shared_prefs.dart';
+import 'package:bloc_cart_app/commons/models/user_model.dart';
 import 'package:flutter/foundation.dart';
 
 class AuthenticationRepository {

@@ -1,9 +1,10 @@
+import 'package:bloc_cart_app/commons/models/products.dart';
 import 'package:flutter/material.dart';
 
-import '../../../data/product_model.dart';
+import '../../../commons/models/product_model.dart';
 
-class ProductSearchDelegate extends SearchDelegate<Product> {
-  final List<Product> products;
+class ProductSearchDelegate extends SearchDelegate<CategoryProduct> {
+  final ProductsModel products;
 
   ProductSearchDelegate({required this.products});
 
@@ -23,7 +24,7 @@ class ProductSearchDelegate extends SearchDelegate<Product> {
   Widget buildLeading(BuildContext context) {
     return IconButton(
       onPressed: () {
-        close(context, Product.empty());
+        close(context, CategoryProduct.empty());
       },
       icon: const Icon(Icons.arrow_back),
     );
@@ -31,18 +32,21 @@ class ProductSearchDelegate extends SearchDelegate<Product> {
 
   @override
   Widget buildResults(BuildContext context) {
-    final filteredProducts = products
-        .where((product) =>
-            product.name.toLowerCase().contains(query.toLowerCase()))
-        .toList();
-
+     final List<CategoryProduct> filteredProducts = [];
+    for (var category in products.products) {
+      for (var product in category.categoryProducts) {
+        if (product.name.toLowerCase().contains(query.toLowerCase())) {
+          filteredProducts.add(product);
+        }
+      }
+    }
     return ListView.builder(
       itemCount: filteredProducts.length,
       itemBuilder: (context, index) {
         final product = filteredProducts[index];
         return ListTile(
           title: Text(product.name),
-          subtitle: Text(product.brand),
+          subtitle: Text(product.description),
           onTap: () {
             close(context, product);
           },
@@ -53,19 +57,24 @@ class ProductSearchDelegate extends SearchDelegate<Product> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final filteredProducts = products
-        .where((product) =>
-            product.name.toLowerCase().contains(query.toLowerCase()))
-        .toList();
+    final List<CategoryProduct> filteredProducts = [];
+    for (var category in products.products) {
+      for (var product in category.categoryProducts) {
+        if (product.name.toLowerCase().contains(query.toLowerCase())) {
+          filteredProducts.add(product);
+        }
+      }
+    }
+    
 
     return ListView.builder(
       itemCount: filteredProducts.length,
       itemBuilder: (context, index) {
         final product = filteredProducts[index];
         return ListTile(
-           leading: Image.asset(product.image),
-          title: Text(product.name),
-          subtitle: Text(product.brand),
+          leading: Image.asset(product.image),
+          title: Text(product.name, style: TextStyle(fontWeight: FontWeight.bold),),
+          subtitle: Text(product.description, maxLines: 1, style: TextStyle(fontWeight: FontWeight.w400, fontSize: 10),),
           onTap: () {
             query = product.name;
             close(context, product);

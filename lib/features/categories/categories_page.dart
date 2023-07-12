@@ -1,3 +1,4 @@
+import 'package:bloc_cart_app/commons/models/categories.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +16,13 @@ class CategoriesPage extends StatelessWidget {
         if (state is HomeLoadedState) {
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Product Search'),
+              title: const Text(
+                'Product Categories',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18,
+                ),
+              ),
               actions: [
                 IconButton(
                   onPressed: () {
@@ -27,35 +34,63 @@ class CategoriesPage extends StatelessWidget {
                   icon: const Icon(Icons.search),
                 ),
                 IconButton(
-                  onPressed: () {
-                   
-                  },
+                  onPressed: () {},
                   icon: const Icon(CupertinoIcons.slider_horizontal_3),
                 ),
                 const SizedBox(width: 20),
               ],
             ),
-            body: ListView.builder(
-              itemCount: state.products.length,
-              itemBuilder: (context, index) {
-                final product = state.products[index];
-                return ListTile(
-                  leading: Image.asset(
-                    product.image,
-                    width: MediaQuery.of(context).size.width * 0.2,
-                      height: MediaQuery.of(context).size.width * 0.2,
-                    errorBuilder: (context, error, stackTrace) => SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      height: MediaQuery.of(context).size.width * 0.2,
+            body: Column(
+              children: [
+                Expanded(
+                  child: GridView.count(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.all(30),
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                    children: List.generate(
+                      Categories.categories.length,
+                      (index) => Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.shade300,
+                                offset: const Offset(3, 3),
+                              )
+                            ]),
+                        padding: const EdgeInsets.all(8),
+                        child: Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image(
+                                width: MediaQuery.of(context).size.width * 0.28,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.28,
+                                image: AssetImage(
+                                  Categories.categories[index].image,
+                                ), // Replace with your image path
+                              ),
+                            ),
+                            Expanded(
+                                child: Text(
+                              Categories.categories[index].name,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context).primaryColor
+                              ),
+                            ))
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                  title: Text(product.name),
-                  subtitle: Text(product.brand),
-                  onTap: () {
-                    // Handle product tap
-                  },
-                );
-              },
+                ),
+              ],
             ),
           );
         } else {

@@ -18,7 +18,7 @@ class CartLoadedEvent extends CartEvent {
   List<Object> get props => [];
 }
 class CartAddItemEvent extends CartEvent {
-  final Product product;
+  final CategoryProduct product;
   const CartAddItemEvent({
     required this.product,
   });
@@ -27,7 +27,7 @@ class CartAddItemEvent extends CartEvent {
   List<Object> get props => [product];
 }
 class CartRemoveItemEvent extends CartEvent {
-    final Product product;
+    final CategoryProduct product;
   const CartRemoveItemEvent({
     required this.product,
   });

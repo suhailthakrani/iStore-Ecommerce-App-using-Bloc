@@ -13,7 +13,7 @@ class WishlistInitialEvent extends WishlistEvent {
   List<Object> get props => [];
 }
 class WishlistAddItemToCartEvent extends WishlistEvent {
-  final Product product;
+  final CategoryProduct product;
   final BuildContext context;
   const WishlistAddItemToCartEvent(
     this.product,
@@ -24,7 +24,7 @@ class WishlistAddItemToCartEvent extends WishlistEvent {
   List<Object> get props => [product];
 }
 class WishlistAddItemEvent extends WishlistEvent {
-  final Product product;
+  final CategoryProduct product;
   const WishlistAddItemEvent(
     this.product,
   );
@@ -33,7 +33,7 @@ class WishlistAddItemEvent extends WishlistEvent {
   List<Object> get props => [product];
 }
 class WishlistRemoveItemEvent extends WishlistEvent {
-  final Product product;
+  final CategoryProduct product;
   const WishlistRemoveItemEvent(
     this.product,
   );

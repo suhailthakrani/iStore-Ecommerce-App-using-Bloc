@@ -17,7 +17,7 @@ class CartLoadingState extends CartState {
   List<Object> get props => [];
 }
 class CartLoadedState extends CartState {
-  final List<Product> cartItems;
+  final List<CategoryProduct> cartItems;
   const CartLoadedState({
     required this.cartItems,
   });
@@ -25,7 +25,7 @@ class CartLoadedState extends CartState {
   List<Object> get props => [cartItems];
 }
 class CartItemQuantityChangedState extends CartState {
-  final Product cartItem;
+  final CategoryProduct cartItem;
   const CartItemQuantityChangedState({
     required this.cartItem,
   });

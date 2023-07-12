@@ -1,24 +1,26 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 
-import 'package:bloc_cart_app/data/product_model.dart';
+import 'package:bloc_cart_app/commons/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/cart/cart_bloc.dart';
 import '../../../blocs/home/home_bloc.dart';
 import '../../../blocs/wishlist/wishlist_bloc.dart';
+import '../../../commons/models/products.dart';
 import '../product/product_details_page.dart';
 
 class ProductList extends StatelessWidget {
-  final List<Product> products;
+  final Category category;
   const ProductList({
     Key? key,
-    required this.products,
+    required this.category,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final products = category.categoryProducts;
     return ListView.builder(
       shrinkWrap: true,
       // physics: const NeverScrollableScrollPhysics(),
@@ -51,19 +53,30 @@ class ProductList extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     padding: const EdgeInsets.all(8),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image(
-                        width: MediaQuery.of(context).size.width * 0.3,
-                        height: MediaQuery.of(context).size.width * 0.3,
-                        fit: BoxFit.contain,
-                        image: AssetImage(
-                          product.image,
-                        ),
-                        errorBuilder: (context, error, stackTrace) => SizedBox(
+                    child: Container(
+                       decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                         boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.shade300,
+                          offset: const Offset(3, 3),
+                        )
+                      ]),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image(
                           width: MediaQuery.of(context).size.width * 0.3,
                           height: MediaQuery.of(context).size.width * 0.3,
-                        ), // Replace with your image path
+                          fit: BoxFit.contain,
+                          image: AssetImage(
+                            product.image,
+                          ),
+                          errorBuilder: (context, error, stackTrace) => SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.3,
+                            height: MediaQuery.of(context).size.width * 0.3,
+                          ), // Replace with your image path
+                        ),
                       ),
                     ),
                   ),
@@ -79,8 +92,8 @@ class ProductList extends StatelessWidget {
                         product.name,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
-                        style:  TextStyle(
-                          color: Colors.blue.shade900,
+                        style:  const TextStyle(
+                          color: Color(0xff343434),
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),

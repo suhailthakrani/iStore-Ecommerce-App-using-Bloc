@@ -23,7 +23,8 @@ class HomeLoadingState extends HomeState {
   List<Object> get props => [];
 }
 class HomeLoadedState extends HomeState {
-  final List<Product> products;
+  final ProductsModel products;
+  final List<Product> trendings;
   final List<Product> recommended;
   final List<Product> sepcialDiccountOffers;
   final List<Product> lootLo;
@@ -31,6 +32,7 @@ class HomeLoadedState extends HomeState {
   final List<Product> superDeals;
   const HomeLoadedState({
     required this.products,
+    required this.trendings,
     required this.recommended,
     required this.sepcialDiccountOffers,
     required this.lootLo,

@@ -68,12 +68,15 @@ class _WishlistPageState extends State<WishlistPage> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           padding: const EdgeInsets.all(8),
-                          child: Image(
-                            width: MediaQuery.of(context).size.width * 0.3,
-                            height: MediaQuery.of(context).size.width * 0.3,
-                            image: AssetImage(
-                              product.image,
-                            ), // Replace with your image path
+                          child: ClipRRect(
+                             borderRadius: BorderRadius.circular(12),
+                            child: Image(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              height: MediaQuery.of(context).size.width * 0.3,
+                              image: AssetImage(
+                                product.image,
+                              ), // Replace with your image path
+                            ),
                           ),
                         ),
                         const SizedBox(width: 20),
@@ -89,16 +92,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              Text(
-                                product.description,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  color: Colors.black45,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
+                       
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,

@@ -3,17 +3,18 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:bloc_cart_app/commons/models/products.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
-import '../../data/product_model.dart';
+import '../../commons/models/product_model.dart';
 
 part 'cart_event.dart';
 part 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
-  List<Product> cartItems = [];
+  List<CategoryProduct> cartItems = [];
   double totalPrice = 0.0;
   int totalItems = 0;
   CartBloc() : super(CartInitialState()) {

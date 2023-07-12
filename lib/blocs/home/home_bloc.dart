@@ -7,13 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/product_model.dart';
+import '../../commons/models/product_model.dart';
+import '../../commons/models/products.dart';
+import '../../repositories/products_repository.dart';
 import '../cart/cart_bloc.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
+  final ProductsRepository productsRepository;
+  ProductsModel products = ProductsModel(products: []);
   List<Product> trendings = [];
   List<Product> recommended = [];
   List<Product> sepcialDiccountOffers = [];
@@ -21,7 +25,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   List<Product> flashSale = [];
   List<Product> superDeals = [];
 
-  HomeBloc() : super(HomeInitialState()) {
+  HomeBloc({required this.productsRepository}) : super(HomeInitialState()) {
     on<HomeInitialEvent>(mapHomeInitialEvent);
     on<HomeAddToCartEvent>(mapHomeAddToCartEvent);
     on<HomeAddToWishlistEvent>(mapHomeAddToWishlistEvent);
@@ -33,6 +37,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       HomeInitialEvent event, Emitter<HomeState> emit) async {
     try {
       emit(HomeLoadingState());
+      products = await productsRepository.loadProductaFromJson();
       trendings = await loadJsonFile();
       recommended = await loadJsonFile();
       sepcialDiccountOffers = await loadJsonFile();
@@ -40,8 +45,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       flashSale = await loadJsonFile();
       superDeals = await loadJsonFile();
 
-
-      emit(HomeLoadedState(products: trendings, recommended: recommended, sepcialDiccountOffers: sepcialDiccountOffers, lootLo: lootLo, flashSale: flashSale, superDeals: superDeals));
+      print(products.products.map((e) => e.category));
+      emit(HomeLoadedState(products: products,trendings: trendings, recommended: recommended, sepcialDiccountOffers: sepcialDiccountOffers, lootLo: lootLo, flashSale: flashSale, superDeals: superDeals));
     } on Exception catch (e) {
       emit(HomeErrorState(errorMessage: e.toString()));
     }

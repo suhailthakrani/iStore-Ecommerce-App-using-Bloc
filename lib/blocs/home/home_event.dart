@@ -14,7 +14,7 @@ class HomeInitialEvent extends HomeEvent {
   List<Object> get props => [];
 }
 class HomeAddToCartEvent extends HomeEvent {
-  final Product product;
+  final CategoryProduct product;
   final BuildContext context;
   const HomeAddToCartEvent(
     this.product,
@@ -25,7 +25,7 @@ class HomeAddToCartEvent extends HomeEvent {
   List<Object> get props => [product,context];
 }
 class HomeAddToWishlistEvent extends HomeEvent {
-  final Product product;
+  final CategoryProduct product;
   final BuildContext context;
   const HomeAddToWishlistEvent(
     this.product,

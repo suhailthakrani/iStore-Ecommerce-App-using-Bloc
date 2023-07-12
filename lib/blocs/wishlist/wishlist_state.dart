@@ -14,7 +14,7 @@ class WishlistInitialState extends WishlistState {
   List<Object> get props => [];
 }
 class WishlistLoadedState extends WishlistState {
-  final List<Product> wishlistItems;
+  final List<CategoryProduct> wishlistItems;
   const WishlistLoadedState({
     required this.wishlistItems,
   });
