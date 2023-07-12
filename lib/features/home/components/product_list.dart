@@ -92,8 +92,8 @@ class ProductList extends StatelessWidget {
                         product.name,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
-                        style:  const TextStyle(
-                          color: Color(0xff343434),
+                        style:   TextStyle(
+                          color:Theme.of(context).primaryColor,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
@@ -113,9 +113,9 @@ class ProductList extends StatelessWidget {
                         children: [
                           Text(
                             "\$ ${product.price}",
-                            style: const TextStyle(
+                            style:  TextStyle(
                               fontSize: 14,
-                              color: Colors.black54,
+                              color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -146,7 +146,7 @@ class ProductList extends StatelessWidget {
                                         CupertinoIcons.heart_fill,
                                         color: Colors.yellow.shade700,
                                       )
-                                    : const Icon(CupertinoIcons.heart),
+                                    :  Icon(CupertinoIcons.heart, color: Theme.of(context).primaryColor,),
                               ),
                               IconButton(
                                   onPressed: () {
@@ -171,7 +171,7 @@ class ProductList extends StatelessWidget {
                                           .cartItems
                                           .contains(product)
                                       ? const Icon(Icons.done)
-                                      : const Icon(CupertinoIcons.cart))
+                                      : Icon(CupertinoIcons.cart, color: Theme.of(context).primaryColor,))
                             ],
                           ),
                         ],

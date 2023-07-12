@@ -45,6 +45,7 @@ dependencies:
   get_storage: ^2.1.1
   easy_localization: ^3.0.2
   flutter_rating_bar: ^4.0.1
+  flutter_stripe: ^9.2.2
 
 dev_dependencies:
   flutter_test:

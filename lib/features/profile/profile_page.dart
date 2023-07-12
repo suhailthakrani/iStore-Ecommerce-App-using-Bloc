@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,7 +34,7 @@ class ProfilePage extends StatelessWidget {
         child: ListView(
           children: [
             Container(
-              height: 200,
+              height: MediaQuery.of(context).size.width * 0.5,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
@@ -49,64 +50,77 @@ class ProfilePage extends StatelessWidget {
                   bottomRight: Radius.circular(40),
                 ),
               ),
-              // child: Stack(
-              //   children: [
+              child: Row(
+                children: [
+                  // Image.asset(
+                  //   'assets/images/image.png', // Replace with your image asset path
+                  //   width: 100, // Adjust the width as needed
+                  //   height: 100, // Adjust the height as needed
+                  // ),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        CupertinoIcons.profile_circled,
+                        size: MediaQuery.of(context).size.width * 0.28,
+                        color: Theme.of(context).primaryColor.withOpacity(0.5),
+                      ),
+                    ),
+                  ),
 
-              //     Align(
-              //       alignment: Alignment.center,
-              //       child: Padding(
-              //         padding: const EdgeInsets.only(bottom: 20),
-              //         child: Container(
-              //           width: 120,
-              //           height: 120,
-              //           decoration: BoxDecoration(
-              //             shape: BoxShape.circle,
-              //             border: Border.all(
-              //               color: Colors.white,
-              //               width: 5,
-              //             ),
-              //             boxShadow: [
-              //               BoxShadow(
-              //                 color: Colors.black26,
-              //                 blurRadius: 8,
-              //                 offset: Offset(0, 4),
-              //               ),
-              //             ],
-              //             image: DecorationImage(
-              //               image: AssetImage('assets/profile_image.jpg'),
-              //               fit: BoxFit.cover,
-              //             ),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
+                  const SizedBox(
+                      width:
+                          10), // Optional spacing between the image and column
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Suhail Thakrani',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color:  Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      // SizedBox(height: 10),
+                      Text(
+                        'suhailthakrani12@gmail.com',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.grey.shade700,
+                          fontWeight: FontWeight.w500
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 30),
             ProfileTile(
-              icon: Icons.person,
+              icon: Icons.person_outline,
               title: 'My Account',
               onTap: () {
                 // Add your logic for handling the "My Account" tile tap
               },
             ),
             ProfileTile(
-              icon: Icons.location_on,
+              icon: Icons.location_on_outlined,
               title: 'Shipping Address',
               onTap: () {
                 // Add your logic for handling the "Shipping Address" tile tap
               },
             ),
             ProfileTile(
-              icon: Icons.credit_card,
+              icon: Icons.credit_card_outlined,
               title: 'Payment Methods',
               onTap: () {
                 // Add your logic for handling the "Payment Methods" tile tap
               },
             ),
             ProfileTile(
-              icon: Icons.favorite,
+              icon: Icons.favorite_border,
               title: 'My Favorites',
               onTap: () {
                 // Add your logic for handling the "My Favorites" tile tap
@@ -120,7 +134,7 @@ class ProfilePage extends StatelessWidget {
               },
             ),
             ProfileTile(
-              icon: Icons.exit_to_app,
+              icon: Icons.exit_to_app_outlined,
               title: 'Logout',
               onTap: () {
                 context.read<HomeBloc>().add(HomeLogoutButtonPressedEvent());
@@ -153,10 +167,15 @@ class ProfileTile extends StatelessWidget {
         title,
         style: TextStyle(
           fontSize: 16,
+          color: Theme.of(context).primaryColor,
           fontWeight: FontWeight.bold,
         ),
       ),
-      trailing: Icon(Icons.arrow_forward_ios),
+      trailing: Icon(
+        Icons.arrow_forward_ios,
+        color: Theme.of(context).primaryColor,
+        size: 16,
+      ),
       onTap: onTap,
     );
   }

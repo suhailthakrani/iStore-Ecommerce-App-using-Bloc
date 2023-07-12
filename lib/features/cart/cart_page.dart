@@ -1,5 +1,6 @@
 import 'package:bloc_cart_app/blocs/cart/cart_bloc.dart';
 import 'package:bloc_cart_app/blocs/home/home_bloc.dart';
+import 'package:bloc_cart_app/features/payment/payment_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,10 +27,10 @@ class _CartPageState extends State<CartPage> {
       // backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
+        title:  Text(
           "Your Cart",
           style: TextStyle(
-            color: Colors.black54,
+            color: Theme.of(context).primaryColor,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -257,18 +258,18 @@ class _CartPageState extends State<CartPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
+                       Text(
                         "Total Items:",
                         style: TextStyle(
-                          color: Colors.black54,
+                          color:Theme.of(context).primaryColor,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
                         ),
                       ),
                       Text(
                         "${cartBloc.cartItems.fold(cartBloc.totalCartItems, (previousValue, element) => previousValue + element.quantity).toInt()}",
-                        style: const TextStyle(
-                          color: Colors.black54,
+                        style:  TextStyle(
+                          color:Theme.of(context).primaryColor,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
                         ),
@@ -278,18 +279,18 @@ class _CartPageState extends State<CartPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
+                       Text(
                         "Total Price:",
                         style: TextStyle(
-                          color: Colors.black54,
+                          color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
                         ),
                       ),
                       Text(
                         "\$ ${cartBloc.totalPrice}",
-                        style: const TextStyle(
-                          color: Colors.black54,
+                        style:  TextStyle(
+                          color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
                         ),
@@ -297,7 +298,9 @@ class _CartPageState extends State<CartPage> {
                     ],
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder:(context) => PaymentPage(),));
+                    },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Theme.of(context).primaryColor,
