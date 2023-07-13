@@ -1,14 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 
-import 'package:bloc_cart_app/commons/models/product_model.dart';
+import 'package:bloc_cart_app/commons/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/cart/cart_bloc.dart';
 import '../../../blocs/home/home_bloc.dart';
 import '../../../blocs/wishlist/wishlist_bloc.dart';
-import '../../../commons/models/products.dart';
+import '../../../commons/models/product_categories.dart';
 import '../product/product_details_page.dart';
 
 class ProductList extends StatelessWidget {
@@ -140,8 +140,8 @@ class ProductList extends StatelessWidget {
                                 ),
                                 icon: context
                                         .read<WishlistBloc>()
-                                        .wishlistItems
-                                        .contains(product)
+                                        .wishlistItems.any((element) => element.id == product.id)
+                                      
                                     ? Icon(
                                         CupertinoIcons.heart_fill,
                                         color: Colors.yellow.shade700,
@@ -168,8 +168,7 @@ class ProductList extends StatelessWidget {
                                   ),
                                   icon: context
                                           .read<CartBloc>()
-                                          .cartItems
-                                          .contains(product)
+                                          .cartItems.any((element) => element.id == product.id)
                                       ? const Icon(Icons.done)
                                       : Icon(CupertinoIcons.cart, color: Theme.of(context).primaryColor,))
                             ],

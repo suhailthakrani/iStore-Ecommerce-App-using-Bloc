@@ -133,6 +133,34 @@ class ProfilePage extends StatelessWidget {
                 // Add your logic for handling the "Settings" tile tap
               },
             ),
+             ProfileTile(
+               icon: Icons.history,
+              title: 'Order History',
+              onTap: () {
+                // Handle "Order History" tile tap
+              },
+            ),
+            ProfileTile(
+              icon: Icons.support_agent,
+              title: 'Customer Support',
+              onTap: () {
+                // Handle "Customer Support" tile tap
+              },
+            ),
+              ProfileTile(
+              icon: Icons.policy_outlined,
+              title: 'Privacy Policy',
+              onTap: () {
+                // Handle "Customer Support" tile tap
+              },
+            ),
+              ProfileTile(
+              icon: Icons.contact_support_outlined,
+              title: 'Frequently Asked Questions',
+              onTap: () {
+                // Handle "Customer Support" tile tap
+              },
+            ),
             ProfileTile(
               icon: Icons.exit_to_app_outlined,
               title: 'Logout',
@@ -140,6 +168,7 @@ class ProfilePage extends StatelessWidget {
                 context.read<HomeBloc>().add(HomeLogoutButtonPressedEvent());
               },
             ),
+          
           ],
         ),
       ),

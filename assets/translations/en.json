@@ -14,6 +14,13 @@
   "sepcialDiccountOffers": "Sepcial Diccount Offers",
   "lootLo": "Loot Lo!",
   "flashSale": "Flash Sale",
-  "sperDeals": "Super Deals"
+  "sperDeals": "Super Deals",
+  "forgorPass": "Forgor password?", 
+  "alreadyHaveAnAccount":"Already have an account?",
+  "createAccount": "Create Account",
+  "register": "Register",
+  "signUpWithGoogle": "Sign Up with Google",
+  "signUpWithFacebook": "Sign Up with Facebook",
+  "dontHaveAnAccount": "Dont't have an account?"
   
 }

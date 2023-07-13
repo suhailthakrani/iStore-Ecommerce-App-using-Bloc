@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../commons/models/product_model.dart';
-import '../../commons/models/products.dart';
+import '../../commons/models/product.dart';
+import '../../commons/models/product_categories.dart';
 import '../../repositories/products_repository.dart';
 import '../cart/cart_bloc.dart';
 
@@ -38,12 +38,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try {
       emit(HomeLoadingState());
       products = await productsRepository.loadProductaFromJson();
-      trendings = await loadJsonFile();
-      recommended = await loadJsonFile();
-      sepcialDiccountOffers = await loadJsonFile();
-      lootLo = await loadJsonFile();
-      flashSale = await loadJsonFile();
-      superDeals = await loadJsonFile();
+
 
       print(products.products.map((e) => e.category));
       emit(HomeLoadedState(products: products,trendings: trendings, recommended: recommended, sepcialDiccountOffers: sepcialDiccountOffers, lootLo: lootLo, flashSale: flashSale, superDeals: superDeals));

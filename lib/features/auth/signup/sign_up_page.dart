@@ -56,30 +56,30 @@ class _SignUpPageState extends State<SignUpPage> {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            const SizedBox(height: 50),
+            const SizedBox(height: 30),
+            SizedBox(
+              height: 40,
+              width: 100,
+              child: Image.asset("assets/images/iStore.png"),
+            ),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  Tkeys.signUp.name,
+                  Tkeys.createAccount.name,
                   style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 28,
                       fontWeight: FontWeight.w500,
                       color: Theme.of(context).primaryColor),
                 ).tr()
               ],
             ),
-            Container(
-              height: 150,
-              width: 150,
-              padding: const EdgeInsets.all(20),
-              child: Image.asset("assets/images/ecommerc.png"),
-            ),
             const SizedBox(height: 20),
             const LanguageWidget(
               height: 60,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
             CustomTextField(
               hint: Tkeys.enterName.name,
               controller: nameController,
@@ -316,19 +316,18 @@ class _SignUpPageState extends State<SignUpPage> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).primaryColor,
                       foregroundColor: Colors.white),
-                  child: Text(Tkeys.alreadyMember.name).tr(),
+                  child: Text(Tkeys.signUp.name).tr(),
                 );
               },
             ),
-            const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
-                     Text(
-                      Tkeys.alreadyMember.name,
+                    Text(
+                      Tkeys.alreadyHaveAnAccount.name,
                       style: const TextStyle(
                         color: Colors.black54,
                         fontWeight: FontWeight.w600,
@@ -350,13 +349,132 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: Text(
                         Tkeys.signIn.name,
                         style: TextStyle(
-                          color: Colors.blue.shade700,
+                          color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.w600,
+                          fontSize: 18
                         ),
                       ).tr(),
                     ),
                   ],
                 )
+              ],
+            ),
+            const SizedBox(height: 12),
+            const Row(
+              children: [
+                SizedBox(width: 12),
+                Expanded(
+                  child: Divider(
+                    color: Colors.grey,
+                  ),
+                ),
+                SizedBox(width: 5),
+                Text("OR Continue with"),
+                SizedBox(width: 5),
+                Expanded(
+                  child: Divider(
+                    color: Colors.grey,
+                  ),
+                ),
+                SizedBox(width: 12),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                BlocConsumer<SignUpBloc, SignUpState>(
+                  listenWhen: (previous, current) =>
+                      (current is SignUpNavigateState),
+                  listener: (context, state) {
+                    if (state is SignUpNavigateState) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BlocProvider.value(
+                            value: BlocProvider.of<SignInBloc>(context),
+                            child: const SignInPage(),
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    return IconButton(
+                      onPressed: () {
+                        print(context.read<SignUpBloc>().state.toString());
+                        AuthenticationRepository authenticationRepository =
+                            AuthenticationRepository();
+                        authenticationRepository.setSignedInStatus(
+                            key: "isSignedUp", value: true);
+                        context.read<SignUpBloc>().add(
+                              SignUpButtonPressedEvent(
+                                UserModel(
+                                  email: emailController.text,
+                                  name: nameController.text,
+                                  password: passController.text,
+                                  confrimP: confrimPassController.text,
+                                ),
+                              ),
+                            );
+                      },
+                      style: ElevatedButton.styleFrom(
+                          elevation: 10,
+                          backgroundColor: Colors.blue.shade50, ),
+                      icon: Image.asset(
+                        "assets/images/icons8-google-144.png",
+                        height: 48,
+                        width: 48,
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(width: 20),
+                BlocConsumer<SignUpBloc, SignUpState>(
+                  listenWhen: (previous, current) =>
+                      (current is SignUpNavigateState),
+                  listener: (context, state) {
+                    if (state is SignUpNavigateState) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BlocProvider.value(
+                            value: BlocProvider.of<SignInBloc>(context),
+                            child: const SignInPage(),
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    return IconButton(
+                      onPressed: () {
+                        print(context.read<SignUpBloc>().state.toString());
+                        AuthenticationRepository authenticationRepository =
+                            AuthenticationRepository();
+                        authenticationRepository.setSignedInStatus(
+                            key: "isSignedUp", value: true);
+                        context.read<SignUpBloc>().add(
+                              SignUpButtonPressedEvent(
+                                UserModel(
+                                  email: emailController.text,
+                                  name: nameController.text,
+                                  password: passController.text,
+                                  confrimP: confrimPassController.text,
+                                ),
+                              ),
+                            );
+                      },
+                      style: ElevatedButton.styleFrom(
+                           backgroundColor:  Colors.blue.shade50, ),
+                      icon: Image.asset(
+                        "assets/images/icons8-facebook-144.png",
+                        height: 48,
+                        width: 48,
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
             const SizedBox(height: 40),

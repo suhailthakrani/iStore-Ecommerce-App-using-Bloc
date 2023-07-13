@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage>
                             const EdgeInsets.symmetric(vertical: 11.5),
                         labelPadding: const EdgeInsets.only(right: 5, left: 5),
                         tabs: [
-                          customTab(AppConstants.airbods),
+                          customTab(AppConstants.airpods),
                           customTab(AppConstants.appwatches),
                           customTab(AppConstants.casesAndProtection),
                           customTab(AppConstants.airTagAndAccessories),
@@ -141,28 +141,28 @@ class _HomePageState extends State<HomePage>
                     child: TabBarView(controller: tabController, children: [
                       ProductList(
                           category: loadedState.products
-                              .getProductsByCategory(AppConstants.airbods)!),
+                              .getProductsByCategory(AppConstants.airpods)),
                       ProductList(
                           category: loadedState.products
-                              .getProductsByCategory(AppConstants.appwatches)!),
+                              .getProductsByCategory(AppConstants.appwatches)),
                       ProductList(
                           category: loadedState.products.getProductsByCategory(
-                              AppConstants.casesAndProtection)!),
+                              AppConstants.casesAndProtection)),
                       ProductList(
                           category: loadedState.products.getProductsByCategory(
-                              AppConstants.airTagAndAccessories)!),
+                              AppConstants.airTagAndAccessories)),
                       ProductList(
                           category: loadedState.products
-                              .getProductsByCategory(AppConstants.keyboards)!),
+                              .getProductsByCategory(AppConstants.keyboards)),
                       ProductList(
                           category: loadedState.products.getProductsByCategory(
-                              AppConstants.miceAndTrackpads)!),
+                              AppConstants.miceAndTrackpads)),
                       ProductList(
                           category: loadedState.products.getProductsByCategory(
-                              AppConstants.powerAndCables)!),
+                              AppConstants.powerAndCables)),
                       ProductList(
                           category: loadedState.products
-                              .getProductsByCategory(AppConstants.iphone)!),
+                              .getProductsByCategory(AppConstants.iphone)),
                     ]),
                   )
                 ],

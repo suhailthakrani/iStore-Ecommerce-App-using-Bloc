@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:bloc_cart_app/features/main/main_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -106,7 +107,8 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
           locale: context.locale,
-          home: isSignedIn ? const SignInPage() : const SignUpPage(),
+          // home: isSignedIn ? const SignInPage() : const SignUpPage(),
+          home: MainPage(),
         ),
       ),
     );

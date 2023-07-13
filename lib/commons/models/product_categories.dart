@@ -22,7 +22,7 @@ class ProductsModel {
 }
 
 class Category {
-  int id = -1;
+  String id = "-1";
   String category = '';
   List<CategoryProduct> categoryProducts = [];
 
@@ -32,14 +32,14 @@ class Category {
     required this.categoryProducts,
   }); 
   Category.empty(){
-    id = -1;
+   id = "";
    category = '';
     categoryProducts = [];
   }
 
   factory Category.fromJson(Map<String, dynamic> json) {
-    int id = json['id'];
-    String category = json['category'];
+    String id = json['id'].toString();
+    String category = json['category']??"";
     List<CategoryProduct> categoryProducts =
         (json['categoryProducts'] as List<dynamic>)
             .map((productJson) => CategoryProduct.fromJson(productJson))
@@ -53,7 +53,7 @@ class Category {
 }
 
 class CategoryProduct {
-  int id = -1;
+  String id = '-1';
   String name = '';
   String image = '';
   String price = '';
@@ -73,7 +73,7 @@ class CategoryProduct {
     this.quantity = 1,
   });
   CategoryProduct.empty() {
-    id = -1;
+    id = "";
     name = '';
     image = '';
     price = '';
@@ -83,7 +83,7 @@ class CategoryProduct {
     quantity = -1;
   }
   factory CategoryProduct.fromJson(Map<String, dynamic> json) {
-    int id = json['id'];
+    String id = json['id'].toString();
     String name = json['name'];
     String image = json['image'];
     String price = json['price'];
@@ -103,7 +103,7 @@ class CategoryProduct {
     );
   }
   CategoryProduct copyWith({
-    int? id,
+    String? id,
     String? name,
     String? image,
     String? price,

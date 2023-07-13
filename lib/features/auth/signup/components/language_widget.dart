@@ -51,6 +51,7 @@ class _LanguageWidgetState extends State<LanguageWidget> {
                           width: languages[index].name.length * 12,
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.black),
+                            color:  Colors.blue.shade50,
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Text(

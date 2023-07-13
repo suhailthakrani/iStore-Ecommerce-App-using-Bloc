@@ -1,7 +1,7 @@
-import 'package:bloc_cart_app/commons/models/products.dart';
+import 'package:bloc_cart_app/commons/models/product_categories.dart';
 import 'package:flutter/material.dart';
 
-import '../../../commons/models/product_model.dart';
+import '../../../commons/models/product.dart';
 
 class ProductSearchDelegate extends SearchDelegate<CategoryProduct> {
   final ProductsModel products;

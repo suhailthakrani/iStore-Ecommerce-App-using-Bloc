@@ -8,5 +8,12 @@
     "enterPassword": "اپنا پاس ورڈ درج کریں",
     "confirmPassword": "اپنا پاس ورڈ تصدیق کریں",
     "newHere": "یہاں نیا؟",
-    "welcomeBack": "خوش آمدید واپس!"
+    "welcomeBack": "خوش آمدید واپس!",
+    "forgorPass": "پاس ورڈ بھول گئے ہیں؟", 
+    "alreadyHaveAnAccount":"کیا پہلے سے ہی اکاؤنٹ ہے؟",
+    "createAccount": "اکاؤنٹ بنائیں",
+    "register": "رجسٹر کریں",
+    "signUpWithGoogle": "گوگل کے ساتھ سائن اپ کریں",
+    "signUpWithFacebook": "فیس بک کے ساتھ سائن اپ کریں",
+    "dontHaveAnAccount": "کیا پہلے سے اکاؤنٹ نہیں ہے؟"
 }

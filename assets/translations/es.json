@@ -8,5 +8,13 @@
   "enterPassword": "Ingresa tu contraseña",
   "confirmPassword": "Confirma tu contraseña",
   "newHere": "¿Nuevo aquí?",
-  "welcomeBack": "¡Bienvenido de nuevo!"
+  "welcomeBack": "¡Bienvenido de nuevo!",
+  "forgotPass": "¿Olvidaste tu contraseña?", 
+  "alreadyHaveAnAccount":"Ya tienes una cuenta?",
+  "createAccount": "Crear cuenta",
+  "register": "Registrarse",
+  "signUpWithGoogle": "Registrarse con Google",
+  "signUpWithFacebook": "Registrarse con Facebook",
+  "dontHaveAnAccount":"¿No tienes una cuenta?"
+
 }

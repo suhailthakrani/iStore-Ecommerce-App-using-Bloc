@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:bloc_cart_app/features/payment/order_completed_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart' as stripe;
@@ -233,10 +234,12 @@ class _PaymentPageState extends State<PaymentPage> {
               ),
               maxLength: 16,
               textAlignVertical: TextAlignVertical.center,
-              style: const TextStyle(color: Colors.black, letterSpacing: 1.2, fontWeight: FontWeight.w500),
+              style: const TextStyle(
+                  color: Colors.black,
+                  letterSpacing: 1.2,
+                  fontWeight: FontWeight.w500),
               keyboardType: TextInputType.number,
               onChanged: (value) {},
-          
               decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border.all(color: Colors.black26),
@@ -341,7 +344,18 @@ class _PaymentPageState extends State<PaymentPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const OrderCompletedPage(
+                      orderNumber: "orderNumber",
+                      productName: "productName",
+                      productImage: "assets/images/congratulations.jpg",
+                    ),
+                  ),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).primaryColor,
                 foregroundColor: Colors.white,

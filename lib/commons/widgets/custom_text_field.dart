@@ -30,7 +30,7 @@ class CustomTextField extends StatelessWidget {
       prefix: Container(
         padding: const EdgeInsets.all(10.0),
         decoration:  BoxDecoration(
-          color: Colors.blue.shade700,
+          color: Theme.of(context).primaryColor,
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(12),
             bottomLeft: Radius.circular(12),

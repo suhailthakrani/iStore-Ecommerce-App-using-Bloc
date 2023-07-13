@@ -1,4 +1,3 @@
-
 enum Tkeys {
   language.new(),
   signIn,
@@ -10,5 +9,11 @@ enum Tkeys {
   confirmPassword,
   newHere,
   welcomeBack,
+  forgorPass,
+  alreadyHaveAnAccount,
+  createAccount,
+  register,
+  signUpWithGoogle,
+  signUpWithFacebook,
+  dontHaveAnAccount,
 }
-

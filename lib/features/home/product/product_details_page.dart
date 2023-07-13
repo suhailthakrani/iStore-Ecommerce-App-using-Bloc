@@ -1,13 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc_cart_app/blocs/home/home_bloc.dart';
-import 'package:bloc_cart_app/commons/models/products.dart';
+import 'package:bloc_cart_app/commons/models/product_categories.dart';
 import 'package:bloc_cart_app/features/home/product/components/see_more.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../../../commons/models/product_model.dart';
+import '../../../commons/models/product.dart';
 
 class ProductDetails extends StatelessWidget {
   final CategoryProduct product;

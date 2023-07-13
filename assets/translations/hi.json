@@ -8,5 +8,12 @@
     "enterPassword": "अपना पासवर्ड दर्ज करें",
     "confirmPassword": "अपना पासवर्ड पुष्टि करें",
     "newHere": "नया यहाँ?",
-    "welcomeBack": "वापसी पर स्वागत है!"
+    "welcomeBack": "वापसी पर स्वागत है!",
+    "forgotPass": "क्या आपने पासवर्ड भूल गए हैं?",
+    "alreadyHaveAnAccount": "क्या आपके पास पहले से ही खाता है?",
+    "createAccount": "खाता बनाएं",
+    "register": "पंजीकरण करें",
+    "signUpWithGoogle": "Google के साथ साइन अप करें",
+    "signUpWithFacebook": "Facebook के साथ साइन अप करें",
+    "dontHaveAnAccount":"खाता नहीं है?"
 }

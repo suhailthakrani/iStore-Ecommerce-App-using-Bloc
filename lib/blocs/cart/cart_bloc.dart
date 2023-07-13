@@ -3,12 +3,12 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
-import 'package:bloc_cart_app/commons/models/products.dart';
+import 'package:bloc_cart_app/commons/models/product_categories.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
-import '../../commons/models/product_model.dart';
+import '../../commons/models/product.dart';
 
 part 'cart_event.dart';
 part 'cart_state.dart';

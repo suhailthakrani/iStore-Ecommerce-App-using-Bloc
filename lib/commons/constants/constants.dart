@@ -1,5 +1,5 @@
 class AppConstants {
-  static const String airbods = "AirBods";
+  static const String airpods = "Air Pods";
   static const String appwatches = "Apple Watch";
   static const String iphone = "Iphone";
   static const String airTagAndAccessories = "AirTag  & Accessories";

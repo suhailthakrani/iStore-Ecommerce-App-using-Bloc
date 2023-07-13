@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:bloc_cart_app/features/home/home_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +15,8 @@ import '../../../blocs/signin/signin_bloc.dart';
 import '../../../localizations/localization_keys.dart';
 
 class SignInPage extends StatefulWidget {
-
   const SignInPage({
     Key? key,
-  
   }) : super(key: key);
 
   @override
@@ -46,7 +45,13 @@ class _SignInPageState extends State<SignInPage> {
       padding: const EdgeInsets.all(16.0),
       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const SizedBox(height: 70),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+        SizedBox(
+          height: 40,
+          width: 120,
+          child: Image.asset("assets/images/iStore.png"),
+        ),
+        const SizedBox(height: 50),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -59,18 +64,7 @@ class _SignInPageState extends State<SignInPage> {
             ).tr(),
           ],
         ),
-        const SizedBox(height: 16),
-        
-        const SizedBox(height: 20),
-        CircleAvatar(
-          radius: 70,
-          backgroundColor: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Image.asset("assets/images/ecommerc.png"),
-          ),
-        ),
-        const SizedBox(height: 60),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.08),
         CustomTextField(
           hint: Tkeys.enterEmail.name,
           controller: emailController,
@@ -108,7 +102,7 @@ class _SignInPageState extends State<SignInPage> {
             }
           },
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 20),
         BlocBuilder<SignInBloc, SignInState>(
           builder: (context, state) {
             return CustomTextField(
@@ -161,7 +155,33 @@ class _SignInPageState extends State<SignInPage> {
             }
           },
         ),
-        const SizedBox(height: 40),
+   
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BlocProvider.value(
+                      value: BlocProvider.of<SignUpBloc>(context),
+                      child: const SignUpPage(),
+                    ),
+                  ),
+                );
+              },
+              child: Text(
+                "Forgor Password?",
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.w600,
+                ),
+              ).tr(),
+            ),
+          ],
+        ),
+        
         BlocConsumer<SignInBloc, SignInState>(
           buildWhen: (previous, current) => current is! SignInActionState,
           listener: (context, state) {
@@ -206,7 +226,6 @@ class _SignInPageState extends State<SignInPage> {
             );
           },
         ),
-        const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -245,7 +264,83 @@ class _SignInPageState extends State<SignInPage> {
             )
           ],
         ),
-       SizedBox(height: MediaQuery.of(context).viewInsets.bottom,),
+         const SizedBox(height: 12),
+            const Row(
+              children: [
+                SizedBox(width: 12),
+                Expanded(
+                  child: Divider(
+                    color: Colors.grey,
+                  ),
+                ),
+                SizedBox(width: 5),
+                Text("OR Continue with"),
+                SizedBox(width: 5),
+                Expanded(
+                  child: Divider(
+                    color: Colors.grey,
+                  ),
+                ),
+                SizedBox(width: 12),
+              ],
+            ),
+        const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                BlocConsumer<SignInBloc, SignInState>(
+                  listenWhen: (previous, current) =>
+                      (current is SignInNavigateState),
+                  listener: (context, state) {
+                    if (state is SignInNavigateState) {
+                        // Navigate to HomePage
+                    }
+                  },
+                  builder: (context, state) {
+                    return IconButton(
+                      onPressed: () {
+                       
+                      },
+                      style: ElevatedButton.styleFrom(
+                          elevation: 10,
+                          backgroundColor: Colors.blue.shade50, ),
+                      icon: Image.asset(
+                        "assets/images/icons8-google-144.png",
+                        height: 48,
+                        width: 48,
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(width: 20),
+                BlocConsumer<SignInBloc, SignInState>(
+                  listenWhen: (previous, current) =>
+                      (current is SignInNavigateState),
+                  listener: (context, state) {
+                    if (state is SignInNavigateState) {
+                     // Navigate to HomePage
+                    }
+                  },
+                  builder: (context, state) {
+                    return IconButton(
+                      onPressed: () {
+                     
+                      },
+                      style: ElevatedButton.styleFrom(
+                           backgroundColor:  Colors.blue.shade50, ),
+                      icon: Image.asset(
+                        "assets/images/icons8-facebook-144.png",
+                        height: 48,
+                        width: 48,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+        SizedBox(
+          height: MediaQuery.of(context).viewInsets.bottom,
+        ),
       ],
     ));
   }
