@@ -60,17 +60,20 @@ class OrderCompletedPage extends StatelessWidget {
                 style: const TextStyle(fontSize: 18),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () {
+                  
                   context.read<CartBloc>().cartItems = [];
                   context.read<CartBloc>().totalItems = 0;
                   context.read<CartBloc>().totalPrice = 0;
                   context.read<MainBloc>().add(const MainTabChangeEvent(0));
                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder:(context) => const MainPage(),), (route) => false);
                 },
-                child: const Text('Back to Home'),
+                style: ElevatedButton.styleFrom(backgroundColor: Theme.of(context).primaryColor),
+                child: const Text('Back to Home', style: TextStyle(color: Colors.white),),
               ),
+              SizedBox(height: 30),
             ],
           ),
         ),

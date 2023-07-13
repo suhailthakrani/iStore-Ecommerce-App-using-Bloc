@@ -56,7 +56,7 @@ class _SignUpPageState extends State<SignUpPage> {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            const SizedBox(height: 30),
+            const SizedBox(height: 25),
             SizedBox(
               height: 40,
               width: 100,
@@ -79,7 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
             const LanguageWidget(
               height: 60,
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 50),
             CustomTextField(
               hint: Tkeys.enterName.name,
               controller: nameController,
