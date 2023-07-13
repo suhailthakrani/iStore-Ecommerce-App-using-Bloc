@@ -1,6 +1,7 @@
 import 'package:bloc_cart_app/commons/models/categories.dart';
 import 'package:bloc_cart_app/commons/models/product_categories.dart';
 import 'package:bloc_cart_app/features/categories/components/filter_page.dart';
+import 'package:bloc_cart_app/features/categories/components/test_p.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,15 @@ import '../../blocs/wishlist/wishlist_bloc.dart';
 import '../home/product/product_details_page.dart';
 import 'components/search_deligate.dart';
 
-class CategoriesPage extends StatelessWidget {
+
+class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key});
+
+  @override
+  State<CategoriesPage> createState() => _CategoriesPageState();
+}
+
+class _CategoriesPageState extends State<CategoriesPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +56,8 @@ class CategoriesPage extends StatelessWidget {
             ),
             body: CustomScrollView(
               slivers: [
+
                 SliverAppBar(
-                  
                   pinned: true,
                   backgroundColor: Colors.white,
                   elevation: 0,
@@ -59,7 +67,9 @@ class CategoriesPage extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       children: [
                         TextButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder:(context) => TextP(),));
+                          },
                           style: TextButton.styleFrom(
                               backgroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(

@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage>
                   //   ),
                   // ),
                   Container(
-                    height: 80,
+                    height: 70,
                     width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: TabBar(
@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage>
                         controller: tabController,
                         padding: EdgeInsets.zero,
                         indicatorPadding:
-                            const EdgeInsets.symmetric(vertical: 11.5),
+                            const EdgeInsets.symmetric(vertical: 5),
                         labelPadding: const EdgeInsets.only(right: 5, left: 5),
                         tabs: [
                           customTab(AppConstants.airpods),

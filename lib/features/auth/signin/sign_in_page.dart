@@ -301,13 +301,16 @@ class _SignInPageState extends State<SignInPage> {
                       onPressed: () {
                        
                       },
-                      style: ElevatedButton.styleFrom(
+                    style: ElevatedButton.styleFrom(
                           elevation: 10,
-                          backgroundColor: Colors.blue.shade50, ),
-                      icon: Image.asset(
+                          padding: const EdgeInsets.all(8),
+                            backgroundColor: Theme.of(context).primaryColor,  ),
+                      icon: 
+                      
+                      Image.asset(
                         "assets/images/icons8-google-144.png",
-                        height: 48,
-                        width: 48,
+                        height: 40,
+                        width: 40,
                       ),
                     );
                   },
@@ -327,11 +330,43 @@ class _SignInPageState extends State<SignInPage> {
                      
                       },
                       style: ElevatedButton.styleFrom(
-                           backgroundColor:  Colors.blue.shade50, ),
+                          elevation: 10,
+                          padding: const EdgeInsets.all(8),
+                          backgroundColor: Theme.of(context).primaryColor,  ),
                       icon: Image.asset(
                         "assets/images/icons8-facebook-144.png",
-                        height: 48,
-                        width: 48,
+                        
+                        height: 42,
+                        width: 42,
+                      ),
+                      // icon: const Icon(Icons.facebook, color: Colors.white, size: 50,),
+                    );
+                  },
+                ),
+                 const SizedBox(width: 20),
+                BlocConsumer<SignInBloc, SignInState>(
+                  listenWhen: (previous, current) =>
+                      (current is SignInNavigateState),
+                  listener: (context, state) {
+                    if (state is SignInNavigateState) {
+                     // Navigate to HomePage
+                    }
+                  },
+                  builder: (context, state) {
+                    return IconButton(
+                      onPressed: () {
+                     
+                      },
+                      style: ElevatedButton.styleFrom(
+                          elevation: 10,
+                          backgroundColor: Theme.of(context).primaryColor,
+                          padding: const EdgeInsets.all(8),
+                       ),
+                      icon: Image.asset(
+                        "assets/images/icons8-apple-logo-50.png",
+                    color: Colors.white,
+                        height: 42,
+                        width: 42,
                       ),
                     );
                   },
