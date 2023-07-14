@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'payment_bloc.dart';
 
 abstract class PaymentState extends Equatable {
@@ -15,11 +16,19 @@ class PaymentLoadingState extends PaymentState {
     @override
   List<Object> get props => [];
 }
-class SignOutState extends PaymentState {}
 class PaymentSuccessState extends PaymentState {
     @override
   List<Object> get props => [];
 }
+class PaymentCardCheckedState extends PaymentState {
+  final bool isCardSaved;
+  const PaymentCardCheckedState({
+    required this.isCardSaved,
+  });
+    @override
+  List<Object> get props => [isCardSaved];
+}
+
 
 class PaymentErrorState extends PaymentState {
   final Map<String, String> fieldErrors;

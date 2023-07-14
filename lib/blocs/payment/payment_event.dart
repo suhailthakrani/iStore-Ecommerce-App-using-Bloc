@@ -15,6 +15,16 @@ class PaymentInitialEvent extends PaymentEvent {
   List<Object> get props => [];
 }
 
+class PaymentCardSavedEvent extends PaymentEvent {
+  final bool isCardSaved;
+  const PaymentCardSavedEvent(
+    this.isCardSaved,
+  );
+
+  @override
+  List<Object> get props => [isCardSaved];
+}
+
 class PaymentTextFieldsChangedEvent extends PaymentEvent {
   final String name;
   final String email;
@@ -51,16 +61,16 @@ class PaymentButtonPressedEvent extends PaymentEvent {
   final String country;
   final String zipCode;
   final bool isCardSaved;
-  const PaymentButtonPressedEvent(
-    this.name,
-    this.email,
-    this.cardNumber,
-    this.expiryDate,
-    this.cvcNo,
-    this.country,
-    this.zipCode,
-    this.isCardSaved,
-  );
+  const PaymentButtonPressedEvent({
+    required this.name,
+    required this.email,
+    required this.cardNumber,
+    required this.expiryDate,
+    required this.cvcNo,
+    required this.country,
+    required this.zipCode,
+    required this.isCardSaved,
+  });
 
   @override
   List<Object> get props => [

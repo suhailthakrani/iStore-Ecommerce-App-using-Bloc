@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderCompletedPage extends StatelessWidget {
-  final String orderNumber;
-  final String productName;
-  final String productImage;
+  // final String orderNumber;
+  // final String productName;
+  // final String productImage;
 
   const OrderCompletedPage({super.key, 
-    required this.orderNumber,
-    required this.productName,
-    required this.productImage,
+    // required this.orderNumber,
+    // required this.productName,
+    // required this.productImage,
   });
 
   @override
@@ -50,13 +50,13 @@ class OrderCompletedPage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Text(
-                'Order Number: $orderNumber',
+                'Order Number: orderNumber',
                 style: const TextStyle(fontSize: 18),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 10),
               Text(
-                'Product: $productName',
+                'Product: productName',
                 style: const TextStyle(fontSize: 18),
                 textAlign: TextAlign.center,
               ),

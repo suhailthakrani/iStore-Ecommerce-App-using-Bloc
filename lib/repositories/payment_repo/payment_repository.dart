@@ -84,10 +84,10 @@ class PaymentRepository {
 
   bool validateExpirationDate(String expDate) {
     try {
-      DateTime date = DateTime.parse("20" + expDate.substring(3) + "-" + expDate.substring(0, 2) + "-01");
+      DateTime date = DateTime.parse("20${expDate.substring(3)}-${expDate.substring(0, 2)}-01");
       // Compare with current date to check if it's expired
       return date.isAfter(DateTime.now());
-    } catch (FormatException) {
+    } on FormatException {
       return false;
     }
   }
