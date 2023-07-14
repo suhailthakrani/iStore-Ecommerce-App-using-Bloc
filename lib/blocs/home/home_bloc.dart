@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../commons/models/product.dart';
 import '../../commons/models/product_categories.dart';
-import '../../repositories/products_repository.dart';
+import '../../repositories/product_repo/products_repository.dart';
 import '../cart/cart_bloc.dart';
 
 part 'home_event.dart';

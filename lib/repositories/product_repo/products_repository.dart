@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:bloc_cart_app/commons/models/product_categories.dart';
 import 'package:flutter/services.dart';
 
-import '../commons/models/product.dart';
+import '../../commons/models/product.dart';
 
 class ProductsRepository {
   Future<ProductsModel> loadProductaFromJson() async {

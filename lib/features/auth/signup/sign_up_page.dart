@@ -6,7 +6,7 @@ import 'package:bloc_cart_app/features/auth/signin/sign_in_page.dart';
 import 'package:bloc_cart_app/features/auth/signup/components/language_widget.dart';
 
 import 'package:bloc_cart_app/localizations/localization_service.dart';
-import 'package:bloc_cart_app/repositories/authentication_repository.dart';
+import 'package:bloc_cart_app/repositories/auth_repo/authentication_repository.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

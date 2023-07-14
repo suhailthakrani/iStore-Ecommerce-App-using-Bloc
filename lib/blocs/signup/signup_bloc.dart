@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../commons/models/user_model.dart';
-import '../../repositories/authentication_repository.dart';
+import '../../repositories/auth_repo/authentication_repository.dart';
 
 part 'signup_event.dart';
 part 'signup_state.dart';

@@ -9,14 +9,14 @@ import 'package:bloc_cart_app/blocs/home/home_bloc.dart';
 import 'package:bloc_cart_app/blocs/signin/signin_bloc.dart';
 import 'package:bloc_cart_app/blocs/wishlist/wishlist_bloc.dart';
 import 'package:bloc_cart_app/commons/storage/my_shared_prefs.dart';
-import 'package:bloc_cart_app/repositories/products_repository.dart';
+import 'package:bloc_cart_app/repositories/product_repo/products_repository.dart';
 
 import 'blocs/main/main_bloc.dart';
 import 'blocs/signup/signup_bloc.dart';
 import 'features/auth/signin/sign_in_page.dart';
 import 'features/auth/signup/sign_up_page.dart';
 import 'obersver/bloc_observer.dart';
-import 'repositories/authentication_repository.dart';
+import 'repositories/auth_repo/authentication_repository.dart';
 
 Future<void> main() async {
   Bloc.observer = SimpleBlocObserver();

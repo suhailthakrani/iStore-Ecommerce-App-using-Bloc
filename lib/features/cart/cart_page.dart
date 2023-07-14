@@ -1,6 +1,8 @@
 import 'package:bloc_cart_app/blocs/cart/cart_bloc.dart';
 import 'package:bloc_cart_app/blocs/home/home_bloc.dart';
+import 'package:bloc_cart_app/blocs/payment/payment_bloc.dart';
 import 'package:bloc_cart_app/features/payment/payment_page.dart';
+import 'package:bloc_cart_app/repositories/payment_repo/payment_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +29,7 @@ class _CartPageState extends State<CartPage> {
       // backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
-        title:  Text(
+        title: Text(
           "Your Cart",
           style: TextStyle(
             color: Theme.of(context).primaryColor,
@@ -63,7 +65,6 @@ class _CartPageState extends State<CartPage> {
                     padding: const EdgeInsets.all(16),
                     // margin: const EdgeInsets.only(bottom: 16),
                     decoration: BoxDecoration(
-                    
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
@@ -258,18 +259,18 @@ class _CartPageState extends State<CartPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                       Text(
+                      Text(
                         "Total Items:",
                         style: TextStyle(
-                          color:Theme.of(context).primaryColor,
+                          color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
                         ),
                       ),
                       Text(
                         "${cartBloc.cartItems.fold(cartBloc.totalCartItems, (previousValue, element) => previousValue + element.quantity).toInt()}",
-                        style:  TextStyle(
-                          color:Theme.of(context).primaryColor,
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
                         ),
@@ -279,7 +280,7 @@ class _CartPageState extends State<CartPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                       Text(
+                      Text(
                         "Total Price:",
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
@@ -289,7 +290,7 @@ class _CartPageState extends State<CartPage> {
                       ),
                       Text(
                         "\$ ${cartBloc.totalPrice}",
-                        style:  TextStyle(
+                        style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
@@ -299,14 +300,26 @@ class _CartPageState extends State<CartPage> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder:(context) => PaymentPage(),));
+                      final paymentRepository = PaymentRepository();
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                RepositoryProvider<PaymentRepository>.value(
+                              value: paymentRepository,
+                              child: BlocProvider<PaymentBloc>(
+                                create: (context) =>
+                                    PaymentBloc(paymentRepository),
+                                child: const PaymentPage(),
+                              ),
+                            ),
+                          ));
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Theme.of(context).primaryColor,
-                      padding: const EdgeInsets.symmetric(vertical: 12)
-                    ),
-                    
+                        foregroundColor: Colors.white,
+                        backgroundColor: Theme.of(context).primaryColor,
+                        padding: const EdgeInsets.symmetric(vertical: 12)),
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

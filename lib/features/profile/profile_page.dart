@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/home/home_bloc.dart';
 import '../../blocs/signin/signin_bloc.dart';
-import '../../repositories/authentication_repository.dart';
+import '../../repositories/auth_repo/authentication_repository.dart';
 import '../auth/signin/sign_in_page.dart';
 
 class ProfilePage extends StatelessWidget {
