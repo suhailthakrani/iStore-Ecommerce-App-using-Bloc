@@ -15,12 +15,12 @@
   "lootLo": "Loot Lo!",
   "flashSale": "Flash Sale",
   "sperDeals": "Super Deals",
-  "forgorPass": "Forgor password?", 
+  "forgotPass": "Forgor password?", 
   "alreadyHaveAnAccount":"Already have an account?",
   "createAccount": "Create Account",
   "register": "Register",
   "signUpWithGoogle": "Sign Up with Google",
   "signUpWithFacebook": "Sign Up with Facebook",
-  "dontHaveAnAccount": "Dont't have an account?"
-  
+  "dontHaveAnAccount": "Dont't have an account?",
+  "orContinueWith": "Or Continue With"  
 }

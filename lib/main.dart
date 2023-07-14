@@ -101,14 +101,13 @@ class MyApp extends StatelessWidget {
           title: 'E Commerce App',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            primaryColor: Color(0xff343434),
+            primaryColor: const Color(0xff343434),
             useMaterial3: true,
           ),
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
           locale: context.locale,
-          // home: isSignedIn ? const SignInPage() : const SignUpPage(),
-          home: MainPage(),
+          home: isSignedIn ? const SignInPage() : const SignUpPage(),
         ),
       ),
     );

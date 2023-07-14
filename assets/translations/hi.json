@@ -10,10 +10,11 @@
     "newHere": "नया यहाँ?",
     "welcomeBack": "वापसी पर स्वागत है!",
     "forgotPass": "क्या आपने पासवर्ड भूल गए हैं?",
-    "alreadyHaveAnAccount": "क्या आपके पास पहले से ही खाता है?",
+    "alreadyHaveAnAccount": "पहले से खाता है?",
     "createAccount": "खाता बनाएं",
     "register": "पंजीकरण करें",
     "signUpWithGoogle": "Google के साथ साइन अप करें",
     "signUpWithFacebook": "Facebook के साथ साइन अप करें",
-    "dontHaveAnAccount":"खाता नहीं है?"
+    "dontHaveAnAccount": "खाता नहीं है?",
+    "orContinueWith": "या जारी रखें"
 }

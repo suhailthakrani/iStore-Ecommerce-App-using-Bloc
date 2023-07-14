@@ -360,23 +360,23 @@ class _SignUpPageState extends State<SignUpPage> {
               ],
             ),
             const SizedBox(height: 12),
-            const Row(
+             Row(
               children: [
-                SizedBox(width: 12),
-                Expanded(
+                const SizedBox(width: 12),
+                const Expanded(
                   child: Divider(
                     color: Colors.grey,
                   ),
                 ),
-                SizedBox(width: 5),
-                Text("OR Continue with"),
-                SizedBox(width: 5),
-                Expanded(
+                const SizedBox(width: 5),
+                Text(Tkeys.orContinueWith.name).tr(),
+                const SizedBox(width: 5),
+                const Expanded(
                   child: Divider(
                     color: Colors.grey,
                   ),
                 ),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
               ],
             ),
             const SizedBox(height: 12),

@@ -9,11 +9,12 @@ enum Tkeys {
   confirmPassword,
   newHere,
   welcomeBack,
-  forgorPass,
+  forgotPass,
   alreadyHaveAnAccount,
   createAccount,
   register,
   signUpWithGoogle,
   signUpWithFacebook,
   dontHaveAnAccount,
+  orContinueWith
 }

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../cart/cart_page.dart';
+import 'components/search_deligate.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -54,19 +55,22 @@ class _HomePageState extends State<HomePage>
         ),
         actions: [
           IconButton(
-            onPressed: () {},
-            style: OutlinedButton.styleFrom(
-              backgroundColor: Colors.black54,
-              shape: const CircleBorder(),
-              padding: const EdgeInsets.all(8),
-            ),
-            icon: const Icon(
-              Icons.notifications_outlined,
-              size: 30,
-              color: Colors.white,
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: ProductSearchDelegate(
+                    products: context.read<HomeBloc>().products),
+              );
+            },
+            style: IconButton.styleFrom(backgroundColor: Colors.white),
+            icon: Image.asset(
+              "assets/images/8666693_search_icon.png",
+              color: Theme.of(context).primaryColor,
+              width: 24,
+              height: 24,
             ),
           ),
-          const SizedBox(width: 20)
+          const SizedBox(width: 20),
         ],
       ),
       body: BlocConsumer<HomeBloc, HomeState>(

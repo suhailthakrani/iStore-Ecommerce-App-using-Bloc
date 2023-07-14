@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:bloc_cart_app/blocs/cart/cart_bloc.dart';
 import 'package:bloc_cart_app/blocs/home/home_bloc.dart';
 import 'package:bloc_cart_app/commons/models/product_categories.dart';
 import 'package:bloc_cart_app/features/home/product/components/see_more.dart';
@@ -18,6 +19,21 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appleColors = [
+      0xff808080, // Space Gray
+      0xffC0C0C0, // Silver
+      0xffFFD700, // Gold
+      0xffFFC0CB, // Rose Gold
+      0xff004953, // Midnight Green
+      0xff007AFF, // Blue
+      0xffFF3B30, // Red (Product(RED))
+      0xff00FF00, // Green
+      0xffFFC0CB, // Pink
+      0xffFFFF00, // Yellow
+      0xffFFA500, // Orange
+      0xff800080 // Purple
+    ];
+
     return Scaffold(
       body: Stack(
         children: [
@@ -32,23 +48,19 @@ class ProductDetails extends StatelessWidget {
                   Center(
                     child: Container(
                       width: double.maxFinite,
-                      // padding: EdgeInsets.all(10),
-                      // decoration: BoxDecoration(
-                      //   color: Colors.black12,
-                      //   borderRadius: BorderRadius.only(
-                      //     bottomLeft: Radius.circular(30),
-                      //     bottomRight: Radius.circular(30),
-                      //   ),
-                      // ),
                       child: Hero(
                         tag: "product",
-                        child: Image.asset(
-                          product.image,
-                          filterQuality: FilterQuality.high,
-                          errorBuilder: (context, error, stackTrace) =>
-                              SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.45,
-                            height: MediaQuery.of(context).size.width * 0.45,
+                        child: ClipRRect(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30)),
+                          child: Image.asset(
+                            product.image,
+                            filterQuality: FilterQuality.high,
+                            errorBuilder: (context, error, stackTrace) =>
+                                SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.45,
+                              height: MediaQuery.of(context).size.width * 0.45,
+                            ),
                           ),
                         ),
                       ),
@@ -59,7 +71,7 @@ class ProductDetails extends StatelessWidget {
                     left: 16,
                     child: IconButton(
                       style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.all(12),
+                          padding: const EdgeInsets.all(12),
                           backgroundColor: Colors.grey.shade200),
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -113,7 +125,6 @@ class ProductDetails extends StatelessWidget {
             bottom: 0,
             child: Container(
               padding: const EdgeInsets.all(16),
-              
               decoration: const BoxDecoration(
                 color: Colors.white24,
                 borderRadius: BorderRadius.only(
@@ -134,24 +145,49 @@ class ProductDetails extends StatelessWidget {
                             product.name,
                             style: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              fontSize: 24,
+                              fontSize: 20,
                             ),
                           ),
                         ),
                         IconButton(
-                      onPressed: () {},
-                      style: OutlinedButton.styleFrom(
-                          backgroundColor: Colors.blueGrey.shade50,
-                          shape: const CircleBorder(),
-                          padding: const EdgeInsets.all(10)),
-                      icon: Icon(
-                        CupertinoIcons.heart,
-                        color: Colors.amber.shade800,
-                        size: 30,
-                      ),
-                    ),
+                          onPressed: () {},
+                          style: OutlinedButton.styleFrom(
+                              backgroundColor: Colors.blueGrey.shade50,
+                              shape: const CircleBorder(),
+                              padding: const EdgeInsets.all(10)),
+                          icon: Icon(
+                            CupertinoIcons.heart,
+                            color: Colors.amber.shade800,
+                            size: 30,
+                          ),
+                        ),
                       ],
                     ),
+                    const SizedBox(height: 16),
+                    Container(
+                      height: 40,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: appleColors.length,
+                        itemBuilder: (context, index) => Container(
+                          padding: const EdgeInsets.all(3),
+                          margin: const EdgeInsets.only(right: 12),
+                          decoration: BoxDecoration(
+                              border: index == 0
+                                  ? Border.all(
+                                      color: Theme.of(context).primaryColor,
+                                      width: 2)
+                                  : null,
+                              shape: BoxShape.circle),
+                          child: CircleAvatar(
+                            radius: 15,
+                            backgroundColor: Color(appleColors[index]),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
                     SizedBox(
                       height: 50,
                       child: Row(
@@ -161,10 +197,9 @@ class ProductDetails extends StatelessWidget {
                             initialRating: double.parse(product.rating).abs(),
                             direction: Axis.horizontal,
                             itemCount: 5,
-                            itemSize: 20,
+                            itemSize: 30,
                             itemBuilder: (context, _) => const Icon(
                               Icons.star,
-                              size: 16,
                               color: Colors.amber,
                             ),
                             onRatingUpdate: (rating) {
@@ -176,10 +211,18 @@ class ProductDetails extends StatelessWidget {
                             crossAxisAlignment: WrapCrossAlignment.center,
                             children: [
                               Text(
-                                "${product.rating} ( ${product.reviews} reviews) ",
+                                product.rating,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w600,
-                                  fontSize: 16,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                "(${product.reviews} Reviews)",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
                                 ),
                               ),
                             ],
@@ -198,156 +241,9 @@ class ProductDetails extends StatelessWidget {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 10),
                     SeeMore(
                       productDescription: product.description,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Brand: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text("product.brand"),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "color: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text("product.color"),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Size: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text("product.displaySize"),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Storage: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text("product.storage"),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Water Resistance: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text("product.waterResistance"),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Battery Life: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text("product.batteryLife"),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Battery Life: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text("product.batteryLife"),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Battery Life: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text("product.batteryLife"),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Battery Life: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text("product.batteryLife"),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          children: [
-                            const Text(
-                              "Rating: ",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(product.rating),
-                          ],
-                        ),
-                        Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          children: [
-                            const Text(
-                              "Reviews: ",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text("${product.reviews}+"),
-                          ],
-                        ),
-                      ],
                     ),
                     const SizedBox(height: 100),
                   ],
@@ -361,7 +257,8 @@ class ProductDetails extends StatelessWidget {
         decoration: const BoxDecoration(
           color: Colors.white,
         ),
-        padding: const EdgeInsets.only(left:24, top: 12, right: 24, bottom: 24),
+        padding:
+            const EdgeInsets.only(left: 24, top: 12, right: 24, bottom: 24),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -374,20 +271,33 @@ class ProductDetails extends StatelessWidget {
             ),
             SizedBox(
               height: 60,
-              width: 200,
+              width: MediaQuery.of(context).size.width * 0.55,
               child: ElevatedButton(
-                onPressed: () {
-                  context
-                      .read<HomeBloc>()
-                      .add(HomeAddToCartEvent(product, context));
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text("${product.name} added to the cart"),
-                    ),
-                  );
-                },
-                child: const Text("Add to Cart"),
-              ),
+                  onPressed: () {
+                    context
+                        .read<HomeBloc>()
+                        .add(HomeAddToCartEvent(product, context));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("${product.name} added to the cart"),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).primaryColor),
+                  child: !context
+                          .read<CartBloc>()
+                          .cartItems
+                          .any((element) => element.id == product.id)
+                      ? const Text(
+                          "Add to Cart",
+                          style: TextStyle(color: Colors.white),
+                        )
+                      : const Icon(
+                          Icons.done,
+                          color: Colors.white,
+                          size: 30,
+                        )),
             ),
           ],
         ),

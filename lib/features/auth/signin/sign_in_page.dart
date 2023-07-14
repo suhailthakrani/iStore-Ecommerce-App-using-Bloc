@@ -155,7 +155,6 @@ class _SignInPageState extends State<SignInPage> {
             }
           },
         ),
-   
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -172,7 +171,7 @@ class _SignInPageState extends State<SignInPage> {
                 );
               },
               child: Text(
-                "Forgor Password?",
+                Tkeys.forgotPass.name,
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.w600,
@@ -181,7 +180,6 @@ class _SignInPageState extends State<SignInPage> {
             ),
           ],
         ),
-        
         BlocConsumer<SignInBloc, SignInState>(
           buildWhen: (previous, current) => current is! SignInActionState,
           listener: (context, state) {
@@ -264,115 +262,108 @@ class _SignInPageState extends State<SignInPage> {
             )
           ],
         ),
-         const SizedBox(height: 12),
-            const Row(
-              children: [
-                SizedBox(width: 12),
-                Expanded(
-                  child: Divider(
-                    color: Colors.grey,
-                  ),
-                ),
-                SizedBox(width: 5),
-                Text("OR Continue with"),
-                SizedBox(width: 5),
-                Expanded(
-                  child: Divider(
-                    color: Colors.grey,
-                  ),
-                ),
-                SizedBox(width: 12),
-              ],
-            ),
         const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                BlocConsumer<SignInBloc, SignInState>(
-                  listenWhen: (previous, current) =>
-                      (current is SignInNavigateState),
-                  listener: (context, state) {
-                    if (state is SignInNavigateState) {
-                        // Navigate to HomePage
-                    }
-                  },
-                  builder: (context, state) {
-                    return IconButton(
-                      onPressed: () {
-                       
-                      },
-                    style: ElevatedButton.styleFrom(
-                          elevation: 10,
-                          padding: const EdgeInsets.all(8),
-                            backgroundColor: Theme.of(context).primaryColor,  ),
-                      icon: 
-                      
-                      Image.asset(
-                        "assets/images/icons8-google-144.png",
-                        height: 40,
-                        width: 40,
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(width: 20),
-                BlocConsumer<SignInBloc, SignInState>(
-                  listenWhen: (previous, current) =>
-                      (current is SignInNavigateState),
-                  listener: (context, state) {
-                    if (state is SignInNavigateState) {
-                     // Navigate to HomePage
-                    }
-                  },
-                  builder: (context, state) {
-                    return IconButton(
-                      onPressed: () {
-                     
-                      },
-                      style: ElevatedButton.styleFrom(
-                          elevation: 10,
-                          padding: const EdgeInsets.all(8),
-                          backgroundColor: Theme.of(context).primaryColor,  ),
-                      icon: Image.asset(
-                        "assets/images/icons8-facebook-144.png",
-                        
-                        height: 42,
-                        width: 42,
-                      ),
-                      // icon: const Icon(Icons.facebook, color: Colors.white, size: 50,),
-                    );
-                  },
-                ),
-                 const SizedBox(width: 20),
-                BlocConsumer<SignInBloc, SignInState>(
-                  listenWhen: (previous, current) =>
-                      (current is SignInNavigateState),
-                  listener: (context, state) {
-                    if (state is SignInNavigateState) {
-                     // Navigate to HomePage
-                    }
-                  },
-                  builder: (context, state) {
-                    return IconButton(
-                      onPressed: () {
-                     
-                      },
-                      style: ElevatedButton.styleFrom(
-                          elevation: 10,
-                          backgroundColor: Theme.of(context).primaryColor,
-                          padding: const EdgeInsets.all(8),
-                       ),
-                      icon: Image.asset(
-                        "assets/images/icons8-apple-logo-50.png",
-                    color: Colors.white,
-                        height: 42,
-                        width: 42,
-                      ),
-                    );
-                  },
-                ),
-              ],
+        Row(
+          children: [
+            const SizedBox(width: 12),
+            const Expanded(
+              child: Divider(
+                color: Colors.grey,
+              ),
             ),
+            const SizedBox(width: 5),
+            Text(Tkeys.orContinueWith.name).tr(),
+            const SizedBox(width: 5),
+            const Expanded(
+              child: Divider(
+                color: Colors.grey,
+              ),
+            ),
+            const SizedBox(width: 12),
+          ],
+        ),
+        const SizedBox(height: 12),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            BlocConsumer<SignInBloc, SignInState>(
+              listenWhen: (previous, current) =>
+                  (current is SignInNavigateState),
+              listener: (context, state) {
+                if (state is SignInNavigateState) {
+                  // Navigate to HomePage
+                }
+              },
+              builder: (context, state) {
+                return IconButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    elevation: 10,
+                    padding: const EdgeInsets.all(8),
+                    backgroundColor: Theme.of(context).primaryColor,
+                  ),
+                  icon: Image.asset(
+                    "assets/images/icons8-google-144.png",
+                    height: 40,
+                    width: 40,
+                  ),
+                );
+              },
+            ),
+            const SizedBox(width: 20),
+            BlocConsumer<SignInBloc, SignInState>(
+              listenWhen: (previous, current) =>
+                  (current is SignInNavigateState),
+              listener: (context, state) {
+                if (state is SignInNavigateState) {
+                  // Navigate to HomePage
+                }
+              },
+              builder: (context, state) {
+                return IconButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    elevation: 10,
+                    padding: const EdgeInsets.all(8),
+                    backgroundColor: Theme.of(context).primaryColor,
+                  ),
+                  icon: Image.asset(
+                    "assets/images/icons8-facebook-144.png",
+                    height: 42,
+                    width: 42,
+                  ),
+                  // icon: const Icon(Icons.facebook, color: Colors.white, size: 50,),
+                );
+              },
+            ),
+            const SizedBox(width: 20),
+            BlocConsumer<SignInBloc, SignInState>(
+              listenWhen: (previous, current) =>
+                  (current is SignInNavigateState),
+              listener: (context, state) {
+                if (state is SignInNavigateState) {
+                  // Navigate to HomePage
+                }
+              },
+              builder: (context, state) {
+                return IconButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    elevation: 10,
+                    backgroundColor: Theme.of(context).primaryColor,
+                    padding: const EdgeInsets.all(8),
+                  ),
+                  icon: Image.asset(
+                    "assets/images/icons8-apple-logo-50.png",
+                    color: Colors.white,
+                    height: 42,
+                    width: 42,
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
         SizedBox(
           height: MediaQuery.of(context).viewInsets.bottom,
         ),

@@ -1,4 +1,5 @@
 import 'package:bloc_cart_app/commons/models/product_categories.dart';
+import 'package:bloc_cart_app/features/home/product/product_details_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../../commons/models/product.dart';
@@ -32,7 +33,7 @@ class ProductSearchDelegate extends SearchDelegate<CategoryProduct> {
 
   @override
   Widget buildResults(BuildContext context) {
-     final List<CategoryProduct> filteredProducts = [];
+    final List<CategoryProduct> filteredProducts = [];
     for (var category in products.products) {
       for (var product in category.categoryProducts) {
         if (product.name.toLowerCase().contains(query.toLowerCase())) {
@@ -48,7 +49,11 @@ class ProductSearchDelegate extends SearchDelegate<CategoryProduct> {
           title: Text(product.name),
           subtitle: Text(product.description),
           onTap: () {
-            close(context, product);
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ProductDetails(product: product),
+              ),
+            );
           },
         );
       },
@@ -65,7 +70,6 @@ class ProductSearchDelegate extends SearchDelegate<CategoryProduct> {
         }
       }
     }
-    
 
     return ListView.builder(
       itemCount: filteredProducts.length,
@@ -73,11 +77,22 @@ class ProductSearchDelegate extends SearchDelegate<CategoryProduct> {
         final product = filteredProducts[index];
         return ListTile(
           leading: Image.asset(product.image),
-          title: Text(product.name, style: TextStyle(fontWeight: FontWeight.bold),),
-          subtitle: Text(product.description, maxLines: 1, style: TextStyle(fontWeight: FontWeight.w400, fontSize: 10),),
+          title: Text(
+            product.name,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text(
+            product.description,
+            maxLines: 1,
+            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 10),
+          ),
           onTap: () {
             query = product.name;
-            close(context, product);
+              Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ProductDetails(product: product),
+              ),
+            );
           },
         );
       },
