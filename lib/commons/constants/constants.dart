@@ -1,4 +1,15 @@
 class AppConstants {
+
+  List<String> categoryValues = [
+  "airPods",
+  "appleWatch",
+  "keyboards",
+  "powerAndCables",
+  "airTagAndAccessories",
+  "iPhone",
+  "casesAndProtection",
+  "miceAndTrackpads",
+  ];
   static const String airpods = "Air Pods";
   static const String appwatches = "Apple Watch";
   static const String iphone = "Iphone";

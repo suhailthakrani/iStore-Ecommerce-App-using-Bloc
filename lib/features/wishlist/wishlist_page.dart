@@ -1,10 +1,12 @@
 import 'package:bloc_cart_app/blocs/cart/cart_bloc.dart';
 import 'package:bloc_cart_app/blocs/wishlist/wishlist_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/wishlist/wishlist_bloc.dart';
+import '../../localizations/localization_keys.dart';
 
 class WishlistPage extends StatefulWidget {
   const WishlistPage({super.key});
@@ -27,15 +29,15 @@ class _WishlistPageState extends State<WishlistPage> {
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
-        title: const Text(
-          "Your Wish List",
+        title:  Text(
+          Tkeys.yourWishlist.name,
           
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             color: Colors.black54,
             fontWeight: FontWeight.w600,
           ),
-        ),
+        ).tr(),
       ),
       body: BlocConsumer<WishlistBloc, WishlistState>(
          listener: (context, state) {
@@ -155,10 +157,10 @@ class _WishlistPageState extends State<WishlistPage> {
                     
                      const Icon(CupertinoIcons.bag, size: 70, color: Colors.black45,),
                       const SizedBox(height: 20),
-                    const Text(
-                      "Your Wishlist is Empty!",
-                      style: TextStyle(color: Colors.black45, fontSize: 20, fontWeight: FontWeight.w600),
-                    ),
+                     Text(Tkeys.wishlistEmpty.name
+                      ,
+                      style: const TextStyle(color: Colors.black45, fontSize: 20, fontWeight: FontWeight.w600),
+                    ).tr(),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                 
                   ],

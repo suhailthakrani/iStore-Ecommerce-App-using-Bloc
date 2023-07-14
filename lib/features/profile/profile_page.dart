@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/home/home_bloc.dart';
 import '../../blocs/signin/signin_bloc.dart';
+import '../../localizations/localization_keys.dart';
 import '../../repositories/auth_repo/authentication_repository.dart';
 import '../auth/signin/sign_in_page.dart';
 
@@ -20,6 +22,7 @@ class ProfilePage extends StatelessWidget {
           if (state is HomeLogoutState) {
             AuthenticationRepository authRepository =
                 AuthenticationRepository();
+                
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -98,72 +101,76 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
+          
+
             ProfileTile(
               icon: Icons.person_outline,
-              title: 'My Account',
+              title: Tkeys.myAccount.name,
               onTap: () {
                 // Add your logic for handling the "My Account" tile tap
               },
             ),
             ProfileTile(
               icon: Icons.location_on_outlined,
-              title: 'Shipping Address',
+              title: Tkeys.paymentMethods.name,
               onTap: () {
                 // Add your logic for handling the "Shipping Address" tile tap
               },
             ),
             ProfileTile(
               icon: Icons.credit_card_outlined,
-              title: 'Payment Methods',
+            
+
+              title: Tkeys.myFavorites.name,
               onTap: () {
                 // Add your logic for handling the "Payment Methods" tile tap
               },
             ),
             ProfileTile(
               icon: Icons.favorite_border,
-              title: 'My Favorites',
+              title: Tkeys.  myFavorites.name,
               onTap: () {
                 // Add your logic for handling the "My Favorites" tile tap
               },
             ),
             ProfileTile(
-              icon: Icons.settings,
-              title: 'Settings',
+              icon: Icons.settings_outlined,
+              title: Tkeys. settings.name,
               onTap: () {
                 // Add your logic for handling the "Settings" tile tap
               },
             ),
              ProfileTile(
                icon: Icons.history,
-              title: 'Order History',
+              title: Tkeys.orderHistory.name,
               onTap: () {
                 // Handle "Order History" tile tap
               },
             ),
             ProfileTile(
               icon: Icons.support_agent,
-              title: 'Customer Support',
+              title: Tkeys. customerSupport.name,
               onTap: () {
                 // Handle "Customer Support" tile tap
               },
             ),
               ProfileTile(
               icon: Icons.policy_outlined,
-              title: 'Privacy Policy',
+              title: Tkeys.privacyPolicy.name,
               onTap: () {
                 // Handle "Customer Support" tile tap
               },
             ),
               ProfileTile(
               icon: Icons.contact_support_outlined,
-              title: 'Frequently Asked Questions',
+              title: Tkeys.faq.name,
               onTap: () {
                 // Handle "Customer Support" tile tap
               },
             ),
             ProfileTile(
               icon: Icons.exit_to_app_outlined,
-              title: 'Logout',
+              title: Tkeys.logout.name,
               onTap: () {
                 context.read<HomeBloc>().add(HomeLogoutButtonPressedEvent());
               },
@@ -199,7 +206,7 @@ class ProfileTile extends StatelessWidget {
           color: Theme.of(context).primaryColor,
           fontWeight: FontWeight.bold,
         ),
-      ),
+      ).tr(),
       trailing: Icon(
         Icons.arrow_forward_ios,
         color: Theme.of(context).primaryColor,

@@ -5,10 +5,12 @@ import 'package:bloc_cart_app/commons/constants/constants.dart';
 import 'package:bloc_cart_app/features/home/components/product_list.dart';
 import 'package:bloc_cart_app/features/home/product/components/image_slider.dart';
 import 'package:bloc_cart_app/features/home/product/product_details_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../localizations/localization_keys.dart';
 import '../cart/cart_page.dart';
 import 'components/search_deligate.dart';
 
@@ -131,14 +133,14 @@ class _HomePageState extends State<HomePage>
                             const EdgeInsets.symmetric(vertical: 5),
                         labelPadding: const EdgeInsets.only(right: 5, left: 5),
                         tabs: [
-                          customTab(AppConstants.airpods),
-                          customTab(AppConstants.appwatches),
-                          customTab(AppConstants.casesAndProtection),
-                          customTab(AppConstants.airTagAndAccessories),
-                          customTab(AppConstants.keyboards),
-                          customTab(AppConstants.miceAndTrackpads),
-                          customTab(AppConstants.powerAndCables),
-                          customTab(AppConstants.iphone),
+                          customTab(Tkeys.airPods.name.tr()),
+                          customTab(Tkeys.appleWatch.name.tr()),
+                          customTab(Tkeys.iPhone.name.tr()),
+                          customTab(Tkeys.airTagAndAccessories.name.tr()),
+                          customTab(Tkeys.keyboards.name.tr()),
+                          customTab(Tkeys.powerAndCables.name.tr()),
+                          customTab(Tkeys.casesAndProtection.name.tr()),
+                          customTab(Tkeys.miceAndTrackpads.name.tr()),
                         ]),
                   ),
                   Expanded(

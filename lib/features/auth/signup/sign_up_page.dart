@@ -495,13 +495,13 @@ class _SignUpPageState extends State<SignUpPage> {
                       style: ElevatedButton.styleFrom(
                           elevation: 10,
                           backgroundColor: Theme.of(context).primaryColor,
-                          padding: const EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(10),
                        ),
                       icon: Image.asset(
                         "assets/images/icons8-apple-logo-50.png",
                     color: Colors.white,
-                        height: 42,
-                        width: 42,
+                        height: 38,
+                        width: 38,
                       ),
                     );
                   },

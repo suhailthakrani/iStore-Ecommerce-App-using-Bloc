@@ -1,18 +1,35 @@
+import 'package:bloc_cart_app/commons/constants/constants.dart';
 import 'package:bloc_cart_app/commons/models/categories.dart';
 import 'package:bloc_cart_app/features/categories/components/category/signle_category_products_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/cart/cart_bloc.dart';
 import '../../blocs/home/home_bloc.dart';
+import '../../localizations/localization_keys.dart';
 import '../cart/cart_page.dart';
 
-class CategoriesPage extends StatelessWidget {
+class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key});
 
   @override
+  State<CategoriesPage> createState() => _CategoriesPageState();
+}
+
+class _CategoriesPageState extends State<CategoriesPage> {
+  late HomeBloc homeBloc;
+  @override
+  void initState() {
+    homeBloc = context.read<HomeBloc>();
+    homeBloc.add(const HomeInitialEvent());
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeBloc, HomeState>(listener: (context, state) {
+    return BlocConsumer<HomeBloc, HomeState>(
+      bloc: homeBloc,
+      listener: (context, state) {
       if (state is HomeInitialState) {
         context.read<HomeBloc>().add(const HomeInitialEvent());
       }
@@ -35,18 +52,20 @@ class CategoriesPage extends StatelessWidget {
       }
     }, builder: (context, state) {
       switch (state.runtimeType) {
+        case HomeLoadingState:
+        return const Scaffold(body: Center(child: CircularProgressIndicator(),),);
         case HomeLoadedState:
           final loadedState = state as HomeLoadedState;
           return Scaffold(
             appBar: AppBar(
               centerTitle: true,
-              title: const Text(
-                'Find Your Favourite Product !',
-                style: TextStyle(
+              title:  Text(
+                Tkeys.findFavoriteProduct.name,
+                style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 18,
                 ),
-              ),
+              ).tr(),
             ),
             body: Column(
               children: [
@@ -98,13 +117,13 @@ class CategoriesPage extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                Categories.categories[index].name,
+                                AppConstants().categoryValues[index],
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
                                     color: Theme.of(context).primaryColor),
-                              )
+                              ).tr()
                             ],
                           ),
                         ),

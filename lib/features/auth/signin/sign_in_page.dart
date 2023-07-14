@@ -299,7 +299,7 @@ class _SignInPageState extends State<SignInPage> {
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     elevation: 10,
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(7),
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
                   icon: Image.asset(
@@ -324,7 +324,7 @@ class _SignInPageState extends State<SignInPage> {
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     elevation: 10,
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(7),
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
                   icon: Image.asset(
@@ -351,13 +351,13 @@ class _SignInPageState extends State<SignInPage> {
                   style: ElevatedButton.styleFrom(
                     elevation: 10,
                     backgroundColor: Theme.of(context).primaryColor,
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(10),
                   ),
                   icon: Image.asset(
                     "assets/images/icons8-apple-logo-50.png",
                     color: Colors.white,
-                    height: 42,
-                    width: 42,
+                    height: 38,
+                    width: 38,
                   ),
                 );
               },

@@ -3,9 +3,12 @@ import 'package:bloc_cart_app/blocs/home/home_bloc.dart';
 import 'package:bloc_cart_app/blocs/payment/payment_bloc.dart';
 import 'package:bloc_cart_app/features/payment/payment_page.dart';
 import 'package:bloc_cart_app/repositories/payment_repo/payment_repository.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../localizations/localization_keys.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -30,12 +33,12 @@ class _CartPageState extends State<CartPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Your Cart",
+          Tkeys.yourCart.name,
           style: TextStyle(
             color: Theme.of(context).primaryColor,
             fontWeight: FontWeight.w600,
           ),
-        ),
+        ).tr(),
       ),
       body: BlocConsumer<CartBloc, CartState>(
         bloc: cartBloc,
@@ -220,13 +223,13 @@ class _CartPageState extends State<CartPage> {
                       color: Colors.black45,
                     ),
                     const SizedBox(height: 20),
-                    const Text(
-                      "Your Cart is Empty!",
-                      style: TextStyle(
+                    Text(
+                     Tkeys.emptyCart.name ,
+                      style: const TextStyle(
                           color: Colors.black45,
                           fontSize: 24,
                           fontWeight: FontWeight.w600),
-                    ),
+                    ).tr(),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.2),
                   ],
                 ),
@@ -260,13 +263,13 @@ class _CartPageState extends State<CartPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Total Items:",
+                        Tkeys.totalItems.name,
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
                         ),
-                      ),
+                      ).tr(),
                       Text(
                         "${cartBloc.cartItems.fold(cartBloc.totalCartItems, (previousValue, element) => previousValue + element.quantity).toInt()}",
                         style: TextStyle(
@@ -281,13 +284,13 @@ class _CartPageState extends State<CartPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Total Price:",
+                        Tkeys.totalPrice.name,
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
                         ),
-                      ),
+                      ).tr(),
                       Text(
                         "\$ ${cartBloc.totalPrice}",
                         style: TextStyle(
@@ -320,15 +323,15 @@ class _CartPageState extends State<CartPage> {
                         foregroundColor: Colors.white,
                         backgroundColor: Theme.of(context).primaryColor,
                         padding: const EdgeInsets.symmetric(vertical: 12)),
-                    child: const Row(
+                    child:  Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Check Out",
-                          style: TextStyle(
+                          Tkeys.checkOut.name,
+                          style: const TextStyle(
                             fontSize: 18,
                           ),
-                        ),
+                        ).tr(),
                       ],
                     ),
                   ),
